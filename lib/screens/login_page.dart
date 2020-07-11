@@ -9,7 +9,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _unfocusedColor = Colors.white38;
+  final _unfocusedColor = Colors.black54;
   final _usernameFocusNode = FocusNode();
   final _passwordFocusNode = FocusNode();
 

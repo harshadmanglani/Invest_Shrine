@@ -9,11 +9,13 @@ IconThemeData _customIconTheme(IconThemeData original) {
 
 OutlineInputBorder textFieldBorder = OutlineInputBorder(
     borderSide: BorderSide(color: textColor, width: 2.0),
-    borderRadius: BorderRadius.all(Radius.circular(17.0)));
+    borderRadius: BorderRadius.all(Radius.circular(30.0)));
 
 ThemeData _buildTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(
+    accentColor: navbarBackgroundColor,
+    cursorColor: Colors.black,
     primaryColor: appBarColor, // background for appBar
     scaffoldBackgroundColor:
         backgroundColor, // background for scaffold body and login page background
@@ -43,14 +45,14 @@ TextTheme _buildTextTheme(TextTheme base) {
         headline5: base.headline5.copyWith(
           fontWeight: FontWeight.w500,
         ),
-        headline6: base.headline6.copyWith(fontSize: 18.0),
+        headline6: base.headline6.copyWith(fontSize: 19.0),
         caption: base.caption.copyWith(
           fontWeight: FontWeight.w400,
           fontSize: 14.0,
         ),
         bodyText1: base.bodyText1.copyWith(
-          fontWeight: FontWeight.w500,
-          fontSize: 16.0,
+          fontWeight: FontWeight.w300,
+          fontSize: 15.0,
         ),
       )
       .apply(
