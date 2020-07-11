@@ -34,18 +34,19 @@ class _PortfolioListState extends State<PortfolioList> {
           Flexible(
             child: Padding(
               padding: const EdgeInsets.all(15.0),
-              child: GridView.builder(
-                  physics: BouncingScrollPhysics(),
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return EntrepreneurPortfolio(index);
-                  },
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    childAspectRatio: 3 / 5,
-                    mainAxisSpacing: 8.0,
-                    crossAxisSpacing: 8.0,
-                    crossAxisCount: 2,
-                  )),
+              child: ListView.builder(
+                physics: BouncingScrollPhysics(),
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return EntrepreneurPortfolio(index);
+                },
+                // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                //   childAspectRatio: 3 / 5,
+                //   mainAxisSpacing: 8.0,
+                //   crossAxisSpacing: 8.0,
+                //   crossAxisCount: 2,
+                // )
+              ),
             ),
           ),
         ],

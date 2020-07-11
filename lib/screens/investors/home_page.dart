@@ -32,6 +32,6 @@ class _HomePageState extends State<HomePage> {
             });
           },
         ),
-        body: buttonIndex == 0 ? PortfolioList() : LoginPage());
+        body: buttonIndex == 0 ? PortfolioList() : Container());
   }
 }

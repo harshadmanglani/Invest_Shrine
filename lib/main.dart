@@ -23,7 +23,7 @@ class _MyAppState extends State<MyApp> {
         '/home': (BuildContext context) => HomePage(),
         '/portfolios': (BuildContext context) => PortfolioList()
       },
-      initialRoute: '/home',
+      initialRoute: '/login',
     );
   }
 }
