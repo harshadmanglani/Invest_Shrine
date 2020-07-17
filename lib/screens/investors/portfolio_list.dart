@@ -1,6 +1,9 @@
+import 'package:MobileApp/backend/entrepreneurs/portfolio_list.dart';
+import 'package:MobileApp/models/entrepreneurs/venture_model.dart';
 import 'package:MobileApp/shared/nav_drawer.dart';
 import 'package:flutter/material.dart';
 import 'portfolio_card.dart';
+import '../../theme/app.dart';
 
 class PortfolioList extends StatefulWidget {
   @override
@@ -18,11 +21,7 @@ class _PortfolioListState extends State<PortfolioList> {
     return Scaffold(
         drawer: NavDrawer(),
         appBar: AppBar(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(20.0),
-                bottomRight: Radius.circular(20)),
-          ),
+          shape: appBarShape,
           centerTitle: true,
           title: Text(
             "Startups",
@@ -32,32 +31,51 @@ class _PortfolioListState extends State<PortfolioList> {
             // IconButton(icon: Icon(Icons.account_balance), onPressed: () {})
           ],
         ),
-        body: Container(
-          child: Column(
-            children: <Widget>[
-              Flexible(
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: ListView.builder(
-                    physics: BouncingScrollPhysics(),
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
-                        child: EntrepreneurPortfolio(index),
-                      );
-                    },
-                    // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    //   childAspectRatio: 3 / 5,
-                    //   mainAxisSpacing: 8.0,
-                    //   crossAxisSpacing: 8.0,
-                    //   crossAxisCount: 2,
-                    // )
+        body: FutureBuilder(
+            future: VenturePortfolioList().getAllVenturePortfolios(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                print(snapshot.data);
+                List<VentureModel> portfolioList = snapshot.data;
+                return Container(
+                  child: Column(
+                    children: <Widget>[
+                      Flexible(
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: ListView.builder(
+                            physics: BouncingScrollPhysics(),
+                            itemCount: portfolioList.length,
+                            itemBuilder: (context, index) {
+                              return EntrepreneurPortfolio(
+                                  portfolioList[index]);
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ),
-            ],
-          ),
-        ));
+                );
+              } else {
+                return Container(
+                  child: Column(
+                    children: <Widget>[
+                      Flexible(
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: ListView.builder(
+                            physics: BouncingScrollPhysics(),
+                            itemCount: 10,
+                            itemBuilder: (context, index) {
+                              return LoadingEntrepreneurPortfolio();
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
+            }));
   }
 }

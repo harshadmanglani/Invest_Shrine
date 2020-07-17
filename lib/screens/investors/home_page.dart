@@ -1,3 +1,5 @@
+import 'package:MobileApp/screens/entrepreneurs/entrepreneur_form.dart';
+import 'package:MobileApp/screens/entrepreneurs/venture_form.dart';
 import 'package:MobileApp/screens/investors/portfolio_page.dart';
 import 'package:MobileApp/shared/bottom_navbar.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +23,6 @@ class _HomePageState extends State<HomePage> {
         }),
         body: buttonIndex == 0
             ? PortfolioList()
-            : buttonIndex == 2 ? PortfolioPage() : Container());
+            : buttonIndex == 2 ? EntrepreneurForm() : VentureForm());
   }
 }

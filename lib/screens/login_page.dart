@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../theme/colors.dart';
 
+double loginMargin = 30.0;
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -28,75 +30,146 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: ListView(
-          // padding: EdgeInsets.symmetric(horizontal: 24.0),
-          children: <Widget>[
-            Image.asset('assets/logo.png'),
-            // SizedBox(
-            // height: 100.0,
-            // ),
-            // Text("Invest Shrine",
-            // textAlign: TextAlign.center, style: TextStyle(fontSize: 40.0)),
-            // SizedBox(height: 220.0),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 10.0),
-              child: TextField(
-                controller: _usernameController,
-                decoration: InputDecoration(
-                  labelText: 'Username',
-                  labelStyle: TextStyle(
-                      color: _usernameFocusNode.hasFocus
-                          ? Theme.of(context).accentColor
-                          : _unfocusedColor),
-                ),
-                focusNode: _usernameFocusNode,
+        child: GestureDetector(
+          onTap: () {
+            _usernameFocusNode.unfocus();
+            _passwordFocusNode.unfocus();
+          },
+          child: ListView(
+            children: <Widget>[
+              SizedBox(height: 20),
+              Image.asset(
+                'assets/images/logo_loading.png',
+                height: 180,
+                width: 180,
               ),
-            ),
-            // SizedBox(height: 12.0),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
-              child: TextField(
-                controller: _passwordController,
-                obscureText: true,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  labelStyle: TextStyle(
-                      color: _passwordFocusNode.hasFocus
-                          ? Theme.of(context).accentColor
-                          : _unfocusedColor),
-                ),
-                focusNode: _passwordFocusNode,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 20.0, top: 20.0),
-              child: ButtonBar(
-                children: <Widget>[
-                  FlatButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(7.0)),
-                    ),
-                    child: Text(
-                      'CANCEL',
-                    ),
-                    onPressed: () {
-                      _usernameController.clear();
-                      _passwordController.clear();
-                    },
+              SizedBox(height: 10.0),
+              Center(
+                  child: Text("Invest Shrine",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w900, fontSize: 40.0))),
+              SizedBox(height: 10.0),
+              Center(
+                  child: Text("We fuel innovation.",
+                      style: TextStyle(fontSize: 18))),
+              SizedBox(height: 20.0),
+              Padding(
+                padding:
+                    EdgeInsets.fromLTRB(loginMargin, 0.0, loginMargin, 10.0),
+                child: TextField(
+                  keyboardType: TextInputType.emailAddress,
+                  controller: _usernameController,
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.person_outline),
+                    isDense: true,
+                    labelText: 'Email',
+                    labelStyle: TextStyle(
+                        color: _usernameFocusNode.hasFocus
+                            ? Theme.of(context).primaryColor
+                            : _unfocusedColor),
                   ),
-                  RaisedButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(17.0))),
-                    elevation: 3.0,
-                    child: Text('NEXT', style: TextStyle(color: iconColor)),
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/home');
-                    },
-                  ),
-                ],
+                  focusNode: _usernameFocusNode,
+                ),
               ),
-            )
-          ],
+              SizedBox(height: 5.0),
+              Padding(
+                padding:
+                    EdgeInsets.fromLTRB(loginMargin, 0.0, loginMargin, 0.0),
+                child: TextField(
+                  keyboardType: TextInputType.visiblePassword,
+                  controller: _passwordController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.lock),
+                    isDense: true,
+                    labelText: 'Password',
+                    labelStyle: TextStyle(
+                        color: _passwordFocusNode.hasFocus
+                            ? Theme.of(context).accentColor
+                            : _unfocusedColor),
+                  ),
+                  focusNode: _passwordFocusNode,
+                ),
+              ),
+              SizedBox(height: 50.0),
+              Padding(
+                padding: EdgeInsets.only(
+                    right: loginMargin, top: 0.0, left: loginMargin),
+                child: RaisedButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(27.0))),
+                  elevation: 3.0,
+                  child: Padding(
+                    padding: EdgeInsets.all(14.0),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          flex: 12,
+                          child: Text('Continue',
+                              style: TextStyle(
+                                  fontSize: 17.0,
+                                  color: iconColor,
+                                  fontWeight: FontWeight.w600)),
+                        ),
+                        Expanded(
+                            flex: 1,
+                            child: Icon(
+                              Icons.arrow_forward,
+                              color: Theme.of(context).iconTheme.color,
+                            ))
+                      ],
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/investor_home');
+                  },
+                ),
+              ),
+              SizedBox(height: 10.0),
+              Divider(
+                color: Colors.grey,
+                thickness: 2.0,
+                indent: loginMargin,
+                endIndent: loginMargin,
+              ),
+              SizedBox(height: 10.0),
+              Padding(
+                padding: EdgeInsets.only(
+                    right: loginMargin, top: 0.0, left: loginMargin),
+                child: RaisedButton(
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      side: BorderSide(color: Colors.grey, width: 1.5),
+                      borderRadius: BorderRadius.all(Radius.circular(27.0))),
+                  elevation: 3.0,
+                  child: Padding(
+                    padding: EdgeInsets.all(14.0),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          flex: 12,
+                          child: Text('Sign in with Google',
+                              style: TextStyle(
+                                  fontSize: 17.0,
+                                  color: Colors.grey[600],
+                                  fontWeight: FontWeight.w600)),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Image.asset(
+                            'assets/images/google_icon.png',
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/investor_home');
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

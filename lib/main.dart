@@ -1,3 +1,4 @@
+import 'package:MobileApp/screens/investors/portfolio_page.dart';
 import 'package:flutter/material.dart';
 import 'theme/app.dart';
 import 'screens/login_page.dart';
@@ -20,8 +21,9 @@ class _MyAppState extends State<MyApp> {
       theme: kAppTheme,
       routes: {
         '/login': (BuildContext context) => LoginPage(),
-        '/home': (BuildContext context) => HomePage(),
-        '/portfolios': (BuildContext context) => PortfolioList()
+        '/investor_home': (BuildContext context) => HomePage(),
+        '/venture_portfolio_list': (BuildContext context) => PortfolioList(),
+        '/venture_portfolio': (BuildContext context) => PortfolioPage()
       },
       initialRoute: '/login',
     );

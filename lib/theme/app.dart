@@ -7,8 +7,13 @@ IconThemeData _customIconTheme(IconThemeData original) {
   return original.copyWith(color: iconColor);
 }
 
+var appBarShape = RoundedRectangleBorder(
+  borderRadius: BorderRadius.only(
+      bottomLeft: Radius.circular(20.0), bottomRight: Radius.circular(20)),
+);
+
 OutlineInputBorder textFieldBorder = OutlineInputBorder(
-    borderSide: BorderSide(color: textColor, width: 2.0),
+    borderSide: BorderSide(color: textColor, width: 1.5),
     borderRadius: BorderRadius.all(Radius.circular(30.0)));
 
 ThemeData _buildTheme() {
@@ -45,18 +50,23 @@ TextTheme _buildTextTheme(TextTheme base) {
         headline5: base.headline5.copyWith(
           fontWeight: FontWeight.w500,
         ),
-        headline6: base.headline6.copyWith(fontSize: 19.0),
+        headline6: base.headline6
+            .copyWith(fontSize: 19.0, fontWeight: FontWeight.w500),
         caption: base.caption.copyWith(
-          fontWeight: FontWeight.w400,
-          fontSize: 14.0,
+          fontWeight: FontWeight.w500,
+          fontSize: 16.0,
         ),
         bodyText1: base.bodyText1.copyWith(
           fontWeight: FontWeight.w300,
           fontSize: 15.0,
         ),
+        bodyText2: base.bodyText1.copyWith(
+          fontWeight: FontWeight.w500,
+          fontSize: 15.0,
+        ),
       )
       .apply(
-        fontFamily: 'Rubik',
+        fontFamily: 'Work Sans',
         displayColor: textColor,
         bodyColor: textColor,
       );

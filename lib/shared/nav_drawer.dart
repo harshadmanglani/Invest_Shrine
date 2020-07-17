@@ -8,6 +8,7 @@ class NavDrawer extends StatefulWidget {
 }
 
 class _NavDrawerState extends State<NavDrawer> {
+  TextStyle navDrawerButtonStyle = TextStyle(fontSize: 16);
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -16,12 +17,14 @@ class _NavDrawerState extends State<NavDrawer> {
         children: <Widget>[
           UserAccountsDrawerHeader(
               currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage('assets/logo.png'),
+                backgroundImage: AssetImage('assets/images/logo_loading.png'),
               ),
               accountName: Text("Abhimanyu Bhosale",
-                  style: TextStyle(color: drawerHeaderTextColor)),
+                  style: navDrawerButtonStyle.copyWith(
+                      color: drawerHeaderTextColor)),
               accountEmail: Text("abhimanyu@livehealth.in",
-                  style: TextStyle(color: drawerHeaderTextColor))),
+                  style: navDrawerButtonStyle.copyWith(
+                      color: drawerHeaderTextColor))),
           ListTile(
             title: Row(
               children: <Widget>[
@@ -37,7 +40,8 @@ class _NavDrawerState extends State<NavDrawer> {
           ListTile(
               title: Row(
             children: <Widget>[
-              Expanded(flex: 4, child: Text("Help")),
+              Expanded(
+                  flex: 4, child: Text("Help", style: navDrawerButtonStyle)),
               Expanded(
                   flex: 1,
                   child:
@@ -47,7 +51,12 @@ class _NavDrawerState extends State<NavDrawer> {
           ListTile(
               title: Row(
             children: <Widget>[
-              Expanded(flex: 4, child: Text("Logout")),
+              Expanded(
+                  flex: 4,
+                  child: Text(
+                    "Logout",
+                    style: navDrawerButtonStyle,
+                  )),
               Expanded(
                   flex: 1,
                   child: Icon(Icons.exit_to_app,
