@@ -1,8 +1,8 @@
 import 'package:MobileApp/shared/nav_drawer.dart';
 import 'package:MobileApp/theme/app.dart';
 import 'package:flutter/material.dart';
-import '../login_page.dart';
-import 'package:toast/toast.dart';
+import '../login.dart';
+// import 'package:toast/toast.dart';
 
 class EntrepreneurForm extends StatefulWidget {
   @override
@@ -49,12 +49,14 @@ class _EntrepreneurFormBodyState extends State<EntrepreneurFormBody> {
   @override
   void initState() {
     super.initState();
-    _firstName = new TextEditingController(text: "Aditya");
-    _lastName = new TextEditingController(text: "Khandelwal");
-    _ventureName = new TextEditingController(text: "Invest Shrine");
+    _firstName = new TextEditingController(text: "Steve");
+    _lastName = new TextEditingController(text: "Cook");
+    _ventureName = new TextEditingController(text: "Travel Haven");
     _linkedinProfile =
-        new TextEditingController(text: "https://linkedin.com/in");
-    _execSummary = new TextEditingController(text: "4th year student at VIT");
+        new TextEditingController(text: "https://fake-linkedin.com/in");
+    _execSummary = new TextEditingController(
+        text:
+            "Ex-CEO of Banana Computers. Founded Travel Haven to dramatically improve the way people travel. Board member of Macrosoft Inc.");
 
     _firstNameNode = new FocusNode();
     _lastNameNode = new FocusNode();
@@ -83,6 +85,7 @@ class _EntrepreneurFormBodyState extends State<EntrepreneurFormBody> {
               TextFormField(
                 validator: (value) {
                   if (value.isEmpty) return "Please enter a value";
+                  return "";
                 },
                 onChanged: (value) {
                   _formKey.currentState.validate();
@@ -100,6 +103,7 @@ class _EntrepreneurFormBodyState extends State<EntrepreneurFormBody> {
                 controller: _lastName,
                 validator: (value) {
                   if (value.isEmpty) return "Please enter a value";
+                  return "";
                 },
                 onChanged: (value) {
                   _formKey.currentState.validate();

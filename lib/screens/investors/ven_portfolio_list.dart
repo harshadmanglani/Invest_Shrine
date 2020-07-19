@@ -1,21 +1,27 @@
-import 'package:MobileApp/backend/entrepreneurs/portfolio_list.dart';
 import 'package:MobileApp/models/entrepreneurs/venture_model.dart';
 import 'package:MobileApp/shared/nav_drawer.dart';
 import 'package:flutter/material.dart';
-import 'portfolio_card.dart';
+import 'ven_portfolio_card.dart';
+import '../../backend/entrepreneurs/portfolio_list.dart';
 import '../../theme/app.dart';
 
-class PortfolioList extends StatefulWidget {
+class VenturePortfolioList extends StatefulWidget {
   @override
-  _PortfolioListState createState() => _PortfolioListState();
+  _VenturePortfolioListState createState() => _VenturePortfolioListState();
 }
 
-class _PortfolioListState extends State<PortfolioList> {
+class _VenturePortfolioListState extends State<VenturePortfolioList> {
   @override
   void initState() {
     super.initState();
   }
 
+  List<String> assetLinks = [
+    'assets/images/logo_loading.png',
+    'assets/images/1_s.jpg',
+    'assets/images/2_s.jpg',
+    'assets/images/3_s.jpg'
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +38,7 @@ class _PortfolioListState extends State<PortfolioList> {
           ],
         ),
         body: FutureBuilder(
-            future: VenturePortfolioList().getAllVenturePortfolios(),
+            future: VenturePortfolioListAPI().getAllVenturePortfolios(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 print(snapshot.data);
@@ -47,8 +53,8 @@ class _PortfolioListState extends State<PortfolioList> {
                             physics: BouncingScrollPhysics(),
                             itemCount: portfolioList.length,
                             itemBuilder: (context, index) {
-                              return EntrepreneurPortfolio(
-                                  portfolioList[index]);
+                              return VenturePortfolioCard(
+                                  portfolioList[index], assetLinks[index]);
                             },
                           ),
                         ),
@@ -67,7 +73,7 @@ class _PortfolioListState extends State<PortfolioList> {
                             physics: BouncingScrollPhysics(),
                             itemCount: 10,
                             itemBuilder: (context, index) {
-                              return LoadingEntrepreneurPortfolio();
+                              return LoadingVenturePortfolioCard();
                             },
                           ),
                         ),

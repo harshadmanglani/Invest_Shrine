@@ -1,8 +1,8 @@
 import 'package:MobileApp/shared/nav_drawer.dart';
 import 'package:MobileApp/theme/app.dart';
 import 'package:flutter/material.dart';
-import 'package:toast/toast.dart';
-import '../login_page.dart';
+// import 'package:toast/toast.dart';
+import '../login.dart';
 
 class VentureForm extends StatefulWidget {
   @override
@@ -95,6 +95,7 @@ class _VentureFormBodyState extends State<VentureFormBody> {
               TextFormField(
                 validator: (value) {
                   if (value.isEmpty) return "Please enter a value";
+                  return "";
                 },
                 onChanged: (value) {
                   _formKey.currentState.validate();
@@ -112,6 +113,7 @@ class _VentureFormBodyState extends State<VentureFormBody> {
                 controller: _location,
                 validator: (value) {
                   if (value.isEmpty) return "Please enter a value";
+                  return "";
                 },
                 onChanged: (value) {
                   _formKey.currentState.validate();

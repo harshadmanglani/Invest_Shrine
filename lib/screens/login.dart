@@ -38,11 +38,12 @@ class _LoginPageState extends State<LoginPage> {
           child: ListView(
             children: <Widget>[
               SizedBox(height: 20),
-              Image.asset(
-                'assets/images/logo_loading.png',
-                height: 180,
-                width: 180,
-              ),
+              // Image.asset(
+              //   'assets/images/logo_loading.png',
+              //   height: 180,
+              //   width: 180,
+              // ),
+              SizedBox(height: 180),
               SizedBox(height: 10.0),
               Center(
                   child: Text("Invest Shrine",
@@ -91,7 +92,15 @@ class _LoginPageState extends State<LoginPage> {
                   focusNode: _passwordFocusNode,
                 ),
               ),
-              SizedBox(height: 50.0),
+              // SizedBox(height: 10.0),
+              ButtonBar(children: <Widget>[
+                FlatButton(
+                    padding: EdgeInsets.only(right: loginMargin),
+                    child: Text("Forgot password?",
+                        style: TextStyle(color: navbarBackgroundColor)),
+                    onPressed: () {})
+              ]),
+              SizedBox(height: 40.0),
               Padding(
                 padding: EdgeInsets.only(
                     right: loginMargin, top: 0.0, left: loginMargin),
@@ -126,48 +135,48 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               SizedBox(height: 10.0),
-              Divider(
-                color: Colors.grey,
-                thickness: 2.0,
-                indent: loginMargin,
-                endIndent: loginMargin,
-              ),
-              SizedBox(height: 10.0),
-              Padding(
-                padding: EdgeInsets.only(
-                    right: loginMargin, top: 0.0, left: loginMargin),
-                child: RaisedButton(
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                      side: BorderSide(color: Colors.grey, width: 1.5),
-                      borderRadius: BorderRadius.all(Radius.circular(27.0))),
-                  elevation: 3.0,
-                  child: Padding(
-                    padding: EdgeInsets.all(14.0),
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                          flex: 12,
-                          child: Text('Sign in with Google',
-                              style: TextStyle(
-                                  fontSize: 17.0,
-                                  color: Colors.grey[600],
-                                  fontWeight: FontWeight.w600)),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Image.asset(
-                            'assets/images/google_icon.png',
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/investor_home');
-                  },
-                ),
-              ),
+              // Divider(
+              //   color: Colors.grey,
+              //   thickness: 2.0,
+              //   indent: loginMargin,
+              //   endIndent: loginMargin,
+              // ),
+              // SizedBox(height: 10.0),
+              // Padding(
+              //   padding: EdgeInsets.only(
+              //       right: loginMargin, top: 0.0, left: loginMargin),
+              //   child: RaisedButton(
+              //     color: Colors.white,
+              //     shape: RoundedRectangleBorder(
+              //         side: BorderSide(color: Colors.grey, width: 1.5),
+              //         borderRadius: BorderRadius.all(Radius.circular(27.0))),
+              //     elevation: 3.0,
+              //     child: Padding(
+              //       padding: EdgeInsets.all(14.0),
+              //       child: Row(
+              //         children: <Widget>[
+              //           Expanded(
+              //             flex: 12,
+              //             child: Text('Sign in with Google',
+              //                 style: TextStyle(
+              //                     fontSize: 17.0,
+              //                     color: Colors.grey[600],
+              //                     fontWeight: FontWeight.w600)),
+              //           ),
+              //           Expanded(
+              //             flex: 1,
+              //             child: Image.asset(
+              //               'assets/images/google_icon.png',
+              //             ),
+              //           )
+              //         ],
+              //       ),
+              //     ),
+              //     onPressed: () {
+              //       Navigator.pushNamed(context, '/investor_home');
+              //     },
+              //   ),
+              // ),
             ],
           ),
         ),

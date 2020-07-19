@@ -9,6 +9,13 @@ class EntrepreneurPortfolioPage extends StatefulWidget {
 class _EntrepreneurPortfolioPageState extends State<EntrepreneurPortfolioPage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(),
+      body: Container(
+        child: Column(
+          children: <Widget>[Text("Hey")],
+        ),
+      ),
+    );
   }
 }

@@ -1,17 +1,19 @@
+import 'package:MobileApp/shared/industry_widget.dart';
 import 'package:MobileApp/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:expandable/expandable.dart';
 import '../../models/entrepreneurs/venture_model.dart';
 
-class EntrepreneurPortfolio extends StatefulWidget {
+class VenturePortfolioCard extends StatefulWidget {
   final VentureModel portfolio;
-  EntrepreneurPortfolio(this.portfolio);
+  final String assetLink;
+  VenturePortfolioCard(this.portfolio, this.assetLink);
 
   @override
-  _EntrepreneurPortfolioState createState() => _EntrepreneurPortfolioState();
+  _VenturePortfolioCardState createState() => _VenturePortfolioCardState();
 }
 
-class _EntrepreneurPortfolioState extends State<EntrepreneurPortfolio> {
+class _VenturePortfolioCardState extends State<VenturePortfolioCard> {
   var cardShape = OutlineInputBorder(
       borderSide: BorderSide(color: Colors.transparent),
       borderRadius: BorderRadius.all(Radius.circular(17.0)));
@@ -44,8 +46,7 @@ class _EntrepreneurPortfolioState extends State<EntrepreneurPortfolio> {
                       topLeft: Radius.circular(17.0),
                       topRight: Radius.circular(17)),
                   image: DecorationImage(
-                      image: AssetImage('assets/images/livehealth.png'),
-                      fit: BoxFit.cover),
+                      image: AssetImage(widget.assetLink), fit: BoxFit.cover),
                 ),
               ),
             ),
@@ -62,27 +63,7 @@ class _EntrepreneurPortfolioState extends State<EntrepreneurPortfolio> {
                   )),
               collapsed: Row(
                 children: <Widget>[
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(15)),
-                    child: Padding(
-                        padding: const EdgeInsets.fromLTRB(4.0, 1.0, 4.0, 1.0),
-                        child: Text(portfolio.industry[0],
-                            style: TextStyle(
-                                fontSize: 14.5, color: Colors.white))),
-                  ),
-                  SizedBox(width: 5.0),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Colors.yellow[300],
-                        borderRadius: BorderRadius.circular(15)),
-                    child: Padding(
-                        padding: const EdgeInsets.fromLTRB(4.0, 1.0, 4.0, 1.0),
-                        child: Text(portfolio.industry[1],
-                            style: TextStyle(
-                                fontSize: 14.5, color: Colors.black))),
-                  )
+                  IndustryWidget(industry: portfolio.industry, limitToTwo: true)
                 ],
               ),
               expanded: Column(
@@ -108,8 +89,11 @@ class _EntrepreneurPortfolioState extends State<EntrepreneurPortfolio> {
                       ),
                       FlatButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, '/venture_portfolio',
-                                arguments: {'portfolio': portfolio});
+                            Navigator.pushNamed(
+                                context, '/venture_portfolio_page', arguments: {
+                              'portfolio': portfolio,
+                              'assetLink': widget.assetLink
+                            });
                           },
                           child: Text(
                             "View Portfolio",
@@ -161,14 +145,14 @@ var secondLogoImage = Center(
   ),
 );
 
-class LoadingEntrepreneurPortfolio extends StatefulWidget {
+class LoadingVenturePortfolioCard extends StatefulWidget {
   @override
-  _LoadingEntrepreneurPortfolioState createState() =>
-      _LoadingEntrepreneurPortfolioState();
+  _LoadingVenturePortfolioCardState createState() =>
+      _LoadingVenturePortfolioCardState();
 }
 
-class _LoadingEntrepreneurPortfolioState
-    extends State<LoadingEntrepreneurPortfolio> {
+class _LoadingVenturePortfolioCardState
+    extends State<LoadingVenturePortfolioCard> {
   var cardShape = OutlineInputBorder(
       borderSide: BorderSide(color: Colors.transparent),
       borderRadius: BorderRadius.all(Radius.circular(17.0)));

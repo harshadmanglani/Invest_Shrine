@@ -4,7 +4,7 @@ import '../api_provider.dart';
 import 'dart:convert';
 import '../../models/entrepreneurs/entrepreneur_model.dart';
 
-class EntrepreneurPortfolioList {
+class EntrepreneurPortfolioListAPI {
   String searchEntrepreneur({String searchQuery = ''}) {
     return '''query{
     allEntrepreneurs''' +
@@ -47,7 +47,7 @@ class EntrepreneurPortfolioList {
   }
 }
 
-class VenturePortfolioList {
+class VenturePortfolioListAPI {
   String searchVenture({String searchQuery = ''}) {
     return ''' 
   query{
@@ -62,6 +62,7 @@ class VenturePortfolioList {
            startupSummary,
            tagLine,
            location,
+           website,
            investment,
           vLinkedinProfile,
            industry{
@@ -91,10 +92,8 @@ class VenturePortfolioList {
           vLinkedinProfile: portfolio["vLinkedinProfile"],
           ventureName: portfolio["ventureName"],
           startupSummary: portfolio["startupSummary"],
-          industry: [
-            portfolio["industry"][0]["industry"],
-            portfolio["industry"][1]["industry"]
-          ],
+          industry: List.generate(portfolio["industry"].length,
+              (index) => portfolio["industry"][index]["industry"]),
           investment: portfolio["investment"],
           website: portfolio["website"],
           tagLine: portfolio["tagLine"],
