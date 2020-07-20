@@ -31,12 +31,14 @@ class _MyAppState extends State<MyApp> {
         '/venture_portfolio_page': (BuildContext context) =>
             VenturePortfolioPage(),
         '/entrepreneur_portfolio_page': (BuildContext context) =>
-            EntrepreneurPortfolioPage()
+            EntrepreneurPortfolioPage(),
       },
-      initialRoute: '/venture_portfolio_list',
+      initialRoute: '/investor_home',
     );
   }
 }
+
+// DONT'REMOVE THIS CODE, MIGHT NEED IT LATER
 
 // import 'package:flutter/material.dart';
 

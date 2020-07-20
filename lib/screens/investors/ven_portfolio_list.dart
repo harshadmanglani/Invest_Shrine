@@ -6,24 +6,24 @@ import '../../backend/entrepreneurs/portfolio_list.dart';
 import '../../theme/app.dart';
 
 class VenturePortfolioList extends StatefulWidget {
+  final String query;
+  VenturePortfolioList({this.query = ''});
   @override
   _VenturePortfolioListState createState() => _VenturePortfolioListState();
 }
 
 class _VenturePortfolioListState extends State<VenturePortfolioList> {
-  @override
-  void initState() {
-    super.initState();
-  }
+  String query;
 
   List<String> assetLinks = [
-    'assets/images/logo_loading.png',
+    'assets/images/livehealth.png',
     'assets/images/1_s.jpg',
-    'assets/images/2_s.jpg',
+    'assets/images/3_s.jpg',
     'assets/images/3_s.jpg'
   ];
   @override
   Widget build(BuildContext context) {
+    query = widget.query;
     return Scaffold(
         drawer: NavDrawer(),
         appBar: AppBar(
@@ -38,7 +38,8 @@ class _VenturePortfolioListState extends State<VenturePortfolioList> {
           ],
         ),
         body: FutureBuilder(
-            future: VenturePortfolioListAPI().getAllVenturePortfolios(),
+            future: VenturePortfolioListAPI()
+                .getAllVenturePortfolios(searchQuery: query),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 print(snapshot.data);

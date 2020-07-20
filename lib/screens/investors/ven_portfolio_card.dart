@@ -109,7 +109,7 @@ class _VenturePortfolioCardState extends State<VenturePortfolioCard> {
               ),
               builder: (_, collapsed, expanded) {
                 return Padding(
-                  padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                  padding: EdgeInsets.only(left: 10, right: 10, bottom: 0),
                   child: Expandable(
                     collapsed: collapsed,
                     expanded: expanded,
