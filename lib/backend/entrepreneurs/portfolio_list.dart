@@ -38,7 +38,6 @@ class EntrepreneurPortfolioListAPI {
         firstName: portfolio["firstName"],
         id: portfolio["id"],
         lastName: portfolio["lastName"],
-        venture: portfolio["venture"],
         execSummary: portfolio["execSummary"],
         linkedinProfile: portfolio["linkedinProfile"],
       ));
@@ -66,7 +65,11 @@ class VenturePortfolioListAPI {
            investment,
           vLinkedinProfile,
            industry{
+             edges{
+               node{
              industry
+             }
+            }
           }
         }
       }
@@ -92,8 +95,10 @@ class VenturePortfolioListAPI {
           vLinkedinProfile: portfolio["vLinkedinProfile"],
           ventureName: portfolio["ventureName"],
           startupSummary: portfolio["startupSummary"],
-          industry: List.generate(portfolio["industry"].length,
-              (index) => portfolio["industry"][index]["industry"]),
+          industry: List.generate(
+              portfolio["industry"]["edges"].length,
+              (index) =>
+                  portfolio["industry"]["edges"][index]["node"]["industry"]),
           investment: portfolio["investment"],
           website: portfolio["website"],
           tagLine: portfolio["tagLine"],

@@ -24,8 +24,10 @@ class _IndustryWidgetState extends State<IndustryWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // print(widget.industry.toString());
-    int length = widget.limitToTwo ? 2 : widget.industry.length;
+    print(widget.industry.toString());
+    int length = widget.limitToTwo
+        ? widget.industry.length == 1 ? 1 : 2
+        : widget.industry.length;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[

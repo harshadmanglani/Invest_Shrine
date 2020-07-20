@@ -1,5 +1,5 @@
 import 'package:MobileApp/screens/investors/ven_portfolio_list.dart';
-import 'package:MobileApp/screens/investors/venture_search.dart';
+import 'package:MobileApp/screens/investors/ven_search.dart';
 import 'package:MobileApp/theme/colors.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +35,7 @@ class _InvestorHomeState extends State<InvestorHome> {
         color: navbarBackgroundColor,
         style: TabStyle.reactCircle,
         items: [
-          TabItem(icon: Icons.bookmark, title: 'Saved'),
+          TabItem(icon: Icons.bookmark_border, title: 'Saved'),
           TabItem(icon: Icons.search, title: 'Search'),
           TabItem(icon: Icons.home, title: 'Home'),
           TabItem(icon: Icons.person_outline, title: 'Portfolio'),

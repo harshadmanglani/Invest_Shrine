@@ -6,14 +6,13 @@ import '../../backend/entrepreneurs/portfolio_list.dart';
 import '../../theme/app.dart';
 
 class VenturePortfolioList extends StatefulWidget {
-  final String query;
-  VenturePortfolioList({this.query = ''});
   @override
   _VenturePortfolioListState createState() => _VenturePortfolioListState();
 }
 
 class _VenturePortfolioListState extends State<VenturePortfolioList> {
-  String query;
+  String query = '';
+  String industry = '';
 
   List<String> assetLinks = [
     'assets/images/livehealth.png',
@@ -23,30 +22,44 @@ class _VenturePortfolioListState extends State<VenturePortfolioList> {
   ];
   @override
   Widget build(BuildContext context) {
-    query = widget.query;
+    dynamic arguments = ModalRoute.of(context).settings.arguments;
+    if (arguments != null) {
+      query = '(industry: "${arguments['query']}")';
+      industry = arguments['industry'];
+    }
     return Scaffold(
-        drawer: NavDrawer(),
-        appBar: AppBar(
-          shape: appBarShape,
-          centerTitle: true,
-          title: Text(
-            "Startups",
-            style: TextStyle(color: Colors.white),
-          ),
-          actions: <Widget>[
-            // IconButton(icon: Icon(Icons.account_balance), onPressed: () {})
-          ],
-        ),
+        drawer: arguments == null ? NavDrawer() : null,
+        appBar: arguments == null
+            ? AppBar(
+                shape: appBarShape,
+                centerTitle: true,
+                title: Text(
+                  "Startups",
+                  style: TextStyle(color: Colors.white),
+                ),
+              )
+            : AppBar(),
         body: FutureBuilder(
             future: VenturePortfolioListAPI()
                 .getAllVenturePortfolios(searchQuery: query),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
-                print(snapshot.data);
+                // print(snapshot.data);
                 List<VentureModel> portfolioList = snapshot.data;
                 return Container(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
+                      arguments != null
+                          ? Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 30, right: 12, top: 12),
+                              child: Text("Showing results by $industry:",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6
+                                      .copyWith(fontSize: 18)))
+                          : Container(height: 0, width: 0),
                       Flexible(
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),

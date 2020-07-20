@@ -75,7 +75,18 @@ class _VenturePortfolioCardState extends State<VenturePortfolioCard> {
                     overflow: TextOverflow.ellipsis,
                     style: theme.textTheme.bodyText1,
                   ),
-                  SizedBox(height: 28.0),
+                  SizedBox(height: 12.0),
+                  RichText(
+                    text: TextSpan(
+                      style: Theme.of(context).textTheme.bodyText1,
+                      children: <TextSpan>[
+                        TextSpan(text: 'Funding Goal: '),
+                        TextSpan(
+                            text: 'Rs. ${priceFormatter(portfolio.investment)}',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                      ],
+                    ),
+                  ),
                   Row(
                     children: <Widget>[
                       Expanded(
@@ -123,6 +134,18 @@ class _VenturePortfolioCardState extends State<VenturePortfolioCard> {
       ),
     ));
   }
+}
+
+String priceFormatter(int price) {
+  String formattedPrice;
+  int length = price.toString().length;
+  if (price.toString().endsWith('00000'))
+    formattedPrice = price.toString().substring(0, length - 5) + 'L';
+  else if (price.toString().endsWith('0000') && length >= 6)
+    formattedPrice = price.toString().substring(0, length - 5) +
+        '.' +
+        price.toString().substring(length - 5, length - 4);
+  return formattedPrice;
 }
 
 var secondLogoImage = Center(

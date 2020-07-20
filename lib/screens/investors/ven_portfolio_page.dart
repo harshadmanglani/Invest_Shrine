@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../theme/app.dart';
 import 'package:expandable/expandable.dart';
+import 'ven_portfolio_card.dart';
 
 class VenturePortfolioPage extends StatefulWidget {
   @override
@@ -28,11 +29,6 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage>
     _scrollController = ScrollController()..addListener(() => setState(() {}));
   }
 
-  bool get _showTitle {
-    return _scrollController.hasClients &&
-        _scrollController.offset > 210 - kToolbarHeight;
-  }
-
   launchURL(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
@@ -51,8 +47,6 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage>
         body: DefaultTabController(
           length: 3,
           child: NestedScrollView(
-            // physics: NeverScrollableScrollPhysics(),
-            controller: _scrollController,
             headerSliverBuilder:
                 (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
@@ -62,7 +56,6 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage>
                   forceElevated: innerBoxIsScrolled,
                   floating: false,
                   pinned: true,
-                  centerTitle: true,
                   leading: Container(
                     height: 20,
                     width: 20,
@@ -75,15 +68,7 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage>
                           Navigator.pop(context);
                         }),
                   ),
-                  title: _showTitle
-                      ? Text(
-                          portfolio.ventureName,
-                          style: standardTextStyle.copyWith(
-                              color: Colors.white, fontSize: 18.0),
-                        )
-                      : null,
                   flexibleSpace: FlexibleSpaceBar(
-                      collapseMode: CollapseMode.pin,
                       centerTitle: true,
                       background: Image.asset(
                         arguments['assetLink'],
@@ -119,20 +104,8 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage>
   }
 
   pitchWidget() {
-    return Container(
-      child: ListView.builder(
-          // key: PageStorageKey<String>(listKey),
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          itemCount: 20,
-          //itemExtent: 1.0,
-          itemBuilder: (context, index) {
-            return new ListTile(
-              title: new Text("Item $index"),
-            );
-          }),
-    );
-    var constEntrepreneurCFListWidget = EntrepreneurCFList(portfolio.id);
+    var constEntrepreneurCFListWidget =
+        EntrepreneurCFList(portfolio.id, portfolio.ventureName);
     return ListView(
       // controller: ScrollController(),
       addAutomaticKeepAlives: true,
@@ -171,12 +144,20 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage>
               SizedBox(height: 30),
               IndustryWidget(industry: portfolio.industry, limitToTwo: false),
               SizedBox(height: 20),
-              Text("Funding Goal: Rs. ${portfolio.investment}",
-                  style: standardTextStyle.copyWith(
-                    // fontWeight: FontWeight.w600,
-                    fontSize: 18,
-                    // decoration: TextDecoration.underline)
-                  )),
+              RichText(
+                text: TextSpan(
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline6
+                      .copyWith(fontSize: 18),
+                  children: <TextSpan>[
+                    TextSpan(text: 'Funding Goal: '),
+                    TextSpan(
+                        text: 'Rs. ${priceFormatter(portfolio.investment)}',
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                  ],
+                ),
+              ),
               SizedBox(height: 20),
               CustomExpandedTile(
                   title: "Startup Summary",
@@ -185,6 +166,7 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage>
                   hasIcon: true),
               SizedBox(height: 20),
               constEntrepreneurCFListWidget,
+              SizedBox(height: 30)
             ],
           ),
         ),
@@ -245,7 +227,8 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
 
 class EntrepreneurCFList extends StatefulWidget {
   final String id;
-  EntrepreneurCFList(this.id);
+  final String ventureName;
+  EntrepreneurCFList(this.id, this.ventureName);
 
   @override
   _EntrepreneurCFListState createState() => _EntrepreneurCFListState();
@@ -285,8 +268,9 @@ class _EntrepreneurCFListState extends State<EntrepreneurCFList>
                         child: ListView.builder(
                           addAutomaticKeepAlives: true,
                           shrinkWrap: true,
-                          itemBuilder: (context, index) =>
-                              EntrepreneurWidget(entrepreneurPortfolios[index]),
+                          itemBuilder: (context, index) => EntrepreneurWidget(
+                              entrepreneurPortfolios[index],
+                              widget.ventureName),
                           itemCount: snapshot.data.length,
                         ),
                       ),
@@ -316,8 +300,8 @@ class _EntrepreneurCFListState extends State<EntrepreneurCFList>
 
 class EntrepreneurWidget extends StatefulWidget {
   final EntrepreneurModel entrepreneurPortfolio;
-
-  EntrepreneurWidget(this.entrepreneurPortfolio);
+  final String ventureName;
+  EntrepreneurWidget(this.entrepreneurPortfolio, this.ventureName);
 
   @override
   _EntrepreneurWidgetState createState() => _EntrepreneurWidgetState();
@@ -327,7 +311,7 @@ class _EntrepreneurWidgetState extends State<EntrepreneurWidget>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
-
+  String ventureName;
   EntrepreneurModel entrepreneurPortfolio;
   launchURL(String url) async {
     if (await canLaunch(url)) {
@@ -340,6 +324,7 @@ class _EntrepreneurWidgetState extends State<EntrepreneurWidget>
   @override
   Widget build(BuildContext context) {
     entrepreneurPortfolio = widget.entrepreneurPortfolio;
+    ventureName = widget.ventureName;
     return Card(
       elevation: 4.0,
       shape: RoundedRectangleBorder(
@@ -357,7 +342,11 @@ class _EntrepreneurWidgetState extends State<EntrepreneurWidget>
             ),
             FlatButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/entrepreneur_portfolio_page');
+                Navigator.pushNamed(context, '/entrepreneur_portfolio_page',
+                    arguments: {
+                      'entrepreneurPortfolio': entrepreneurPortfolio,
+                      'ventureName': ventureName
+                    });
               },
               child: Text(
                 "View",
