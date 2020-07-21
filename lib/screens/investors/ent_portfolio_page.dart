@@ -1,5 +1,5 @@
 import 'package:MobileApp/models/entrepreneurs/entrepreneur_model.dart';
-import 'package:MobileApp/screens/login.dart';
+import 'package:MobileApp/screens/investors/investor_login.dart';
 import 'package:MobileApp/theme/app.dart';
 import 'package:flutter/material.dart';
 import '../../shared/custom_expanded_tile.dart';

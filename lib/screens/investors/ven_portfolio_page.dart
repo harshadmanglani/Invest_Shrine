@@ -18,7 +18,6 @@ class VenturePortfolioPage extends StatefulWidget {
 class _VenturePortfolioPageState extends State<VenturePortfolioPage>
     with SingleTickerProviderStateMixin {
   TextStyle standardTextStyle;
-  ScrollController _scrollController;
   TabController _tabController;
   VentureModel portfolio;
 
@@ -26,7 +25,6 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage>
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
-    _scrollController = ScrollController()..addListener(() => setState(() {}));
   }
 
   launchURL(String url) async {
@@ -234,11 +232,7 @@ class EntrepreneurCFList extends StatefulWidget {
   _EntrepreneurCFListState createState() => _EntrepreneurCFListState();
 }
 
-class _EntrepreneurCFListState extends State<EntrepreneurCFList>
-    with AutomaticKeepAliveClientMixin {
-  @override
-  bool get wantKeepAlive => true;
-
+class _EntrepreneurCFListState extends State<EntrepreneurCFList> {
   @override
   Widget build(BuildContext context) {
     var standardTextStyle = Theme.of(context).textTheme.caption;
@@ -307,10 +301,7 @@ class EntrepreneurWidget extends StatefulWidget {
   _EntrepreneurWidgetState createState() => _EntrepreneurWidgetState();
 }
 
-class _EntrepreneurWidgetState extends State<EntrepreneurWidget>
-    with AutomaticKeepAliveClientMixin {
-  @override
-  bool get wantKeepAlive => true;
+class _EntrepreneurWidgetState extends State<EntrepreneurWidget> {
   String ventureName;
   EntrepreneurModel entrepreneurPortfolio;
   launchURL(String url) async {

@@ -1,9 +1,12 @@
 // import 'package:MobileApp/screens/investors/entr_portfolio_page.dart';
 // import 'package:MobileApp/screens/investors/ven_portfolio_card.dart';
+import 'package:MobileApp/screens/entrepreneurs/ent_home.dart';
+import 'package:MobileApp/screens/entrepreneurs/ent_login.dart';
 import 'package:MobileApp/screens/investors/ven_portfolio_page.dart';
+import 'package:MobileApp/screens/split_route.dart';
 import 'package:flutter/material.dart';
 import 'theme/app.dart';
-import 'screens/login.dart';
+import 'screens/investors/investor_login.dart';
 import 'screens/investors/investor_home.dart';
 import 'screens/investors/ven_portfolio_list.dart';
 import 'screens/investors/ent_portfolio_page.dart';
@@ -24,16 +27,19 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: kAppTheme,
       routes: {
-        '/login': (BuildContext context) => LoginPage(),
+        '/investor_login': (BuildContext context) => InvestorLogin(),
+        '/entrepreneur_login': (BuildContext context) => EntrepreneurLogin(),
         '/investor_home': (BuildContext context) => InvestorHome(),
+        '/entrepreneur_home': (BuildContext context) => EntrepreneurHome(),
         '/venture_portfolio_list': (BuildContext context) =>
             VenturePortfolioList(),
         '/venture_portfolio_page': (BuildContext context) =>
             VenturePortfolioPage(),
         '/entrepreneur_portfolio_page': (BuildContext context) =>
             EntrepreneurPortfolioPage(),
+        '/split_route': (BuildContext context) => SplitRoute(),
       },
-      initialRoute: '/investor_home',
+      initialRoute: '/split_route',
     );
   }
 }

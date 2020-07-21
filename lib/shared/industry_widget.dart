@@ -14,12 +14,13 @@ class _IndustryWidgetState extends State<IndustryWidget> {
   // Map<dynamic, dynamic> colorMap = {};
 
   var colorMap = {
-    "Tech": {"background": Colors.red[100], "text": Colors.black},
-    "Healthcare": {"background": Colors.green[100], "text": Colors.black},
-    "Fintech": {"background": Colors.blue[100], "text": Colors.white},
-    "MSME": {"background": Colors.yellow[100], "text": Colors.black},
-    "E-Commerce": {"background": Colors.orange[100], "text": Colors.black},
-    "Travel": {"background": Colors.purple[100], "text": Colors.white},
+    "Tech": {"background": Colors.red[200], "text": Colors.black},
+    "Healthcare": {"background": Colors.green[200], "text": Colors.black},
+    "Fintech": {"background": Colors.blue[200], "text": Colors.white},
+    "MSME": {"background": Colors.yellow[200], "text": Colors.black},
+    "E-Commerce": {"background": Colors.orange[200], "text": Colors.black},
+    "Travel": {"background": Colors.purple[200], "text": Colors.white},
+    "Food": {"background": Colors.indigo[200], "text": Colors.white}
   };
 
   @override

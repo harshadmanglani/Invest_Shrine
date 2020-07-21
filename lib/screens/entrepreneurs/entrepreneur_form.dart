@@ -1,7 +1,7 @@
 import 'package:MobileApp/shared/nav_drawer.dart';
 import 'package:MobileApp/theme/app.dart';
 import 'package:flutter/material.dart';
-import '../login.dart';
+import '../investors/investor_login.dart';
 // import 'package:toast/toast.dart';
 
 class EntrepreneurForm extends StatefulWidget {

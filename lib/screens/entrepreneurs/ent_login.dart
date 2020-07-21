@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import '../theme/colors.dart';
+import '../../theme/colors.dart';
 
 double loginMargin = 30.0;
 
-class LoginPage extends StatefulWidget {
+class EntrepreneurLogin extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _EntrepreneurLoginState createState() => _EntrepreneurLoginState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _EntrepreneurLoginState extends State<EntrepreneurLogin> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   final _unfocusedColor = Colors.black54;
@@ -35,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
             _usernameFocusNode.unfocus();
             _passwordFocusNode.unfocus();
           },
-          child: ListView(
+          child: Column(
             children: <Widget>[
               SizedBox(height: 20),
               // Image.asset(
@@ -130,7 +130,8 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/investor_home');
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        '/entrepreneur_home', (Route<dynamic> route) => false);
                   },
                 ),
               ),
@@ -173,7 +174,7 @@ class _LoginPageState extends State<LoginPage> {
               //       ),
               //     ),
               //     onPressed: () {
-              //       Navigator.pushNamed(context, '/investor_home');
+              //       Navigator.pushNamed(context, '/entrepreneur_home');
               //     },
               //   ),
               // ),

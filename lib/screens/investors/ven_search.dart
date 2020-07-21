@@ -1,4 +1,4 @@
-import 'package:MobileApp/screens/login.dart';
+import 'package:MobileApp/screens/investors/investor_login.dart';
 import 'package:MobileApp/theme/colors.dart';
 import 'package:flutter/material.dart';
 
