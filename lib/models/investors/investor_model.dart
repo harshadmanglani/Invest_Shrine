@@ -8,8 +8,12 @@ class InvestorModel {
   List<String> interests;
   List<String> investmentHistory;
   int investment;
+  int numInvestments;
+  String location;
   InvestorModel(
       {this.background,
+      this.location,
+      this.numInvestments,
       this.investment,
       this.currentOccupation,
       this.firstName,

@@ -64,20 +64,21 @@ class _InvestorPortfolioListState extends State<InvestorPortfolioList> {
                       Flexible(
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
-                          child: GridView.builder(
-                              physics: BouncingScrollPhysics(),
-                              itemCount: portfolioList.length,
-                              itemBuilder: (context, index) {
-                                return InvestorPortfolioCard(
-                                    portfolioList[index]);
-                              },
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                childAspectRatio: 4 / 6,
-                                mainAxisSpacing: 8.0,
-                                crossAxisSpacing: 8.0,
-                                crossAxisCount: 2,
-                              )),
+                          child: ListView.builder(
+                            physics: BouncingScrollPhysics(),
+                            itemCount: portfolioList.length,
+                            itemBuilder: (context, index) {
+                              return InvestorPortfolioCard(
+                                  portfolioList[index]);
+                            },
+                            // gridDelegate:
+                            //     SliverGridDelegateWithFixedCrossAxisCount(
+                            //   childAspectRatio: 4 / 6,
+                            //   mainAxisSpacing: 8.0,
+                            //   crossAxisSpacing: 8.0,
+                            //   crossAxisCount: 2,
+                            // )
+                          ),
                         ),
                       ),
                     ],

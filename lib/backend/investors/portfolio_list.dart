@@ -15,6 +15,8 @@ class InvestorPortfolioListAPI {
           linkedinProfile,
           lastName,
           background,
+          location,
+          numInvestments
           interests{
             edges{
               node{
@@ -43,6 +45,8 @@ class InvestorPortfolioListAPI {
       investorPortfolioList.add(InvestorModel(
         firstName: portfolio["firstName"],
         id: portfolio["id"],
+        location: portfolio["location"],
+        numInvestments: portfolio["numInvestments"],
         lastName: portfolio["lastName"],
         background: portfolio["background"],
         interests: List.generate(
