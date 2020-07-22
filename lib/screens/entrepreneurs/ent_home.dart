@@ -1,4 +1,5 @@
 import 'package:MobileApp/screens/entrepreneurs/inv_portfolio_list.dart';
+import 'package:MobileApp/screens/entrepreneurs/inv_search.dart';
 import 'package:flutter/material.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import '../../theme/colors.dart';
@@ -13,7 +14,7 @@ class _EntrepreneurHomeState extends State<EntrepreneurHome> {
 
   List<Widget> _widgetOptions = <Widget>[
     Container(),
-    Container(),
+    InvestorSearch(),
     InvestorPortfolioList(),
     Container(),
     Container()
@@ -40,7 +41,7 @@ class _EntrepreneurHomeState extends State<EntrepreneurHome> {
           TabItem(icon: Icons.person_outline, title: 'Portfolio'),
           TabItem(icon: Icons.settings, title: 'Settings'),
         ],
-        initialActiveIndex: 2, //optional, default as 0
+        initialActiveIndex: _selectedIndex,
         onTap: (int i) {
           _onItemTapped(i);
         },

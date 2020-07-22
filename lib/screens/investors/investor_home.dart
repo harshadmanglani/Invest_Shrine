@@ -41,7 +41,7 @@ class _InvestorHomeState extends State<InvestorHome> {
           TabItem(icon: Icons.person_outline, title: 'Portfolio'),
           TabItem(icon: Icons.settings, title: 'Settings'),
         ],
-        initialActiveIndex: 2, //optional, default as 0
+        initialActiveIndex: _selectedIndex, //optional, default as 0
         onTap: (int i) {
           _onItemTapped(i);
         },

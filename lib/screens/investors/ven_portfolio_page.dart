@@ -19,7 +19,7 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage>
     with SingleTickerProviderStateMixin {
   TextStyle standardTextStyle;
   TabController _tabController;
-  VentureModel portfolio;
+  VentureModel venturePortfolio;
 
   @override
   void initState() {
@@ -38,7 +38,7 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage>
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context).settings.arguments;
-    portfolio = arguments['portfolio'];
+    venturePortfolio = arguments['venturePortfolio'];
     standardTextStyle = Theme.of(context).textTheme.caption;
     return SafeArea(
       child: Scaffold(
@@ -103,7 +103,7 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage>
 
   pitchWidget() {
     var constEntrepreneurCFListWidget =
-        EntrepreneurCFList(portfolio.id, portfolio.ventureName);
+        EntrepreneurCFList(venturePortfolio.id, venturePortfolio.ventureName);
     return ListView(
       // controller: ScrollController(),
       addAutomaticKeepAlives: true,
@@ -122,7 +122,7 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage>
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(0.0, 12.0, 5.0, 12.0),
                       child: Text(
-                        portfolio.ventureName,
+                        venturePortfolio.ventureName,
                         overflow: TextOverflow.clip,
                         style: Theme.of(context).textTheme.headline6.copyWith(
                             fontWeight: FontWeight.bold, fontSize: 30.0),
@@ -134,13 +134,14 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage>
               ),
               SizedBox(height: 10),
               Text(
-                portfolio.tagLine,
+                venturePortfolio.tagLine,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 3,
                 style: standardTextStyle,
               ),
               SizedBox(height: 30),
-              IndustryWidget(industry: portfolio.industry, limitToTwo: false),
+              IndustryWidget(
+                  industry: venturePortfolio.industry, limitToTwo: false),
               SizedBox(height: 20),
               RichText(
                 text: TextSpan(
@@ -151,7 +152,8 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage>
                   children: <TextSpan>[
                     TextSpan(text: 'Funding Goal: '),
                     TextSpan(
-                        text: 'Rs. ${priceFormatter(portfolio.investment)}',
+                        text:
+                            'Rs. ${priceFormatter(venturePortfolio.investment)}',
                         style: TextStyle(fontWeight: FontWeight.bold)),
                   ],
                 ),
@@ -159,7 +161,7 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage>
               SizedBox(height: 20),
               CustomExpandedTile(
                   title: "Startup Summary",
-                  content: portfolio.startupSummary,
+                  content: venturePortfolio.startupSummary,
                   initallyExpanded: false,
                   hasIcon: true),
               SizedBox(height: 20),
@@ -186,13 +188,13 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage>
         IconButton(
             icon: Icon(Icons.launch, color: navbarBackgroundColor),
             onPressed: () {
-              launchURL(portfolio.website);
+              launchURL(venturePortfolio.website);
             }),
         IconButton(
             icon: Image.asset('assets/images/linkedin.png',
                 height: 21, width: 21),
             onPressed: () {
-              launchURL(portfolio.vLinkedinProfile);
+              launchURL(venturePortfolio.vLinkedinProfile);
             })
       ],
     );

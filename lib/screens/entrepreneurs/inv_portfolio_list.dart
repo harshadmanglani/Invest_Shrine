@@ -1,5 +1,4 @@
 import 'package:MobileApp/backend/investors/portfolio_list.dart';
-import 'package:MobileApp/models/entrepreneurs/venture_model.dart';
 import 'package:MobileApp/models/investors/investor_model.dart';
 import 'package:MobileApp/screens/entrepreneurs/inv_portfolio_card.dart';
 import 'package:MobileApp/shared/nav_drawer.dart';
@@ -25,7 +24,7 @@ class _InvestorPortfolioListState extends State<InvestorPortfolioList> {
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context).settings.arguments;
     if (arguments != null) {
-      query = '(industry: "${arguments['query']}")';
+      query = '(interests: "${arguments['query']}")';
       industry = arguments['industry'];
     }
     return Scaffold(
@@ -95,7 +94,7 @@ class _InvestorPortfolioListState extends State<InvestorPortfolioList> {
                             physics: BouncingScrollPhysics(),
                             itemCount: 10,
                             itemBuilder: (context, index) {
-                              return Text(" Hi");
+                              return LoadingInvestorPortfolioCard();
                             },
                           ),
                         ),

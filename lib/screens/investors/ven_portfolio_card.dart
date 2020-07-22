@@ -93,12 +93,21 @@ class _VenturePortfolioCardState extends State<VenturePortfolioCard> {
                     children: <Widget>[
                       Expanded(
                         flex: 1,
-                        child: Text(venturePortfolio.location,
-                            textAlign: TextAlign.left,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                color: Colors.grey[600],
-                                fontWeight: FontWeight.w300)),
+                        child: Row(
+                          children: <Widget>[
+                            Icon(
+                              Icons.location_on,
+                              color: Colors.grey[700],
+                              size: 16.5,
+                            ),
+                            Text(venturePortfolio.location,
+                                textAlign: TextAlign.left,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: Colors.grey[600],
+                                    fontWeight: FontWeight.w300)),
+                          ],
+                        ),
                       ),
                       FlatButton(
                           onPressed: () {

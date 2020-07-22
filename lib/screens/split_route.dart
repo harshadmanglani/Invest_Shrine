@@ -65,7 +65,8 @@ class _SplitRouteState extends State<SplitRoute> {
                             Navigator.pushNamed(context, '/entrepreneur_login');
                           },
                           child: Padding(
-                            padding: const EdgeInsets.all(6.0),
+                            padding: const EdgeInsets.only(
+                                left: 2.0, right: 2.0, top: 5, bottom: 5.0),
                             child: Text("I'm an Entrepreneur",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
