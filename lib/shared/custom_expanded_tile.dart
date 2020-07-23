@@ -40,7 +40,7 @@ class _CustomExpandedTileState extends State<CustomExpandedTile> {
       ),
       collapsed: Container(height: 0, width: 0),
       expanded: Padding(
-        padding: const EdgeInsets.only(top: 18.0),
+        padding: const EdgeInsets.only(top: 10.0),
         child: Text(
           content,
           style: standardTextStyle,
