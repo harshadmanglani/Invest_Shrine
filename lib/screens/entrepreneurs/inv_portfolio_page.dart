@@ -39,7 +39,7 @@ class _InvestorPortfolioPageState extends State<InvestorPortfolioPage> {
       body: Container(
         child: Padding(
           padding:
-              EdgeInsets.only(left: loginMargin - 10, right: loginMargin - 10),
+              EdgeInsets.only(left: loginMargin - 12, right: loginMargin - 12),
           child: ListView(
             physics: BouncingScrollPhysics(),
             children: <Widget>[
@@ -52,40 +52,80 @@ class _InvestorPortfolioPageState extends State<InvestorPortfolioPage> {
                   alignment: Alignment.center,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Row(
+                    child: Column(
                       children: <Widget>[
-                        CircleAvatar(
-                          radius: 65,
-                          backgroundImage:
-                              AssetImage('assets/images/cofounder.png'),
-                        ),
-                        SizedBox(width: 20),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 8.0),
-                            child: RichText(
-                              overflow: TextOverflow.clip,
-                              text: TextSpan(
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyText1
-                                    .copyWith(fontSize: 25),
-                                children: <TextSpan>[
-                                  TextSpan(
-                                    text: investorPortfolio.firstName +
-                                        ' ' +
-                                        investorPortfolio.lastName +
-                                        ', \n',
+                        Row(
+                          children: <Widget>[
+                            CircleAvatar(
+                              radius: 65,
+                              backgroundImage:
+                                  AssetImage('assets/images/cofounder.png'),
+                            ),
+                            SizedBox(width: 20),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: RichText(
+                                  overflow: TextOverflow.clip,
+                                  text: TextSpan(
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyText1
+                                        .copyWith(fontSize: 25),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                        text: investorPortfolio.firstName +
+                                            ' ' +
+                                            investorPortfolio.lastName +
+                                            ', \n',
+                                      ),
+                                      TextSpan(
+                                          text: "Seed investor",
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              color: Colors.grey[700])),
+                                    ],
                                   ),
-                                  TextSpan(
-                                      text: investorPortfolio.currentOccupation,
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.grey[700])),
-                                ],
+                                ),
                               ),
                             ),
-                          ),
+                          ],
+                        ),
+                        SizedBox(height: 15),
+                        Row(
+                          children: <Widget>[
+                            Expanded(
+                              flex: 1,
+                              child: Icon(
+                                Icons.location_on,
+                                color: Colors.grey[700],
+                                size: 19,
+                              ),
+                            ),
+                            Expanded(
+                              flex: 5,
+                              child: Text(investorPortfolio.location,
+                                  style: TextStyle(
+                                      color: Colors.grey[700], fontSize: 15)),
+                            ),
+                            // Expanded(child: SizedBox(), flex: 1),
+                            SizedBox(width: 4),
+                            Expanded(
+                              flex: 1,
+                              child: Icon(
+                                Icons.work,
+                                color: Colors.grey[700],
+                                size: 19,
+                              ),
+                            ),
+                            Expanded(
+                              flex: 5,
+                              child: Text(investorPortfolio.currentOccupation,
+                                  overflow: TextOverflow.fade,
+                                  style: TextStyle(
+                                      color: Colors.grey[700], fontSize: 15)),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -95,30 +135,24 @@ class _InvestorPortfolioPageState extends State<InvestorPortfolioPage> {
               SizedBox(height: 15),
               Row(
                 children: <Widget>[
-                  Expanded(
-                    flex: 2,
-                    child: IconButton(
-                        icon: Image.asset('assets/images/linkedin.png',
-                            height: 26, width: 26),
-                        onPressed: () {
-                          launchURL(investorPortfolio.linkedinProfile);
-                        }),
+                  Text(
+                    "Contact Details: ",
+                    style: Theme.of(context)
+                        .textTheme
+                        .caption
+                        .copyWith(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
-                  Expanded(child: SizedBox(), flex: 5),
-                  Expanded(
-                    flex: 1,
-                    child: SizedBox(
-                        width: 25,
-                        child: Icon(
-                          Icons.location_on,
-                          color: Colors.grey[700],
-                          size: 21,
-                        )),
-                  ),
-                  Expanded(
-                    flex: 5,
-                    child: Text(investorPortfolio.location,
-                        style: TextStyle(color: Colors.grey[700])),
+                  IconButton(
+                      icon: Image.asset('assets/images/linkedin.png',
+                          height: 22, width: 22),
+                      onPressed: () {
+                        launchURL(investorPortfolio.linkedinProfile);
+                      }),
+                  IconButton(
+                    icon: Icon(Icons.email),
+                    iconSize: 28,
+                    color: navbarBackgroundColor,
+                    onPressed: () {},
                   )
                 ],
               ),
@@ -156,6 +190,9 @@ class _InvestorPortfolioPageState extends State<InvestorPortfolioPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              IndustryWidget(
+                  industry: investorPortfolio.interests, limitToTwo: false),
+              SizedBox(height: 8),
               Row(
                 children: <Widget>[
                   Image.asset('assets/images/bars.png', height: 27, width: 27),
@@ -182,8 +219,6 @@ class _InvestorPortfolioPageState extends State<InvestorPortfolioPage> {
               SizedBox(height: 15),
               // Text("Favourite domains: ", style: standardTextStyle),
               // SizedBox(height: 8),
-              IndustryWidget(
-                  industry: investorPortfolio.interests, limitToTwo: false)
             ],
           ),
         ));
