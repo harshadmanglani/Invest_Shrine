@@ -92,7 +92,7 @@ class _VenturePortfolioCardState extends State<VenturePortfolioCard> {
                   Row(
                     children: <Widget>[
                       Expanded(
-                        flex: 1,
+                        flex: 2,
                         child: Row(
                           children: <Widget>[
                             Icon(
@@ -100,6 +100,7 @@ class _VenturePortfolioCardState extends State<VenturePortfolioCard> {
                               color: Colors.grey[700],
                               size: 16.5,
                             ),
+                            SizedBox(width: 3),
                             Text(venturePortfolio.location,
                                 textAlign: TextAlign.left,
                                 overflow: TextOverflow.ellipsis,
@@ -109,22 +110,39 @@ class _VenturePortfolioCardState extends State<VenturePortfolioCard> {
                           ],
                         ),
                       ),
-                      FlatButton(
-                          onPressed: () {
-                            Navigator.pushNamed(
-                                context, '/venture_portfolio_page', arguments: {
-                              'venturePortfolio': venturePortfolio,
-                              'assetLink': widget.assetLink
-                            });
-                          },
-                          child: Text(
-                            "View Portfolio",
-                            style: TextStyle(
-                                color: navbarBackgroundColor,
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.w500,
-                                decoration: TextDecoration.underline),
-                          ))
+                      Expanded(flex: 1, child: SizedBox()),
+                      Expanded(
+                        flex: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 20.0),
+                          child: FlatButton(
+                              onPressed: () {
+                                Navigator.pushNamed(
+                                    context, '/venture_portfolio_page',
+                                    arguments: {
+                                      'venturePortfolio': venturePortfolio,
+                                      'assetLink': widget.assetLink
+                                    });
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: navbarBackgroundColor),
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 13, right: 13, top: 5.0, bottom: 5),
+                                  child: Text(
+                                    "View",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15.0,
+                                        fontWeight: FontWeight.w500,
+                                        decoration: TextDecoration.underline),
+                                  ),
+                                ),
+                              )),
+                        ),
+                      )
                     ],
                   ),
                 ],

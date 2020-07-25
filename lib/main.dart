@@ -8,8 +8,8 @@ import 'package:MobileApp/screens/investors/ven_portfolio_page.dart';
 import 'package:MobileApp/screens/split_route.dart';
 import 'package:flutter/material.dart';
 import 'theme/app.dart';
-import 'screens/investors/investor_login.dart';
-import 'screens/investors/investor_home.dart';
+import 'screens/investors/inv_login.dart';
+import 'screens/investors/inv_home.dart';
 import 'screens/investors/ven_portfolio_list.dart';
 import 'screens/investors/ent_portfolio_page.dart';
 

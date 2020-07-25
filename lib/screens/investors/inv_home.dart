@@ -1,3 +1,4 @@
+import 'package:MobileApp/screens/investors/beeps_page.dart';
 import 'package:MobileApp/screens/investors/ven_portfolio_list.dart';
 import 'package:MobileApp/screens/investors/ven_search.dart';
 import 'package:MobileApp/theme/colors.dart';
@@ -16,7 +17,7 @@ class _InvestorHomeState extends State<InvestorHome> {
     Container(),
     VentureSearch(),
     VenturePortfolioList(),
-    Container(),
+    BeepsPage(),
     Container()
   ];
 
@@ -35,11 +36,11 @@ class _InvestorHomeState extends State<InvestorHome> {
         color: navbarBackgroundColor,
         style: TabStyle.reactCircle,
         items: [
-          TabItem(icon: Icons.bookmark_border, title: 'Saved'),
+          TabItem(icon: Icons.account_balance, title: 'Events'),
           TabItem(icon: Icons.search, title: 'Search'),
           TabItem(icon: Icons.home, title: 'Home'),
-          TabItem(icon: Icons.person_outline, title: 'Portfolio'),
-          TabItem(icon: Icons.settings, title: 'Settings'),
+          TabItem(icon: Icons.notifications, title: 'Beeps'),
+          TabItem(icon: Icons.bookmark_border, title: 'Saved'),
         ],
         initialActiveIndex: _selectedIndex, //optional, default as 0
         onTap: (int i) {

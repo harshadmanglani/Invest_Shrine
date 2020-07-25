@@ -34,7 +34,7 @@ class InvestorPortfolioListAPI {
 
   Future<dynamic> getAllInvestorPortfolios({String searchQuery = ''}) async {
     String query = searchInvestor(searchQuery: searchQuery);
-    String responseFromApi = await ApiProvider().interactWithApi(query);
+    String responseFromApi = await user.interactWithApi(query);
     Map<dynamic, dynamic> parsedResponse = json.decode(responseFromApi);
     List<dynamic> allPortfolios =
         parsedResponse["data"]["allInvestors"]["edges"];

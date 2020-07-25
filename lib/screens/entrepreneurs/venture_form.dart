@@ -2,7 +2,7 @@ import 'package:MobileApp/shared/nav_drawer.dart';
 import 'package:MobileApp/theme/app.dart';
 import 'package:flutter/material.dart';
 // import 'package:toast/toast.dart';
-import '../investors/investor_login.dart';
+import '../investors/inv_login.dart';
 
 class VentureForm extends StatefulWidget {
   @override

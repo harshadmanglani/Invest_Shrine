@@ -148,7 +148,7 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage>
                   style: Theme.of(context)
                       .textTheme
                       .headline6
-                      .copyWith(fontSize: 18),
+                      .copyWith(fontSize: 17),
                   children: <TextSpan>[
                     TextSpan(text: 'Funding Goal: '),
                     TextSpan(

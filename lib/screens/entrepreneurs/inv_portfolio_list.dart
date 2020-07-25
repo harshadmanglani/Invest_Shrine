@@ -12,7 +12,7 @@ class InvestorPortfolioList extends StatefulWidget {
 
 class _InvestorPortfolioListState extends State<InvestorPortfolioList> {
   String query = '';
-  String industry = '';
+  String parameter = '';
 
   List<String> assetLinks = [
     'assets/images/livehealth.png',
@@ -24,8 +24,10 @@ class _InvestorPortfolioListState extends State<InvestorPortfolioList> {
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context).settings.arguments;
     if (arguments != null) {
-      query = '(interests: "${arguments['query']}")';
-      industry = arguments['industry'];
+      query = arguments['query'];
+      print(query);
+      parameter = arguments['parameter'];
+      print(parameter);
     }
     return Scaffold(
         drawer: arguments == null ? NavDrawer() : null,
@@ -38,51 +40,68 @@ class _InvestorPortfolioListState extends State<InvestorPortfolioList> {
                   style: TextStyle(color: Colors.white),
                 ),
               )
-            : AppBar(),
+            : AppBar(
+                shape: appBarShape,
+              ),
         body: FutureBuilder(
             future: InvestorPortfolioListAPI()
                 .getAllInvestorPortfolios(searchQuery: query),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 print(snapshot.data);
-                List<InvestorModel> portfolioList = snapshot.data;
-                return Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      arguments != null
-                          ? Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 30, right: 12, top: 12),
-                              child: Text("Showing results by $industry:",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline6
-                                      .copyWith(fontSize: 18)))
-                          : Container(height: 0, width: 0),
-                      Flexible(
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: ListView.builder(
-                            physics: BouncingScrollPhysics(),
-                            itemCount: portfolioList.length,
-                            itemBuilder: (context, index) {
-                              return InvestorPortfolioCard(
-                                  portfolioList[index]);
-                            },
-                            // gridDelegate:
-                            //     SliverGridDelegateWithFixedCrossAxisCount(
-                            //   childAspectRatio: 4 / 6,
-                            //   mainAxisSpacing: 8.0,
-                            //   crossAxisSpacing: 8.0,
-                            //   crossAxisCount: 2,
-                            // )
+                if (snapshot.data == null)
+                  return Container(
+                    child: Column(
+                      children: <Widget>[
+                        Center(
+                          child: Text(
+                            "Oops, no results found.",
+                            style: TextStyle(fontSize: 18),
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                else {
+                  List<InvestorModel> portfolioList = snapshot.data;
+                  return Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        arguments != null
+                            ? Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 30, right: 12, top: 12),
+                                child: Text("Showing results for $parameter:",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline6
+                                        .copyWith(fontSize: 18)))
+                            : Container(height: 0, width: 0),
+                        Flexible(
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: ListView.builder(
+                              physics: BouncingScrollPhysics(),
+                              itemCount: portfolioList.length,
+                              itemBuilder: (context, index) {
+                                return InvestorPortfolioCard(
+                                    portfolioList[index]);
+                              },
+                              // gridDelegate:
+                              //     SliverGridDelegateWithFixedCrossAxisCount(
+                              //   childAspectRatio: 4 / 6,
+                              //   mainAxisSpacing: 8.0,
+                              //   crossAxisSpacing: 8.0,
+                              //   crossAxisCount: 2,
+                              // )
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                );
+                      ],
+                    ),
+                  );
+                }
               } else {
                 return Container(
                   child: Column(

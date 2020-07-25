@@ -12,7 +12,7 @@ class VenturePortfolioList extends StatefulWidget {
 
 class _VenturePortfolioListState extends State<VenturePortfolioList> {
   String query = '';
-  String industry = '';
+  String parameter = '';
 
   List<String> assetLinks = [
     'assets/images/livehealth.png',
@@ -24,8 +24,8 @@ class _VenturePortfolioListState extends State<VenturePortfolioList> {
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context).settings.arguments;
     if (arguments != null) {
-      query = '(industry: "${arguments['query']}")';
-      industry = arguments['industry'];
+      query = arguments['query'];
+      parameter = arguments['parameter'];
     }
     return Scaffold(
         drawer: arguments == null ? NavDrawer() : null,
@@ -45,37 +45,52 @@ class _VenturePortfolioListState extends State<VenturePortfolioList> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 // print(snapshot.data);
-                List<VentureModel> portfolioList = snapshot.data;
-                return Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      arguments != null
-                          ? Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 30, right: 12, top: 12),
-                              child: Text("Showing results by $industry:",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline6
-                                      .copyWith(fontSize: 18)))
-                          : Container(height: 0, width: 0),
-                      Flexible(
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: ListView.builder(
-                            physics: BouncingScrollPhysics(),
-                            itemCount: portfolioList.length,
-                            itemBuilder: (context, index) {
-                              return VenturePortfolioCard(
-                                  portfolioList[index], assetLinks[index]);
-                            },
+                if (snapshot.data == null)
+                  return Container(
+                    child: Column(
+                      children: <Widget>[
+                        Center(
+                          child: Text(
+                            "Oops, no results found.",
+                            style: TextStyle(fontSize: 18),
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                else {
+                  List<VentureModel> portfolioList = snapshot.data;
+                  return Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        arguments != null
+                            ? Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 30, right: 12, top: 12),
+                                child: Text("Showing results by $parameter:",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline6
+                                        .copyWith(fontSize: 18)))
+                            : Container(height: 0, width: 0),
+                        Flexible(
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: ListView.builder(
+                              physics: BouncingScrollPhysics(),
+                              itemCount: portfolioList.length,
+                              itemBuilder: (context, index) {
+                                return VenturePortfolioCard(
+                                    portfolioList[index], assetLinks[index]);
+                              },
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                );
+                      ],
+                    ),
+                  );
+                }
               } else {
                 return Container(
                   child: Column(

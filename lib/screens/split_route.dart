@@ -1,4 +1,4 @@
-import 'package:MobileApp/screens/investors/investor_login.dart';
+import 'package:MobileApp/screens/investors/inv_login.dart';
 import 'package:flutter/material.dart';
 
 class SplitRoute extends StatefulWidget {

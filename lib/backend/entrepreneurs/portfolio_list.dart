@@ -26,7 +26,7 @@ class EntrepreneurPortfolioListAPI {
   Future<dynamic> getAllEntrepreneurPortfolios(
       {String searchQuery = ''}) async {
     String query = searchEntrepreneur(searchQuery: searchQuery);
-    String responseFromApi = await ApiProvider().interactWithApi(query);
+    String responseFromApi = await user.interactWithApi(query);
     Map<dynamic, dynamic> parsedResponse = json.decode(responseFromApi);
     List<dynamic> allPortfolios =
         parsedResponse["data"]["allEntrepreneurs"]["edges"];
@@ -80,7 +80,7 @@ class VenturePortfolioListAPI {
 
   Future<dynamic> getAllVenturePortfolios({String searchQuery = ''}) async {
     String query = searchVenture(searchQuery: searchQuery);
-    String responseFromApi = await ApiProvider().interactWithApi(query);
+    String responseFromApi = await user.interactWithApi(query);
     Map<dynamic, dynamic> parsedResponse = json.decode(responseFromApi);
     List<dynamic> allPortfolios =
         parsedResponse["data"]["allVentures"]["edges"];

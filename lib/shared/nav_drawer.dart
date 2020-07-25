@@ -1,3 +1,4 @@
+import 'package:MobileApp/backend/api_provider.dart';
 import 'package:MobileApp/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,10 +20,13 @@ class _NavDrawerState extends State<NavDrawer> {
               currentAccountPicture: CircleAvatar(
                 backgroundImage: AssetImage('assets/images/logo_loading.png'),
               ),
-              accountName: Text("Abhimanyu Bhosale",
+              accountName: Text(
+                  user.category == 'INVESTOR'
+                      ? '${user.investorModel.firstName} ${user.investorModel.lastName}'
+                      : '${user.entrepreneurModel.firstName} ${user.entrepreneurModel.lastName}',
                   style: navDrawerButtonStyle.copyWith(
                       color: drawerHeaderTextColor)),
-              accountEmail: Text("abhimanyu@livehealth.in",
+              accountEmail: Text(user.email,
                   style: navDrawerButtonStyle.copyWith(
                       color: drawerHeaderTextColor))),
           ListTile(
@@ -49,21 +53,26 @@ class _NavDrawerState extends State<NavDrawer> {
             ],
           )),
           ListTile(
+              onTap: () {
+                user.logout();
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/split_route', (route) => false);
+              },
               title: Row(
-            children: <Widget>[
-              Expanded(
-                  flex: 4,
-                  child: Text(
-                    "Logout",
-                    style: navDrawerButtonStyle,
-                  )),
-              Expanded(
-                  flex: 1,
-                  child: Icon(Icons.exit_to_app,
-                      color: navbarBackgroundColor //Colors.grey,
+                children: <Widget>[
+                  Expanded(
+                      flex: 4,
+                      child: Text(
+                        "Logout",
+                        style: navDrawerButtonStyle,
                       )),
-            ],
-          ))
+                  Expanded(
+                      flex: 1,
+                      child: Icon(Icons.exit_to_app,
+                          color: navbarBackgroundColor //Colors.grey,
+                          )),
+                ],
+              )),
         ],
       ),
     );
