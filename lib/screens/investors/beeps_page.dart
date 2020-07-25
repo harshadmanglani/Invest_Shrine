@@ -1,5 +1,6 @@
 import 'package:MobileApp/shared/nav_drawer.dart';
 import 'package:MobileApp/theme/app.dart';
+import 'package:MobileApp/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class BeepsPage extends StatefulWidget {
@@ -12,13 +13,76 @@ class _BeepsPageState extends State<BeepsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: NavDrawer(),
-      appBar: AppBar(title: Text("Beeps"), shape: appBarShape),
+      appBar: AppBar(
+          centerTitle: true,
+          title: Text("Beeps", style: TextStyle(color: Colors.white)),
+          shape: appBarShape),
       body: Container(
         child: ListView.builder(
-          itemBuilder: (context, index) => Text("Hi"),
+          physics: BouncingScrollPhysics(),
+          itemBuilder: (context, index) => beepCard(),
           itemCount: 5,
         ),
       ),
     );
+  }
+
+  beepCard() {
+    return Card(
+        shape: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.transparent),
+            borderRadius: BorderRadius.all(Radius.circular(25.0))),
+        elevation: 7.0,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                  flex: 1,
+                  child: Icon(Icons.notifications_active,
+                      color: navbarBackgroundColor, size: 25)),
+              Expanded(
+                flex: 3,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: SizedBox(
+                    height: 80,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Flexible(
+                          flex: 1,
+                          child: Container(
+                            child: Text(
+                              "Aditya Khandelwal, Co-Founder @ Invest Shrine beeped you.",
+                              maxLines: 4,
+                              overflow: TextOverflow.clip,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: FlatButton(
+                  shape: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(color: Colors.transparent)),
+                  onPressed: () {
+                    print("onPressed");
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: Icon(Icons.arrow_forward_ios, size: 20),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ));
   }
 }

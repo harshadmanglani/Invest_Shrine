@@ -1,4 +1,3 @@
-import 'package:MobileApp/backend/api_provider.dart';
 import 'package:MobileApp/backend/investors/inv_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
