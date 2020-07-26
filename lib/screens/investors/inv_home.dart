@@ -1,4 +1,5 @@
 import 'package:MobileApp/screens/investors/beeps_page.dart';
+import 'package:MobileApp/screens/investors/saved_ven.dart';
 import 'package:MobileApp/screens/investors/ven_portfolio_list.dart';
 import 'package:MobileApp/screens/investors/ven_search.dart';
 import 'package:MobileApp/theme/colors.dart';
@@ -18,7 +19,7 @@ class _InvestorHomeState extends State<InvestorHome> {
     VentureSearch(),
     VenturePortfolioList(),
     BeepsPage(),
-    Container()
+    SavedVentures()
   ];
 
   void _onItemTapped(int index) {

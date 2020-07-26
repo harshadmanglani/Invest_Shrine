@@ -154,7 +154,8 @@ class _EntrepreneurLoginState extends State<EntrepreneurLogin> {
                           isLoading = false;
                         });
                         Navigator.of(context).pushNamedAndRemoveUntil(
-                            '/investor_home', (Route<dynamic> route) => false);
+                            '/entrepreneur_home',
+                            (Route<dynamic> route) => false);
                       } else {
                         setState(() {
                           isLoading = false;

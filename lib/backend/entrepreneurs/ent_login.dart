@@ -59,6 +59,7 @@ class EntrepreneurDataAPI {
           parsedResponse["data"]["allUsers"]["edges"][0]["node"]["email"];
       user.category =
           parsedResponse["data"]["allUsers"]["edges"][0]["node"]["category"];
+      print(user.category);
       if (user.category == 'ENTREPRENEUR') {
         dynamic portfolioData = await EntrepreneurPortfolioListAPI()
             .getAllEntrepreneurPortfolios(searchQuery: '(user: "${user.id}")');

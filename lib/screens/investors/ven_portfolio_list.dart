@@ -39,6 +39,8 @@ class _VenturePortfolioListState extends State<VenturePortfolioList> {
                 ),
               )
             : AppBar(),
+        extendBodyBehindAppBar: true,
+        extendBody: true,
         body: FutureBuilder(
             future: VenturePortfolioListAPI()
                 .getAllVenturePortfolios(searchQuery: query),

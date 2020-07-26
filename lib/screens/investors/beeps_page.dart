@@ -9,6 +9,10 @@ class BeepsPage extends StatefulWidget {
 }
 
 class _BeepsPageState extends State<BeepsPage> {
+  List<dynamic> beepsList = [
+    {'cf': 'Steve Cook', 'vn': 'Travel Haven'},
+    {'cf': 'Leela Parmar', 'vn': 'Decoration Jewelry Online'}
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,14 +24,14 @@ class _BeepsPageState extends State<BeepsPage> {
       body: Container(
         child: ListView.builder(
           physics: BouncingScrollPhysics(),
-          itemBuilder: (context, index) => beepCard(),
-          itemCount: 5,
+          itemBuilder: (context, index) => beepCard(index),
+          itemCount: beepsList.length,
         ),
       ),
     );
   }
 
-  beepCard() {
+  beepCard(int index) {
     return Card(
         shape: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.transparent),
@@ -55,7 +59,7 @@ class _BeepsPageState extends State<BeepsPage> {
                           flex: 1,
                           child: Container(
                             child: Text(
-                              "Aditya Khandelwal, Co-Founder @ Invest Shrine beeped you.",
+                              "${beepsList[index]['cf']}, Co-Founder @ ${beepsList[index]['vn']} beeped you.",
                               maxLines: 4,
                               overflow: TextOverflow.clip,
                             ),

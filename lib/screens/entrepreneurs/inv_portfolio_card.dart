@@ -37,7 +37,7 @@ class _InvestorPortfolioCardState extends State<InvestorPortfolioCard> {
                       borderRadius: BorderRadius.circular(32),
                       image: DecorationImage(
                           image: AssetImage('assets/images/cofounder.png'),
-                          fit: BoxFit.contain)),
+                          fit: BoxFit.cover)),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0),
