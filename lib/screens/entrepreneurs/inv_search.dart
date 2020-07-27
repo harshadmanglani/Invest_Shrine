@@ -223,24 +223,6 @@ class _InvestorSearchState extends State<InvestorSearch> {
                       itemCount: industryImages.length),
                 ),
                 SizedBox(height: 40),
-                /* Text("By Funding Goal",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1
-                        .copyWith(fontSize: 18, fontWeight: FontWeight.bold)),
-                SizedBox(
-                  height: 200,
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => Card(
-                            child: Container(
-                              width: 100,
-                              child: Text("Healthcare"),
-                            ),
-                          ),
-                      itemCount: 8),
-                ),*/
               ],
             ),
           ),

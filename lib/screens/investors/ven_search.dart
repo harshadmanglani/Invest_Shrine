@@ -290,23 +290,12 @@ class _VentureSearchState extends State<VentureSearch> {
                           onSubmitted: (value) {
                             print("onSubmitted: $value");
                             _searchNode.unfocus();
-                            if (value.split(' ').length == 1) {
-                              Navigator.pushNamed(
-                                  context, '/venture_portfolio_list',
-                                  arguments: {
-                                    'query': '(firstName: "$value")',
-                                    'parameter': "$value"
-                                  });
-                            } else if (value.split(' ').length == 2) {
-                              List<String> name = value.split(' ');
-                              Navigator.pushNamed(
-                                  context, '/venture_portfolio_list',
-                                  arguments: {
-                                    'query':
-                                        '(firstName: "${name[0]}", lastName: "${name[1]}")',
-                                    'parameter': "$value"
-                                  });
-                            }
+
+                            Navigator.pushNamed(
+                                context, '/venture_portfolio_list', arguments: {
+                              'query': '(ventureName: "$value")',
+                              'parameter': "$value"
+                            });
                           },
                           onChanged: (value) {
                             // print("onChanged: $value");
@@ -362,7 +351,7 @@ class _VentureSearchState extends State<VentureSearch> {
                                     context, '/venture_portfolio_list',
                                     arguments: {
                                       'query':
-                                          '(interests: "${industryImages[index]["id"]}")',
+                                          '(industry: "${industryImages[index]["id"]}")',
                                       'parameter': industryImages[index]
                                           ["industry"]
                                     });
@@ -420,24 +409,6 @@ class _VentureSearchState extends State<VentureSearch> {
                       itemCount: industryImages.length),
                 ),
                 SizedBox(height: 40),
-                /* Text("By Funding Goal",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1
-                        .copyWith(fontSize: 18, fontWeight: FontWeight.bold)),
-                SizedBox(
-                  height: 200,
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => Card(
-                            child: Container(
-                              width: 100,
-                              child: Text("Healthcare"),
-                            ),
-                          ),
-                      itemCount: 8),
-                ),*/
               ],
             ),
           ),
@@ -557,29 +528,18 @@ class _FilterWidgetState extends State<FilterWidget> {
                           String industryQuery = '';
                           String locationQuery = ')';
                           if (_selectedIndustryId != null)
-                            industryQuery =
-                                ',interests: "$_selectedIndustryId"';
+                            industryQuery = ',industry: "$_selectedIndustryId"';
                           if (_selectedLocation != null)
                             locationQuery = ',location: "$_selectedLocation")';
-                          if (name.split(' ').length == 1)
-                            Navigator.pushNamed(
-                                context, '/venture_portfolio_list',
-                                arguments: {
-                                  'query': '(firstName: "$name"' +
-                                      industryQuery +
-                                      locationQuery,
-                                  'parameter': "a filtered search"
-                                });
-                          else if (name.split(' ').length == 2)
-                            Navigator.pushNamed(
-                                context, '/venture_portfolio_list',
-                                arguments: {
-                                  'query':
-                                      '(firstName: "${name.split(' ')[0]}", lastName: "${name.split(' ')[1]}"' +
-                                          industryQuery +
-                                          locationQuery,
-                                  'parameter': "a filtered search"
-                                });
+
+                          Navigator.pushNamed(
+                              context, '/venture_portfolio_list',
+                              arguments: {
+                                'query': '(firstName: "$name"' +
+                                    industryQuery +
+                                    locationQuery,
+                                'parameter': "a filtered search"
+                              });
                         },
                         child: Text("Apply",
                             style: TextStyle(color: Colors.white)),
