@@ -4,6 +4,7 @@ import 'package:MobileApp/screens/entrepreneurs/ent_home.dart';
 import 'package:MobileApp/screens/entrepreneurs/ent_login.dart';
 import 'package:MobileApp/screens/entrepreneurs/inv_portfolio_list.dart';
 import 'package:MobileApp/screens/entrepreneurs/inv_portfolio_page.dart';
+import 'package:MobileApp/screens/experiments/inv_home.dart';
 import 'package:MobileApp/screens/investors/ven_portfolio_page.dart';
 import 'package:MobileApp/screens/split_route.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +33,7 @@ class _MyAppState extends State<MyApp> {
         '/investor_login': (BuildContext context) => InvestorLogin(),
         '/entrepreneur_login': (BuildContext context) => EntrepreneurLogin(),
         '/investor_home': (BuildContext context) => InvestorHome(),
+        '/investor_home_page': (BuildContext context) => InvestorHomePage(),
         '/investor_portfolio_page': (BuildContext context) =>
             InvestorPortfolioPage(),
         '/entrepreneur_home': (BuildContext context) => EntrepreneurHome(),
@@ -45,7 +47,7 @@ class _MyAppState extends State<MyApp> {
             EntrepreneurPortfolioPage(),
         '/split_route': (BuildContext context) => SplitRoute(),
       },
-      initialRoute: '/split_route',
+      initialRoute: '/investor_home_page',
     );
   }
 }

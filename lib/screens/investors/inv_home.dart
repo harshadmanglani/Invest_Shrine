@@ -35,7 +35,7 @@ class _InvestorHomeState extends State<InvestorHome> {
         backgroundColor: Colors.white,
         activeColor: navbarBackgroundColor,
         color: navbarBackgroundColor,
-        style: TabStyle.reactCircle,
+        style: TabStyle.custom,
         items: [
           TabItem(icon: Icons.account_balance, title: 'Events'),
           TabItem(icon: Icons.search, title: 'Search'),

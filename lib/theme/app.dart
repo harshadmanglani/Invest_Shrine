@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'colors.dart';
 
 final ThemeData kAppTheme = _buildTheme();
@@ -37,9 +38,11 @@ ThemeData _buildTheme() {
     primaryIconTheme: base.iconTheme.copyWith(color: iconColor),
     inputDecorationTheme: InputDecorationTheme(
         enabledBorder: textFieldBorder, focusedBorder: textFieldBorder),
-    textTheme: _buildTextTheme(base.textTheme),
-    primaryTextTheme: _buildTextTheme(base.primaryTextTheme),
-    accentTextTheme: _buildTextTheme(base.accentTextTheme),
+    textTheme: GoogleFonts.ralewayTextTheme(_buildTextTheme(base.textTheme)),
+    primaryTextTheme:
+        GoogleFonts.ralewayTextTheme(_buildTextTheme(base.textTheme)),
+    accentTextTheme:
+        GoogleFonts.ralewayTextTheme(_buildTextTheme(base.textTheme)),
     iconTheme: _customIconTheme(base.iconTheme),
   );
 }
@@ -47,27 +50,33 @@ ThemeData _buildTheme() {
 TextTheme _buildTextTheme(TextTheme base) {
   return base
       .copyWith(
+        headline1: base.headline1.copyWith(
+          fontWeight: FontWeight.w800,
+        ),
+        headline2: base.headline2.copyWith(
+          fontWeight: FontWeight.w700,
+        ),
+        headline3: base.headline3.copyWith(
+          fontWeight: FontWeight.w600,
+        ),
+        headline4: base.headline4.copyWith(
+          fontWeight: FontWeight.w500,
+        ),
         headline5: base.headline5.copyWith(
           fontWeight: FontWeight.w500,
         ),
-        headline6: base.headline6
-            .copyWith(fontSize: 19.0, fontWeight: FontWeight.w500),
-        caption: base.caption.copyWith(
+        headline6: base.headline6.copyWith(
+          fontWeight: FontWeight.w400,
+        ),
+        caption: base.caption.copyWith(fontSize: 12),
+        bodyText1: base.bodyText1.copyWith(
           fontWeight: FontWeight.w500,
           fontSize: 16.0,
         ),
-        bodyText1: base.bodyText1.copyWith(
-          fontWeight: FontWeight.w300,
-          fontSize: 15.0,
-        ),
-        bodyText2: base.bodyText1.copyWith(
-          fontWeight: FontWeight.w500,
+        bodyText2: base.bodyText2.copyWith(
+          fontWeight: FontWeight.w400,
           fontSize: 15.0,
         ),
       )
-      .apply(
-        fontFamily: 'Work Sans',
-        displayColor: textColor,
-        bodyColor: textColor,
-      );
+      .apply(bodyColor: textColor, displayColor: textColor);
 }

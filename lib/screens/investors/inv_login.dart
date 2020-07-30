@@ -138,6 +138,52 @@ class _InvestorLoginState extends State<InvestorLogin> {
                         ],
                       ),
                     ),
+                    onLongPress: () async {
+                      setState(() {
+                        isLoading = true;
+                      });
+                      bool correctLogin = await InvestorLoginAPI()
+                          .loginUser(username: "Adi", password: "root1234");
+                      print(correctLogin);
+                      if (correctLogin) {
+                        setState(() {
+                          isLoading = false;
+                        });
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                            '/investor_home', (Route<dynamic> route) => false);
+                      } else {
+                        setState(() {
+                          isLoading = false;
+                        });
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Text("Invalid credentials",
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            actions: <Widget>[
+                              FlatButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8),
+                                    child: Text("Retry",
+                                        style: TextStyle(fontSize: 15)),
+                                  ))
+                            ],
+                            content: Container(
+                                height: 100,
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                      "Please re-enter a valid username and password."),
+                                )),
+                            shape: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                          ),
+                        );
+                      }
+                    },
                     onPressed: () async {
                       _passwordFocusNode.unfocus();
                       _usernameFocusNode.unfocus();

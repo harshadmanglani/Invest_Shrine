@@ -535,7 +535,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                           Navigator.pushNamed(
                               context, '/venture_portfolio_list',
                               arguments: {
-                                'query': '(firstName: "$name"' +
+                                'query': '(ventureName: "$name"' +
                                     industryQuery +
                                     locationQuery,
                                 'parameter': "a filtered search"

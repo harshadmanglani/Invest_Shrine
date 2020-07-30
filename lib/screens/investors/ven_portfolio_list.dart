@@ -38,29 +38,27 @@ class _VenturePortfolioListState extends State<VenturePortfolioList> {
                   style: TextStyle(color: Colors.white),
                 ),
               )
-            : AppBar(),
-        extendBodyBehindAppBar: true,
-        extendBody: true,
+            : AppBar(shape: appBarShape),
         body: FutureBuilder(
             future: VenturePortfolioListAPI()
                 .getAllVenturePortfolios(searchQuery: query),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 // print(snapshot.data);
-                if (snapshot.data == null)
+                if (snapshot.data == null) {
                   return Container(
                     child: Column(
                       children: <Widget>[
                         Center(
                           child: Text(
                             "Oops, no results found.",
-                            style: TextStyle(fontSize: 18),
+                            style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   );
-                else {
+                } else {
                   List<VentureModel> portfolioList = snapshot.data;
                   return Container(
                     child: Column(

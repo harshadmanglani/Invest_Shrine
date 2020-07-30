@@ -25,9 +25,9 @@ dependencies:
     sdk: flutter
    
   convex_bottom_bar: ">=2.2.5+1"
-  google_fonts: ^1.1.0
+  google_fonts: ">=1.1.0"
   url_launcher: ">=5.5.0"
-  http: ^0.12.1
+  http: ">=0.12.1"
   expandable: ">=4.1.4"
   carousel_slider: ">=2.2.1"
   toast: ">=0.1.5" 
@@ -68,10 +68,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  fonts:
-    - family: Work Sans
-      fonts:
-        - asset: assets/fonts/Work_Sans/WorkSans-VariableFont_wght.ttf
+  # fonts:
+    # - family: Work Sans
+      # fonts:
+        # - asset: assets/fonts/Work_Sans/WorkSans-VariableFont_wght.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
