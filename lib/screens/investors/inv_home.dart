@@ -1,6 +1,6 @@
 import 'package:MobileApp/screens/investors/beeps_page.dart';
 import 'package:MobileApp/screens/investors/saved_ven.dart';
-import 'package:MobileApp/screens/investors/ven_portfolio_list.dart';
+import 'package:MobileApp/screens/old/ven_portfolio_list.dart';
 import 'package:MobileApp/screens/investors/ven_search.dart';
 import 'package:MobileApp/theme/colors.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';

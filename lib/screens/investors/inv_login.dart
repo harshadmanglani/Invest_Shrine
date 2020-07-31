@@ -41,14 +41,14 @@ class _InvestorLoginState extends State<InvestorLogin> {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                SizedBox(height: 20),
+                // SizedBox(height: 20),
                 // Image.asset(
                 //   'assets/images/logo_loading.png',
                 //   height: 180,
                 //   width: 180,
                 // ),
                 SizedBox(height: 180),
-                SizedBox(height: 10.0),
+                // SizedBox(height: 10.0),
                 Center(
                     child: Text("Invest Shrine",
                         style: TextStyle(

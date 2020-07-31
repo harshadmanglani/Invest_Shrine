@@ -18,7 +18,7 @@ class _InvestorHomePageState extends State<InvestorHomePage>
     super.initState();
     _focusNode = FocusNode();
     _textEditingController = TextEditingController();
-    tabController = TabController(length: 2, vsync: this);
+    tabController = TabController(length: 3, vsync: this);
   }
 
   @override
@@ -32,6 +32,7 @@ class _InvestorHomePageState extends State<InvestorHomePage>
       tabs: <Widget>[
         Tab(text: "Explore"),
         Tab(text: "Startups"),
+        Tab(text: "SMEs")
       ],
       controller: tabController,
     );
@@ -128,7 +129,8 @@ class _InvestorHomePageState extends State<InvestorHomePage>
                       ],
                     ),
                   ),
-                  AllVentures()
+                  AllStartups(),
+                  AllSMEs()
                 ]),
               ),
             ],
@@ -599,12 +601,12 @@ class _ExploreVentureCardState extends State<ExploreVentureCard> {
   }
 }
 
-class AllVentures extends StatefulWidget {
+class AllStartups extends StatefulWidget {
   @override
-  _AllVenturesState createState() => _AllVenturesState();
+  _AllStartupsState createState() => _AllStartupsState();
 }
 
-class _AllVenturesState extends State<AllVentures> {
+class _AllStartupsState extends State<AllStartups> {
   Future venturePortfolioList;
 
   @override
@@ -623,7 +625,7 @@ class _AllVenturesState extends State<AllVentures> {
               physics: BouncingScrollPhysics(),
               itemCount: snapshot.data.length,
               itemBuilder: (context, index) {
-                return VentureCard(
+                return StartupCard(
                   venturePortfolio: snapshot.data[index],
                 );
               },
@@ -633,7 +635,7 @@ class _AllVenturesState extends State<AllVentures> {
               physics: NeverScrollableScrollPhysics(),
               itemCount: 10,
               itemBuilder: (context, index) {
-                return VentureCard(
+                return StartupCard(
                   venturePortfolio: null,
                 );
               },
@@ -642,15 +644,15 @@ class _AllVenturesState extends State<AllVentures> {
   }
 }
 
-class VentureCard extends StatefulWidget {
+class StartupCard extends StatefulWidget {
   final VentureModel venturePortfolio;
 
-  VentureCard({this.venturePortfolio});
+  StartupCard({this.venturePortfolio});
   @override
-  _VentureCardState createState() => _VentureCardState();
+  _StartupCardState createState() => _StartupCardState();
 }
 
-class _VentureCardState extends State<VentureCard> {
+class _StartupCardState extends State<StartupCard> {
   VentureModel venturePortfolio;
   @override
   Widget build(BuildContext context) {
@@ -772,6 +774,205 @@ class _VentureCardState extends State<VentureCard> {
                           ],
                         )),
                     SizedBox(height: 4)
+                  ],
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class AllSMEs extends StatefulWidget {
+  @override
+  _AllSMEsState createState() => _AllSMEsState();
+}
+
+class _AllSMEsState extends State<AllSMEs> {
+  Future venturePortfolioList;
+
+  @override
+  void initState() {
+    super.initState();
+    venturePortfolioList = VenturePortfolioListAPI().getAllVenturePortfolios();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 20),
+      child: FutureBuilder(
+          future: venturePortfolioList,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done)
+              return GridView.builder(
+                  physics: BouncingScrollPhysics(),
+                  itemCount: snapshot.data.length,
+                  itemBuilder: (context, index) {
+                    return SMECard(
+                      venturePortfolio: snapshot.data[index],
+                    );
+                  },
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    childAspectRatio: 0.70,
+                    mainAxisSpacing: 25.0,
+                    crossAxisSpacing: 12.0,
+                    crossAxisCount: 2,
+                  ));
+            else
+              return GridView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: 10,
+                  itemBuilder: (context, index) {
+                    return SMECard(
+                      venturePortfolio: null,
+                    );
+                  },
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    childAspectRatio: 0.75,
+                    mainAxisSpacing: 25.0,
+                    crossAxisSpacing: 12.0,
+                    crossAxisCount: 2,
+                  ));
+          }),
+    );
+  }
+}
+
+class SMECard extends StatefulWidget {
+  final VentureModel venturePortfolio;
+  SMECard({this.venturePortfolio});
+  @override
+  _SMECardState createState() => _SMECardState();
+}
+
+class _SMECardState extends State<SMECard> {
+  VentureModel venturePortfolio;
+  @override
+  Widget build(BuildContext context) {
+    venturePortfolio = widget.venturePortfolio;
+    var textTheme = Theme.of(context).textTheme;
+    return Padding(
+      padding: const EdgeInsets.only(left: 0, right: 0),
+      child: Column(
+        children: <Widget>[
+          Expanded(
+              flex: 3,
+              child: Container(
+                decoration: venturePortfolio != null
+                    ? BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(venturePortfolio.mainImage)))
+                    : BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.grey[300]),
+              )),
+          Expanded(
+            flex: 4,
+            child: SizedBox(
+              // height: 85,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 12.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(height: 10),
+                    // Expanded(
+                    // flex: 2,
+                    // child:
+                    venturePortfolio != null
+                        ? Text(
+                            venturePortfolio.ventureName,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                            style: textTheme.headline6,
+                          )
+                        : Text(
+                            '                                     ',
+                            style: TextStyle(backgroundColor: Colors.grey[200]),
+                          ),
+                    SizedBox(height: 8), //),
+                    // Expanded(
+                    // flex: 3,
+                    // child:
+                    venturePortfolio != null
+                        ? Text(
+                            venturePortfolio.tagLine,
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                            style: textTheme.bodyText1
+                                .copyWith(color: Colors.grey[800]),
+                          )
+                        : Text(
+                            '                                         \n                                         ',
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                backgroundColor: Colors.grey[200])), //),
+                    // Expanded(
+                    // flex: 1,
+                    // child:
+                    SizedBox(height: 8),
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                            flex: 1,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Flexible(
+                                  flex: 2,
+                                  child: venturePortfolio != null
+                                      ? Text(venturePortfolio.industry[1],
+                                          overflow: TextOverflow.ellipsis,
+                                          style: textTheme.bodyText1)
+                                      : Container(height: 0, width: 0),
+                                ),
+                                SizedBox(width: 2),
+                                venturePortfolio != null
+                                    ? Flexible(
+                                        child: Icon(Icons.local_hospital,
+                                            size: 15, color: Colors.red),
+                                      )
+                                    : Container(
+                                        height: 0,
+                                        width: 0,
+                                      ),
+                              ],
+                            )),
+                        Expanded(
+                            flex: 1,
+                            child: Row(
+                              children: <Widget>[
+                                Expanded(
+                                  flex: 1,
+                                  child: venturePortfolio != null
+                                      ? Icon(
+                                          Icons.location_on,
+                                          color: Colors.grey[500],
+                                          size: 14,
+                                        )
+                                      : Container(height: 0, width: 0),
+                                ),
+                                SizedBox(width: 2),
+                                Expanded(
+                                  flex: 3,
+                                  child: venturePortfolio != null
+                                      ? Text(venturePortfolio.location,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              color: Colors.grey[600]))
+                                      : Container(height: 0, width: 0),
+                                ),
+                              ],
+                            ))
+                      ],
+                    ) //),
                   ],
                 ),
               ),

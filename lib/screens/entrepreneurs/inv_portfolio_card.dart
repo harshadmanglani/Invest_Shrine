@@ -1,6 +1,6 @@
 import 'package:MobileApp/models/investors/investor_model.dart';
 import 'package:flutter/material.dart';
-import '../investors/ven_portfolio_card.dart';
+import '../old/ven_portfolio_card.dart';
 
 class InvestorPortfolioCard extends StatefulWidget {
   final InvestorModel investorPortfolio;

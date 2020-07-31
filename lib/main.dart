@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'theme/app.dart';
 import 'screens/investors/inv_login.dart';
 import 'screens/investors/inv_home.dart';
-import 'screens/investors/ven_portfolio_list.dart';
+// import 'screens/old/ven_portfolio_list.dart';
 import 'screens/investors/ent_portfolio_page.dart';
 
 void main() {
@@ -37,8 +37,8 @@ class _MyAppState extends State<MyApp> {
         '/investor_portfolio_page': (BuildContext context) =>
             InvestorPortfolioPage(),
         '/entrepreneur_home': (BuildContext context) => EntrepreneurHome(),
-        '/venture_portfolio_list': (BuildContext context) =>
-            VenturePortfolioList(),
+        // '/venture_portfolio_list': (BuildContext context) =>
+        // VenturePortfolioList(),
         '/investor_portfolio_list': (BuildContext context) =>
             InvestorPortfolioList(),
         '/venture_portfolio_page': (BuildContext context) =>
@@ -47,7 +47,7 @@ class _MyAppState extends State<MyApp> {
             EntrepreneurPortfolioPage(),
         '/split_route': (BuildContext context) => SplitRoute(),
       },
-      initialRoute: '/investor_home_page',
+      initialRoute: '/split_route',
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:MobileApp/models/entrepreneurs/venture_model.dart';
 import 'package:MobileApp/shared/nav_drawer.dart';
 import 'package:flutter/material.dart';
-import 'ven_portfolio_card.dart';
+import '../investors/../old/ven_portfolio_card.dart';
 import '../../backend/entrepreneurs/portfolio_list.dart';
 import '../../theme/app.dart';
 

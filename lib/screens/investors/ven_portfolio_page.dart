@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../theme/app.dart';
 import 'package:expandable/expandable.dart';
-import 'ven_portfolio_card.dart';
+import '../old/ven_portfolio_card.dart';
 
 class VenturePortfolioPage extends StatefulWidget {
   @override

@@ -5,7 +5,7 @@ import 'package:MobileApp/shared/industry_widget.dart';
 import 'package:MobileApp/theme/app.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../investors/ven_portfolio_card.dart';
+import '../old/ven_portfolio_card.dart';
 import '../../theme/colors.dart';
 import 'package:expandable/expandable.dart';
 
