@@ -25,6 +25,7 @@ class InvestorPortfolioListAPI {
             }
           }
           investment,
+          displayImage,
           currentOccupation
         }
       }
@@ -45,6 +46,7 @@ class InvestorPortfolioListAPI {
       investorPortfolioList.add(InvestorModel(
         firstName: portfolio["firstName"],
         id: portfolio["id"],
+        displayImage: portfolio["displayImage"],
         location: portfolio["location"],
         numInvestments: portfolio["numInvestments"],
         lastName: portfolio["lastName"],

@@ -10,6 +10,7 @@ class InvestorModel {
   int investment;
   int numInvestments;
   String location;
+  String displayImage;
   InvestorModel(
       {this.background,
       this.location,
@@ -21,5 +22,6 @@ class InvestorModel {
       this.interests,
       this.investmentHistory,
       this.lastName,
+      this.displayImage,
       this.linkedinProfile});
 }

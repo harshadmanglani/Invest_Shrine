@@ -8,6 +8,8 @@ class VentureModel {
   String vLinkedinProfile;
   String location;
   List<String> industry;
+  String logoImage;
+  String mainImage;
 
   VentureModel(
       {this.id,
@@ -18,5 +20,7 @@ class VentureModel {
       this.startupSummary,
       this.ventureName,
       this.vLinkedinProfile,
+      this.logoImage,
+      this.mainImage,
       this.website});
 }
