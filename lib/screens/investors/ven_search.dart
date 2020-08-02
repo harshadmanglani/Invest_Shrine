@@ -300,115 +300,18 @@ class _VentureSearchState extends State<VentureSearch> {
                           onChanged: (value) {
                             // print("onChanged: $value");
                           },
-                          onEditingComplete: () {
-                            // print(
-                            // "onEditingComplete: ${_textEditingController.value}");
-                          },
                           decoration: InputDecoration(
                               isDense: true,
                               labelText: "Fuel innovation",
                               prefixIcon: Icon(
                                 Icons.search,
                                 size: 23,
-                                color: navbarBackgroundColor,
                               )),
                           textInputAction: TextInputAction.go),
                     ),
-                    Expanded(
-                        flex: 1,
-                        child: IconButton(
-                            icon: Icon(Icons.filter_list,
-                                color: navbarBackgroundColor),
-                            onPressed: () {
-                              _searchNode.unfocus();
-                              showDialog(
-                                  context: context,
-                                  builder: (context) => FilterWidget(
-                                        name: _textEditingController.value.text,
-                                        industryImages: industryImages,
-                                      ));
-                            }))
                   ],
                 ),
                 SizedBox(height: 30),
-                Text("By Industry",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1
-                        .copyWith(fontSize: 18, fontWeight: FontWeight.bold)),
-                SizedBox(height: 20),
-                SizedBox(
-                  height: 200,
-                  child: ListView.builder(
-                      physics: BouncingScrollPhysics(),
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => Padding(
-                            padding: const EdgeInsets.only(right: 5.0),
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, '/venture_portfolio_list',
-                                    arguments: {
-                                      'query':
-                                          '(industry: "${industryImages[index]["id"]}")',
-                                      'parameter': industryImages[index]
-                                          ["industry"]
-                                    });
-                              },
-                              child: Card(
-                                elevation: 4,
-                                shape: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.black12),
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: Container(
-                                  width: 145,
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          image: AssetImage(
-                                              industryImages[index]["image"]),
-                                          fit: BoxFit.contain)),
-                                  child: Align(
-                                      alignment: FractionalOffset.bottomCenter,
-                                      child: Row(
-                                        children: <Widget>[
-                                          Expanded(
-                                            flex: 1,
-                                            child: Container(
-                                                height: 30,
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                            bottomLeft: Radius
-                                                                .circular(20),
-                                                            bottomRight:
-                                                                Radius.circular(
-                                                                    20)),
-                                                    color: Colors.black54),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 2.0, left: 12.0),
-                                                  child: Text(
-                                                      industryImages[index]
-                                                          ["industry"],
-                                                      style: TextStyle(
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: Colors.white)),
-                                                )),
-                                          ),
-                                        ],
-                                      )),
-                                ),
-                              ),
-                            ),
-                          ),
-                      itemCount: industryImages.length),
-                ),
-                SizedBox(height: 40),
               ],
             ),
           ),

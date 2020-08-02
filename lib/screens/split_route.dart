@@ -40,7 +40,7 @@ class _SplitRouteState extends State<SplitRoute> {
                     child: RaisedButton(
                       elevation: 4,
                       shape: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(20),
                           borderSide: BorderSide(color: Colors.transparent)),
                       onPressed: () {
                         Navigator.pushNamed(context, '/investor_login');
@@ -60,7 +60,7 @@ class _SplitRouteState extends State<SplitRoute> {
                     child: RaisedButton(
                       elevation: 4,
                       shape: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(20),
                           borderSide: BorderSide(color: Colors.transparent)),
                       onPressed: () {
                         Navigator.pushNamed(context, '/entrepreneur_login');

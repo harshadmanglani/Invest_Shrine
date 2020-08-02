@@ -1,13 +1,11 @@
 import 'package:MobileApp/screens/entrepreneurs/ent_home.dart';
 import 'package:MobileApp/screens/entrepreneurs/ent_login.dart';
 import 'package:MobileApp/screens/entrepreneurs/inv_portfolio_page.dart';
-import 'package:MobileApp/screens/experiments/inv_home_page.dart';
-import 'package:MobileApp/screens/experiments/ven_portfolio_page.dart';
+import 'package:MobileApp/screens/investors/inv_platform.dart';
 import 'package:MobileApp/screens/split_route.dart';
 import 'package:flutter/material.dart';
 import 'theme/app.dart';
 import 'screens/investors/inv_login.dart';
-import 'screens/old/ent_portfolio_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -27,17 +25,13 @@ class _MyAppState extends State<MyApp> {
       routes: {
         '/investor_login': (BuildContext context) => InvestorLogin(),
         '/entrepreneur_login': (BuildContext context) => EntrepreneurLogin(),
-        '/investor_home_page': (BuildContext context) => InvestorHomePage(),
+        '/investor_home_page': (BuildContext context) => InvestorPlatform(),
         '/investor_portfolio_page': (BuildContext context) =>
             InvestorPortfolioPage(),
         '/entrepreneur_home': (BuildContext context) => EntrepreneurHome(),
-        '/venture_portfolio_page': (BuildContext context) =>
-            VenturePortfolioPage(),
-        '/entrepreneur_portfolio_page': (BuildContext context) =>
-            EntrepreneurPortfolioPage(),
         '/split_route': (BuildContext context) => SplitRoute(),
       },
-      initialRoute: '/investor_home_page',
+      initialRoute: '/split_route',
     );
   }
 }

@@ -18,8 +18,9 @@ class _NavDrawerState extends State<NavDrawer> {
         children: <Widget>[
           UserAccountsDrawerHeader(
               currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage('assets/images/logo_loading.png'),
-              ),
+                  backgroundImage: NetworkImage(user.category == 'INVESTOR'
+                      ? user.investorModel.displayImage
+                      : user.entrepreneurModel.displayImage)),
               accountName: Text(
                   user.category == 'INVESTOR'
                       ? '${user.investorModel.firstName} ${user.investorModel.lastName}'

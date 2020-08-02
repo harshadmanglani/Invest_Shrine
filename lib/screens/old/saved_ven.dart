@@ -1,7 +1,6 @@
 import 'package:MobileApp/models/entrepreneurs/venture_model.dart';
 import 'package:MobileApp/shared/nav_drawer.dart';
 import 'package:MobileApp/theme/app.dart';
-import 'package:MobileApp/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class SavedVentures extends StatefulWidget {

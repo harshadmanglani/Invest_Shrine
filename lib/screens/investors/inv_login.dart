@@ -63,6 +63,7 @@ class _InvestorLoginState extends State<InvestorLogin> {
                       EdgeInsets.fromLTRB(loginMargin, 0.0, loginMargin, 10.0),
                   child: TextField(
                     keyboardType: TextInputType.emailAddress,
+                    textInputAction: TextInputAction.next,
                     controller: _usernameController,
                     decoration: InputDecoration(
                       prefixIcon: Icon(Icons.person_outline),
@@ -84,6 +85,9 @@ class _InvestorLoginState extends State<InvestorLogin> {
                     keyboardType: TextInputType.visiblePassword,
                     controller: _passwordController,
                     obscureText: true,
+                    onSubmitted: (value) {
+                      investorLoginFunction();
+                    },
                     decoration: InputDecoration(
                       prefixIcon: Icon(Icons.lock),
                       isDense: true,
@@ -110,7 +114,7 @@ class _InvestorLoginState extends State<InvestorLogin> {
                       right: loginMargin, top: 0.0, left: loginMargin),
                   child: RaisedButton(
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(27.0))),
+                        borderRadius: BorderRadius.all(Radius.circular(20.0))),
                     elevation: 3.0,
                     child: Padding(
                       padding: EdgeInsets.all(14.0),
@@ -185,55 +189,8 @@ class _InvestorLoginState extends State<InvestorLogin> {
                         );
                       }
                     },
-                    onPressed: () async {
-                      _passwordFocusNode.unfocus();
-                      _usernameFocusNode.unfocus();
-                      setState(() {
-                        isLoading = true;
-                      });
-                      bool correctLogin = await InvestorLoginAPI().loginUser(
-                          username: _usernameController.value.text,
-                          password: _passwordController.value.text);
-                      print(correctLogin);
-                      if (correctLogin) {
-                        setState(() {
-                          isLoading = false;
-                        });
-                        Navigator.of(context).pushNamedAndRemoveUntil(
-                            '/investor_home_page',
-                            (Route<dynamic> route) => false);
-                      } else {
-                        setState(() {
-                          isLoading = false;
-                        });
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            title: Text("Invalid credentials",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                            actions: <Widget>[
-                              FlatButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8),
-                                    child: Text("Retry",
-                                        style: TextStyle(fontSize: 15)),
-                                  ))
-                            ],
-                            content: Container(
-                                height: 100,
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                      "Please re-enter a valid username and password."),
-                                )),
-                            shape: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                          ),
-                        );
-                      }
+                    onPressed: () {
+                      investorLoginFunction();
                     },
                   ),
                 ),
@@ -244,5 +201,73 @@ class _InvestorLoginState extends State<InvestorLogin> {
         ),
       ),
     );
+  }
+
+  investorLoginFunction() async {
+    _passwordFocusNode.unfocus();
+    _usernameFocusNode.unfocus();
+    setState(() {
+      isLoading = true;
+    });
+    bool correctLogin = await InvestorLoginAPI().loginUser(
+        username: _usernameController.value.text,
+        password: _passwordController.value.text);
+    print(correctLogin);
+    if (correctLogin) {
+      setState(() {
+        isLoading = false;
+      });
+      Navigator.of(context).pushNamedAndRemoveUntil(
+          '/investor_home_page', (Route<dynamic> route) => false);
+    } else {
+      setState(() {
+        isLoading = false;
+      });
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text("Invalid credentials",
+              textAlign: TextAlign.left,
+              style: TextStyle(fontWeight: FontWeight.bold)),
+          actions: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                RawMaterialButton(
+                  constraints: BoxConstraints(),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "Try Again",
+                        style: TextStyle(fontSize: 15),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(width: 20)
+              ],
+            )
+          ],
+          content: Container(
+              height: 40,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    "Please re-enter a valid username and password.",
+                    textAlign: TextAlign.left,
+                  ),
+                ],
+              )),
+          shape: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+        ),
+      );
+    }
   }
 }

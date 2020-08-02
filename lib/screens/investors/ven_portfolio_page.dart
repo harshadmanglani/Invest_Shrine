@@ -1,9 +1,9 @@
-import 'package:MobileApp/backend/entrepreneurs/ent_login.dart';
 import 'package:MobileApp/backend/entrepreneurs/portfolio_list.dart';
 import 'package:MobileApp/models/entrepreneurs/venture_model.dart';
 import 'package:MobileApp/screens/old/ven_portfolio_card.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_advanced_networkimage/provider.dart';
 
 class VenturePortfolioPage extends StatefulWidget {
   final VenturePortfolioModel venturePortfolioModel;
@@ -39,7 +39,6 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage> {
   @override
   Widget build(BuildContext context) {
     venturePortfolioModel = widget.venturePortfolioModel;
-    var textTheme = Theme.of(context).textTheme;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -49,6 +48,7 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage> {
           ],
         ),
         body: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.start,
             // crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,8 +70,12 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage> {
                               bottomLeft: Radius.circular(25),
                               bottomRight: Radius.circular(25)),
                           image: DecorationImage(
-                              image:
-                                  NetworkImage(venturePortfolioModel.mainImage),
+                              image: AdvancedNetworkImage(
+                                venturePortfolioModel.mainImage,
+                                useDiskCache: true,
+                                cacheRule:
+                                    CacheRule(maxAge: const Duration(days: 7)),
+                              ),
                               fit: BoxFit.cover)),
                     ),
                     Positioned(
@@ -101,6 +105,7 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage> {
                 color: Colors.grey[300],
                 thickness: 10,
               ),
+              SizedBox(height: 5),
               overviewWidget(),
               teamWidget(),
               SizedBox(height: 50)

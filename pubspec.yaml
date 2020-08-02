@@ -32,6 +32,7 @@ dependencies:
   carousel_slider: ">=2.2.1"
   toast: ">=0.1.5" 
   flutter_spinkit: ">=4.1.2+1"
+  flutter_advanced_networkimage: ">=0.7.0"
 
 
   # The following adds the Cupertino Icons font to your application.

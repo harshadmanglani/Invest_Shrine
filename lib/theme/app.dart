@@ -10,12 +10,12 @@ IconThemeData _customIconTheme(IconThemeData original) {
 
 var appBarShape = RoundedRectangleBorder(
   borderRadius: BorderRadius.only(
-      bottomLeft: Radius.circular(20.0), bottomRight: Radius.circular(20)),
+      bottomLeft: Radius.circular(20.0), bottomRight: Radius.circular(15)),
 );
 
 OutlineInputBorder textFieldBorder = OutlineInputBorder(
-    borderSide: BorderSide(color: textColor, width: 1.5),
-    borderRadius: BorderRadius.all(Radius.circular(30.0)));
+    borderSide: BorderSide(color: Colors.grey[300]),
+    borderRadius: BorderRadius.all(Radius.circular(20.0)));
 
 ThemeData _buildTheme() {
   final ThemeData base = ThemeData.light();
