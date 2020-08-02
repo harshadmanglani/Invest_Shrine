@@ -59,7 +59,7 @@ class _VenturePortfolioListState extends State<VenturePortfolioList> {
                     ),
                   );
                 } else {
-                  List<VentureModel> portfolioList = snapshot.data;
+                  List<VenturePortfolioModel> portfolioList = snapshot.data;
                   return Container(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

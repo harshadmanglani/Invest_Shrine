@@ -10,12 +10,12 @@ class SavedVentures extends StatefulWidget {
 }
 
 class _SavedVenturesState extends State<SavedVentures> {
-  List<VentureModel> ventures = [
-    VentureModel(
+  List<VenturePortfolioModel> ventures = [
+    VenturePortfolioModel(
         ventureName: "Travel Haven",
         tagLine:
             "Travel and make your soul feel blissful. Giving you heaven on earth."),
-    VentureModel(
+    VenturePortfolioModel(
         ventureName: "Decoration Jewelry Online",
         tagLine:
             "The best decoration jewelry delivered at your doorstep, at the cheapest prices!"),

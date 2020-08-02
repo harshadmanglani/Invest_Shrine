@@ -89,12 +89,12 @@ class VenturePortfolioListAPI {
     List<dynamic> allPortfolios =
         parsedResponse["data"]["allVentures"]["edges"];
 
-    List<VentureModel> venturePortfolioList = [];
+    List<VenturePortfolioModel> venturePortfolioList = [];
 
     for (var i = 0; i < allPortfolios.length; i++) {
       dynamic portfolio = allPortfolios[i]["node"];
 
-      venturePortfolioList.add(new VentureModel(
+      venturePortfolioList.add(new VenturePortfolioModel(
           id: portfolio["id"],
           vLinkedinProfile: portfolio["vLinkedinProfile"],
           ventureName: portfolio["ventureName"],

@@ -5,9 +5,9 @@ import 'package:expandable/expandable.dart';
 import '../../models/entrepreneurs/venture_model.dart';
 
 class VenturePortfolioCard extends StatefulWidget {
-  final VentureModel venturePortfolio;
+  final VenturePortfolioModel venturePortfolioModel;
   final String assetLink;
-  VenturePortfolioCard(this.venturePortfolio, this.assetLink);
+  VenturePortfolioCard(this.venturePortfolioModel, this.assetLink);
 
   @override
   _VenturePortfolioCardState createState() => _VenturePortfolioCardState();
@@ -18,12 +18,12 @@ class _VenturePortfolioCardState extends State<VenturePortfolioCard> {
       borderSide: BorderSide(color: Colors.transparent),
       borderRadius: BorderRadius.all(Radius.circular(17.0)));
 
-  VentureModel venturePortfolio;
+  VenturePortfolioModel venturePortfolioModel;
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    venturePortfolio = widget.venturePortfolio;
+    venturePortfolioModel = widget.venturePortfolioModel;
     return ExpandableNotifier(
         child: Padding(
       padding: const EdgeInsets.all(10),
@@ -58,20 +58,21 @@ class _VenturePortfolioCardState extends State<VenturePortfolioCard> {
               header: Padding(
                   padding: EdgeInsets.all(10),
                   child: Text(
-                    venturePortfolio.ventureName,
+                    venturePortfolioModel.ventureName,
                     style: Theme.of(context).textTheme.headline6,
                   )),
               collapsed: Row(
                 children: <Widget>[
                   IndustryWidget(
-                      industry: venturePortfolio.industry, limitToTwo: true)
+                      industry: venturePortfolioModel.industry,
+                      limitToTwo: true)
                 ],
               ),
               expanded: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    venturePortfolio.tagLine,
+                    venturePortfolioModel.tagLine,
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                     style: theme.textTheme.bodyText1,
@@ -84,7 +85,7 @@ class _VenturePortfolioCardState extends State<VenturePortfolioCard> {
                         TextSpan(text: 'Funding Goal: '),
                         TextSpan(
                             text:
-                                'Rs. ${priceFormatter(venturePortfolio.investment)}',
+                                'Rs. ${priceFormatter(venturePortfolioModel.investment)}',
                             style: TextStyle(fontWeight: FontWeight.bold)),
                       ],
                     ),
@@ -101,7 +102,7 @@ class _VenturePortfolioCardState extends State<VenturePortfolioCard> {
                               size: 16.5,
                             ),
                             SizedBox(width: 3),
-                            Text(venturePortfolio.location,
+                            Text(venturePortfolioModel.location,
                                 textAlign: TextAlign.left,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
@@ -120,7 +121,8 @@ class _VenturePortfolioCardState extends State<VenturePortfolioCard> {
                                 Navigator.pushNamed(
                                     context, '/venture_portfolio_page',
                                     arguments: {
-                                      'venturePortfolio': venturePortfolio,
+                                      'venturePortfolioModel':
+                                          venturePortfolioModel,
                                       'assetLink': widget.assetLink
                                     });
                               },

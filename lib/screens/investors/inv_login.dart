@@ -150,7 +150,8 @@ class _InvestorLoginState extends State<InvestorLogin> {
                           isLoading = false;
                         });
                         Navigator.of(context).pushNamedAndRemoveUntil(
-                            '/investor_home', (Route<dynamic> route) => false);
+                            '/investor_home_page',
+                            (Route<dynamic> route) => false);
                       } else {
                         setState(() {
                           isLoading = false;
@@ -199,7 +200,8 @@ class _InvestorLoginState extends State<InvestorLogin> {
                           isLoading = false;
                         });
                         Navigator.of(context).pushNamedAndRemoveUntil(
-                            '/investor_home', (Route<dynamic> route) => false);
+                            '/investor_home_page',
+                            (Route<dynamic> route) => false);
                       } else {
                         setState(() {
                           isLoading = false;

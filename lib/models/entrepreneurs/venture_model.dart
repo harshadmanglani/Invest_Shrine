@@ -1,4 +1,4 @@
-class VentureModel {
+class VenturePortfolioModel {
   String id;
   String ventureName;
   String startupSummary;
@@ -11,7 +11,7 @@ class VentureModel {
   String logoImage;
   String mainImage;
 
-  VentureModel(
+  VenturePortfolioModel(
       {this.id,
       this.location,
       this.investment,

@@ -26,18 +26,19 @@ class _IndustryWidgetState extends State<IndustryWidget> {
   @override
   Widget build(BuildContext context) {
     print(widget.industry.toString());
+    int limit = 4;
     int length = widget.limitToTwo
         ? widget.industry.length == 1 ? 1 : 2
         : widget.industry.length;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        for (var i = 0; i < length; i = i + 3)
+        for (var i = 0; i < length; i = i + limit)
           Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
             child: Row(
               children: <Widget>[
-                for (var j = i; j < i + 3 && j < length; j++)
+                for (var j = i; j < i + limit && j < length; j++)
                   Padding(
                     padding: const EdgeInsets.only(right: 8.0),
                     child: Container(

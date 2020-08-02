@@ -59,24 +59,23 @@ TextTheme _buildTextTheme(TextTheme base) {
         // headline3: base.headline3.copyWith(
         //   fontWeight: FontWeight.w600,
         // ),
-        // headline4: base.headline4.copyWith(
-        //   fontWeight: FontWeight.w500,
-        // ),
+        headline4: base.headline4.copyWith(
+          fontWeight: FontWeight.w500,
+          fontSize: 23,
+        ),
         headline5: base.headline5.copyWith(
           fontWeight: FontWeight.w700,
           fontSize: 21,
         ),
         headline6:
-            base.headline6.copyWith(fontWeight: FontWeight.w600, fontSize: 16),
+            base.headline6.copyWith(fontWeight: FontWeight.w600, fontSize: 18),
         // caption: base.caption.copyWith(fontSize: 12),
-        // bodyText1: base.bodyText1.copyWith(
-        //   fontWeight: FontWeight.w500,
-        //   fontSize: 16.0,
-        // ),
-        // bodyText2: base.bodyText2.copyWith(
-        //   fontWeight: FontWeight.w400,
-        //   fontSize: 15.0,
-        // ),
+        bodyText1: base.bodyText1.copyWith(
+          fontSize: 15.0,
+        ),
+        bodyText2: base.bodyText2.copyWith(
+          fontSize: 16.0,
+        ),
       )
       .apply(bodyColor: textColor, displayColor: textColor);
 }

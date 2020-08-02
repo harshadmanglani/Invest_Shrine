@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../theme/app.dart';
 import 'package:expandable/expandable.dart';
-import '../old/ven_portfolio_card.dart';
+import 'ven_portfolio_card.dart';
 
 class VenturePortfolioPage extends StatefulWidget {
   @override
@@ -19,7 +19,7 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage>
     with SingleTickerProviderStateMixin {
   TextStyle standardTextStyle;
   TabController _tabController;
-  VentureModel venturePortfolio;
+  VenturePortfolioModel venturePortfolioModel;
 
   @override
   void initState() {
@@ -38,7 +38,7 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage>
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context).settings.arguments;
-    venturePortfolio = arguments['venturePortfolio'];
+    venturePortfolioModel = arguments['venturePortfolioModel'];
     standardTextStyle = Theme.of(context).textTheme.caption;
     return SafeArea(
       child: Scaffold(
@@ -102,8 +102,8 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage>
   }
 
   pitchWidget() {
-    var constEntrepreneurCFListWidget =
-        EntrepreneurCFList(venturePortfolio.id, venturePortfolio.ventureName);
+    var constEntrepreneurCFListWidget = EntrepreneurCFList(
+        venturePortfolioModel.id, venturePortfolioModel.ventureName);
     return ListView(
       // controller: ScrollController(),
       addAutomaticKeepAlives: true,
@@ -122,7 +122,7 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage>
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(0.0, 12.0, 5.0, 12.0),
                       child: Text(
-                        venturePortfolio.ventureName,
+                        venturePortfolioModel.ventureName,
                         overflow: TextOverflow.clip,
                         style: Theme.of(context).textTheme.headline6.copyWith(
                             fontWeight: FontWeight.bold, fontSize: 30.0),
@@ -134,14 +134,14 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage>
               ),
               SizedBox(height: 10),
               Text(
-                venturePortfolio.tagLine,
+                venturePortfolioModel.tagLine,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 3,
                 style: standardTextStyle,
               ),
               SizedBox(height: 30),
               IndustryWidget(
-                  industry: venturePortfolio.industry, limitToTwo: false),
+                  industry: venturePortfolioModel.industry, limitToTwo: false),
               SizedBox(height: 20),
               RichText(
                 text: TextSpan(
@@ -153,7 +153,7 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage>
                     TextSpan(text: 'Funding Goal: '),
                     TextSpan(
                         text:
-                            'Rs. ${priceFormatter(venturePortfolio.investment)}',
+                            'Rs. ${priceFormatter(venturePortfolioModel.investment)}',
                         style: TextStyle(fontWeight: FontWeight.bold)),
                   ],
                 ),
@@ -161,7 +161,7 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage>
               SizedBox(height: 20),
               CustomExpandedTile(
                   title: "Startup Summary",
-                  content: venturePortfolio.startupSummary,
+                  content: venturePortfolioModel.startupSummary,
                   initallyExpanded: false,
                   hasIcon: true),
               SizedBox(height: 20),
@@ -188,13 +188,13 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage>
         IconButton(
             icon: Icon(Icons.launch, color: navbarBackgroundColor),
             onPressed: () {
-              launchURL(venturePortfolio.website);
+              launchURL(venturePortfolioModel.website);
             }),
         IconButton(
             icon: Image.asset('assets/images/linkedin.png',
                 height: 21, width: 21),
             onPressed: () {
-              launchURL(venturePortfolio.vLinkedinProfile);
+              launchURL(venturePortfolioModel.vLinkedinProfile);
             })
       ],
     );
