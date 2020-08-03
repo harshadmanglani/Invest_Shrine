@@ -15,10 +15,6 @@ class VenturePortfolioPage extends StatefulWidget {
 class _VenturePortfolioPageState extends State<VenturePortfolioPage> {
   VenturePortfolioModel venturePortfolioModel;
   Future entrepreneurPortfolioList;
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   launchURL(String url) async {
     if (await canLaunch(url)) {
@@ -48,7 +44,6 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage> {
           ],
         ),
         body: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.start,
             // crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,7 +82,7 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage> {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(15),
-                          border: Border.all(color: Colors.black54, width: 2),
+                          border: Border.all(color: Colors.black12, width: 1.5),
                           image: DecorationImage(
                               image:
                                   NetworkImage(venturePortfolioModel.logoImage),

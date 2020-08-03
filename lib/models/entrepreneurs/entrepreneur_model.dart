@@ -1,4 +1,4 @@
-class EntrepreneurModel {
+class EntrepreneurPortfolioModel {
   String id;
   String firstName;
   String lastName;
@@ -6,7 +6,7 @@ class EntrepreneurModel {
   String linkedinProfile;
   String displayImage;
 
-  EntrepreneurModel(
+  EntrepreneurPortfolioModel(
       {this.execSummary,
       this.id,
       this.linkedinProfile,

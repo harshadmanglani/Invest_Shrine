@@ -1,6 +1,7 @@
 import 'package:MobileApp/backend/api_provider.dart';
 import 'package:MobileApp/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class NavDrawer extends StatefulWidget {
@@ -10,6 +11,7 @@ class NavDrawer extends StatefulWidget {
 
 class _NavDrawerState extends State<NavDrawer> {
   TextStyle navDrawerButtonStyle = TextStyle(fontSize: 16);
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -54,26 +56,40 @@ class _NavDrawerState extends State<NavDrawer> {
             ],
           )),
           ListTile(
-              onTap: () {
-                user.logout();
+              onTap: () async {
+                setState(() {
+                  isLoading = true;
+                });
+                await Future.delayed(Duration(seconds: 1));
+                setState(() {
+                  isLoading = false;
+                });
+
                 Navigator.pushNamedAndRemoveUntil(
                     context, '/split_route', (route) => false);
+                await Future.delayed(Duration(milliseconds: 10));
+                user.logout();
               },
-              title: Row(
-                children: <Widget>[
-                  Expanded(
-                      flex: 4,
-                      child: Text(
-                        "Logout",
-                        style: navDrawerButtonStyle,
-                      )),
-                  Expanded(
-                      flex: 1,
-                      child: Icon(Icons.exit_to_app,
-                          color: navbarBackgroundColor //Colors.grey,
-                          )),
-                ],
-              )),
+              title: isLoading
+                  ? Center(
+                      child: SpinKitThreeBounce(
+                          color: navbarBackgroundColor, size: 20),
+                    )
+                  : Row(
+                      children: <Widget>[
+                        Expanded(
+                            flex: 4,
+                            child: Text(
+                              "Logout",
+                              style: navDrawerButtonStyle,
+                            )),
+                        Expanded(
+                            flex: 1,
+                            child: Icon(Icons.exit_to_app,
+                                color: navbarBackgroundColor //Colors.grey,
+                                )),
+                      ],
+                    )),
         ],
       ),
     );

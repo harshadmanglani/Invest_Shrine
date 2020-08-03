@@ -24,7 +24,7 @@ class _EntrepreneurPortfolioPageState extends State<EntrepreneurPortfolioPage> {
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context).settings.arguments;
-    EntrepreneurModel entrepreneurPortfolio =
+    EntrepreneurPortfolioModel entrepreneurPortfolio =
         arguments['entrepreneurPortfolio'];
     return Scaffold(
       appBar: AppBar(

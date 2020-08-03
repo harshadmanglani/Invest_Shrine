@@ -10,7 +10,7 @@ class ApiProvider {
   String category;
   bool isAuthenticated;
   InvestorModel investorModel;
-  EntrepreneurModel entrepreneurModel;
+  EntrepreneurPortfolioModel entrepreneurModel;
 
   void logout() {
     this.email = null;

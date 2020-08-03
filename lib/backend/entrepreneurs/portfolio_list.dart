@@ -31,11 +31,11 @@ class EntrepreneurPortfolioListAPI {
     Map<dynamic, dynamic> parsedResponse = json.decode(responseFromApi);
     List<dynamic> allPortfolios =
         parsedResponse["data"]["allEntrepreneurs"]["edges"];
-    List<EntrepreneurModel> entrepreneurPortfolioList = [];
+    List<EntrepreneurPortfolioModel> entrepreneurPortfolioList = [];
 
     for (var i = 0; i < allPortfolios.length; i++) {
       dynamic portfolio = allPortfolios[i]["node"];
-      entrepreneurPortfolioList.add(EntrepreneurModel(
+      entrepreneurPortfolioList.add(EntrepreneurPortfolioModel(
         firstName: portfolio["firstName"],
         id: portfolio["id"],
         displayImage: portfolio["displayImage"],

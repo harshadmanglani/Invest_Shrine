@@ -255,7 +255,8 @@ class _EntrepreneurCFListState extends State<EntrepreneurCFList> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 print(snapshot.data);
-                List<EntrepreneurModel> entrepreneurPortfolios = snapshot.data;
+                List<EntrepreneurPortfolioModel> entrepreneurPortfolios =
+                    snapshot.data;
                 return Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
@@ -295,7 +296,7 @@ class _EntrepreneurCFListState extends State<EntrepreneurCFList> {
 }
 
 class EntrepreneurWidget extends StatefulWidget {
-  final EntrepreneurModel entrepreneurPortfolio;
+  final EntrepreneurPortfolioModel entrepreneurPortfolio;
   final String ventureName;
   EntrepreneurWidget(this.entrepreneurPortfolio, this.ventureName);
 
@@ -305,7 +306,7 @@ class EntrepreneurWidget extends StatefulWidget {
 
 class _EntrepreneurWidgetState extends State<EntrepreneurWidget> {
   String ventureName;
-  EntrepreneurModel entrepreneurPortfolio;
+  EntrepreneurPortfolioModel entrepreneurPortfolio;
   launchURL(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
