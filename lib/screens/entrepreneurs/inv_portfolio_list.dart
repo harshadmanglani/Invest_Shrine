@@ -63,7 +63,7 @@ class _InvestorPortfolioListState extends State<InvestorPortfolioList> {
                     ),
                   );
                 else {
-                  List<InvestorModel> portfolioList = snapshot.data;
+                  List<InvestorPortfolioModel> portfolioList = snapshot.data;
                   return Container(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

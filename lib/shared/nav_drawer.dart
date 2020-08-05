@@ -21,12 +21,12 @@ class _NavDrawerState extends State<NavDrawer> {
           UserAccountsDrawerHeader(
               currentAccountPicture: CircleAvatar(
                   backgroundImage: NetworkImage(user.category == 'INVESTOR'
-                      ? user.investorModel.displayImage
-                      : user.entrepreneurModel.displayImage)),
+                      ? user.investorPortfolioModel.displayImage
+                      : user.entrepreneurPortfolioModel.displayImage)),
               accountName: Text(
                   user.category == 'INVESTOR'
-                      ? '${user.investorModel.firstName} ${user.investorModel.lastName}'
-                      : '${user.entrepreneurModel.firstName} ${user.entrepreneurModel.lastName}',
+                      ? '${user.investorPortfolioModel.firstName} ${user.investorPortfolioModel.lastName}'
+                      : '${user.entrepreneurPortfolioModel.firstName} ${user.entrepreneurPortfolioModel.lastName}',
                   style: navDrawerButtonStyle.copyWith(
                       color: drawerHeaderTextColor)),
               accountEmail: Text(user.email,
@@ -45,16 +45,20 @@ class _NavDrawerState extends State<NavDrawer> {
             onTap: null,
           ),
           ListTile(
+              onTap: () {
+                Navigator.pushNamed(context, '/isafe_page');
+              },
               title: Row(
-            children: <Widget>[
-              Expanded(
-                  flex: 4, child: Text("Help", style: navDrawerButtonStyle)),
-              Expanded(
-                  flex: 1,
-                  child:
-                      Icon(Icons.help_outline, color: navbarBackgroundColor)),
-            ],
-          )),
+                children: <Widget>[
+                  Expanded(
+                      flex: 4,
+                      child: Text("iSAFE", style: navDrawerButtonStyle)),
+                  Expanded(
+                      flex: 1,
+                      child: Icon(Icons.help_outline,
+                          color: navbarBackgroundColor)),
+                ],
+              )),
           ListTile(
               onTap: () async {
                 setState(() {

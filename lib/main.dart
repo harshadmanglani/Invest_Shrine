@@ -1,13 +1,20 @@
+import 'package:MobileApp/isafe_page.dart';
 import 'package:MobileApp/screens/entrepreneurs/ent_home.dart';
 import 'package:MobileApp/screens/entrepreneurs/ent_login.dart';
 import 'package:MobileApp/screens/entrepreneurs/inv_portfolio_page.dart';
 import 'package:MobileApp/screens/investors/inv_platform.dart';
+import 'package:MobileApp/screens/old/beeps_page.dart';
 import 'package:MobileApp/screens/split_route.dart';
 import 'package:flutter/material.dart';
 import 'theme/app.dart';
 import 'screens/investors/inv_login.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await FlutterDownloader.initialize(
+      debug: true // optional: set false to disable printing logs to console
+      );
   runApp(MyApp());
 }
 
@@ -30,6 +37,8 @@ class _MyAppState extends State<MyApp> {
             InvestorPortfolioPage(),
         '/entrepreneur_home': (BuildContext context) => EntrepreneurHome(),
         '/split_route': (BuildContext context) => SplitRoute(),
+        '/beeps_page': (BuildContext context) => BeepsPage(),
+        '/isafe_page': (BuildContext context) => ISAFEPage()
       },
       initialRoute: '/split_route',
     );

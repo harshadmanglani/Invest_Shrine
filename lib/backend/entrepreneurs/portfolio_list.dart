@@ -38,6 +38,7 @@ class EntrepreneurPortfolioListAPI {
       entrepreneurPortfolioList.add(EntrepreneurPortfolioModel(
         firstName: portfolio["firstName"],
         id: portfolio["id"],
+        uid: "1", //portfolio["uid"],
         displayImage: portfolio["displayImage"],
         lastName: portfolio["lastName"],
         execSummary: portfolio["execSummary"],
@@ -101,6 +102,7 @@ class VenturePortfolioListAPI {
           startupSummary: portfolio["startupSummary"],
           mainImage: portfolio["mainImage"],
           logoImage: portfolio["logoImage"],
+          uid: "1", //portfolio["uid"],
           industry: List.generate(
               portfolio["industry"]["edges"].length,
               (index) =>

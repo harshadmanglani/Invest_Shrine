@@ -1,4 +1,5 @@
 import 'package:MobileApp/backend/investors/inv_login.dart';
+import 'package:MobileApp/screens/investors/new_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../../theme/colors.dart';
@@ -75,6 +76,10 @@ class _InvestorLoginState extends State<InvestorLogin> {
                               : _unfocusedColor),
                     ),
                     focusNode: _usernameFocusNode,
+                    onSubmitted: (value) {
+                      _usernameFocusNode.unfocus();
+                      _passwordFocusNode.requestFocus();
+                    },
                   ),
                 ),
                 SizedBox(height: 5.0),
@@ -101,12 +106,29 @@ class _InvestorLoginState extends State<InvestorLogin> {
                   ),
                 ),
                 // SizedBox(height: 10.0),
-                ButtonBar(children: <Widget>[
-                  FlatButton(
-                      padding: EdgeInsets.only(right: loginMargin),
-                      child: Text("Forgot password?",
-                          style: TextStyle(color: navbarBackgroundColor)),
-                      onPressed: () {})
+                Row(children: <Widget>[
+                  Expanded(
+                    flex: 3,
+                    child: FlatButton(
+                        padding: EdgeInsets.only(left: loginMargin),
+                        child: Text("New User?",
+                            style: TextStyle(color: navbarBackgroundColor)),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => NewUserForm()));
+                        }),
+                  ),
+                  Expanded(flex: 2, child: SizedBox()),
+                  Expanded(
+                    flex: 4,
+                    child: FlatButton(
+                        padding: EdgeInsets.only(right: loginMargin),
+                        child: Text("Forgot password?",
+                            style: TextStyle(color: navbarBackgroundColor)),
+                        onPressed: () {}),
+                  )
                 ]),
                 SizedBox(height: 40.0),
                 Padding(
@@ -147,7 +169,7 @@ class _InvestorLoginState extends State<InvestorLogin> {
                         isLoading = true;
                       });
                       bool correctLogin = await InvestorLoginAPI()
-                          .loginUser(username: "Adi", password: "root1234");
+                          .loginUser(username: "temp", password: "root1234");
                       print(correctLogin);
                       if (correctLogin) {
                         setState(() {

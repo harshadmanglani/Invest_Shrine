@@ -63,7 +63,7 @@ class EntrepreneurDataAPI {
       if (user.category == 'ENTREPRENEUR') {
         dynamic portfolioData = await EntrepreneurPortfolioListAPI()
             .getAllEntrepreneurPortfolios(searchQuery: '(user: "${user.id}")');
-        user.entrepreneurModel = portfolioData[0];
+        user.entrepreneurPortfolioModel = portfolioData[0];
         return true;
       } else
         return false;

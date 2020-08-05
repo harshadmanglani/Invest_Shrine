@@ -1,5 +1,6 @@
-class InvestorModel {
+class InvestorPortfolioModel {
   String id;
+  String uid;
   String firstName;
   String lastName;
   String currentOccupation;
@@ -11,9 +12,10 @@ class InvestorModel {
   int numInvestments;
   String location;
   String displayImage;
-  InvestorModel(
+  InvestorPortfolioModel(
       {this.background,
       this.location,
+      this.uid,
       this.numInvestments,
       this.investment,
       this.currentOccupation,

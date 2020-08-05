@@ -80,12 +80,24 @@ class _InvestorHomePageState extends State<InvestorHomePage>
                           )),
                     ),
                   ),
-                  Expanded(flex: 10, child: SizedBox()),
-                  Expanded(flex: 3, child: Container(height: 0, width: 0))
+                  Expanded(
+                      flex: 10,
+                      child: Text(
+                        "", // "Home",""
+                        style: Theme.of(context).textTheme.headline4,
+                        textAlign: TextAlign.center,
+                      )),
+                  Expanded(
+                      flex: 3,
+                      child: Image.network(
+                        'https://cdn.pixabay.com/photo/2016/09/16/09/21/money-1673582_1280.png',
+                        height: 45,
+                        width: 45,
+                      )),
                 ],
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 15),
             Expanded(flex: 2, child: _getTabBar()),
             Expanded(
               flex: 26,
@@ -374,10 +386,10 @@ class _ExploreVentureCardState extends State<ExploreVentureCard> {
 
   @override
   Widget build(BuildContext context) {
-    double mainImageHeight = 145,
-        mainImageWidth = 230,
-        logoImageHeight = 58,
-        logoImageWidth = 58,
+    double mainImageHeight = 130,
+        mainImageWidth = 200,
+        logoImageHeight = 53,
+        logoImageWidth = 53,
         paddingWidth = 10;
     double overflowWidth = mainImageWidth - logoImageWidth - paddingWidth;
     venturePortfolioModel = widget.venturePortfolioModel;
@@ -439,7 +451,8 @@ class _ExploreVentureCardState extends State<ExploreVentureCard> {
                         venturePortfolioModel != null
                             ? Text(venturePortfolioModel.ventureName,
                                 overflow: TextOverflow.ellipsis,
-                                style: textTheme.headline6)
+                                style:
+                                    textTheme.headline6.copyWith(fontSize: 16))
                             : Text('                                ',
                                 style: TextStyle(
                                     backgroundColor: Colors.grey[200],
@@ -454,7 +467,7 @@ class _ExploreVentureCardState extends State<ExploreVentureCard> {
                                   ? Text(venturePortfolioModel.industry[0],
                                       overflow: TextOverflow.ellipsis,
                                       style: textTheme.bodyText2
-                                          .copyWith(fontSize: 14))
+                                          .copyWith(fontSize: 13))
                                   : Text('                  ',
                                       style: TextStyle(
                                           backgroundColor: Colors.grey[200],
@@ -482,7 +495,7 @@ class _ExploreVentureCardState extends State<ExploreVentureCard> {
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
                                           color: Colors.grey[700],
-                                          fontSize: 14))
+                                          fontSize: 13))
                                   : Text('                      ',
                                       style: TextStyle(
                                           backgroundColor: Colors.grey[200],
@@ -597,17 +610,44 @@ class _StartupCardState extends State<StartupCard> {
                 Expanded(
                     flex: 2,
                     child: Container(
-                      height: 95,
-                      decoration: venturePortfolioModel != null
-                          ? BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: NetworkImage(
-                                      venturePortfolioModel.mainImage)))
-                          : BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: Colors.grey[300]),
+                      height: 100,
+                      width: 138,
+                      child: Stack(
+                        children: <Widget>[
+                          Container(
+                            height: 95,
+                            width: 125,
+                            decoration: venturePortfolioModel != null
+                                ? BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: NetworkImage(
+                                            venturePortfolioModel.mainImage)))
+                                : BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    color: Colors.grey[300]),
+                          ),
+                          Positioned(
+                            top: 55,
+                            left: 90,
+                            child: Container(
+                              height: 47.5,
+                              width: 47.5,
+                              decoration: venturePortfolioModel != null
+                                  ? BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      border: Border.all(
+                                          color: Colors.white, width: 3),
+                                      image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: NetworkImage(
+                                              venturePortfolioModel.logoImage)))
+                                  : null,
+                            ),
+                          ),
+                        ],
+                      ),
                     )),
                 Expanded(
                   flex: 3,
@@ -619,6 +659,7 @@ class _StartupCardState extends State<StartupCard> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
+                          SizedBox(height: 5),
                           Expanded(
                               flex: 1,
                               child: venturePortfolioModel != null
@@ -748,7 +789,7 @@ class _StartupCardState extends State<StartupCard> {
             ),
           ),
         ),
-        Divider(color: Colors.grey[400])
+        // Divider(color: Colors.grey[400])
       ],
     );
   }
@@ -771,7 +812,7 @@ class _AllSMEsState extends State<AllSMEs> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 20),
+      padding: const EdgeInsets.only(left: 12.0, right: 15.0, top: 20),
       child: FutureBuilder(
           future: venturePortfolioList,
           builder: (context, snapshot) {
@@ -838,16 +879,45 @@ class _SMECardState extends State<SMECard> {
         child: Column(
           children: <Widget>[
             Container(
-              height: 100,
-              decoration: venturePortfolioModel != null
-                  ? BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(venturePortfolioModel.mainImage)))
-                  : BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.grey[300]),
+              height: 105,
+              width: 155,
+              child: Stack(
+                overflow: Overflow.visible,
+                children: <Widget>[
+                  Positioned(
+                    child: Container(
+                      height: 100,
+                      decoration: venturePortfolioModel != null
+                          ? BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage(
+                                      venturePortfolioModel.mainImage)))
+                          : BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.grey[300]),
+                    ),
+                  ),
+                  // Positioned(
+                  //   top: 70,
+                  //   left: -6,
+                  //   child: Container(
+                  //     height: 47.5,
+                  //     width: 47.5,
+                  //     decoration: venturePortfolioModel != null
+                  //         ? BoxDecoration(
+                  //             borderRadius: BorderRadius.circular(15),
+                  //             border: Border.all(color: Colors.white, width: 3),
+                  //             image: DecorationImage(
+                  //                 fit: BoxFit.cover,
+                  //                 image: NetworkImage(
+                  //                     venturePortfolioModel.logoImage)))
+                  //         : null,
+                  //   ),
+                  // ),
+                ],
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 12.0),
@@ -855,7 +925,7 @@ class _SMECardState extends State<SMECard> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  SizedBox(height: 10),
+                  SizedBox(height: 15),
                   venturePortfolioModel != null
                       ? Text(
                           venturePortfolioModel.ventureName,

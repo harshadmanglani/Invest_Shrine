@@ -1,5 +1,6 @@
 class EntrepreneurPortfolioModel {
   String id;
+  String uid;
   String firstName;
   String lastName;
   String execSummary;
@@ -9,6 +10,7 @@ class EntrepreneurPortfolioModel {
   EntrepreneurPortfolioModel(
       {this.execSummary,
       this.id,
+      this.uid,
       this.linkedinProfile,
       this.firstName,
       this.lastName,

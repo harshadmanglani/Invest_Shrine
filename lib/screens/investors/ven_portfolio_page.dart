@@ -82,7 +82,7 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage> {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(15),
-                          border: Border.all(color: Colors.black12, width: 1.5),
+                          border: Border.all(color: Colors.white, width: 3),
                           image: DecorationImage(
                               image:
                                   NetworkImage(venturePortfolioModel.logoImage),
@@ -141,7 +141,7 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage> {
                       launchURL(venturePortfolioModel.website);
                     },
                     child:
-                        Icon(Icons.launch, color: Colors.grey[700], size: 24),
+                        Icon(Icons.launch, color: Colors.grey[700], size: 26),
                   ),
                 ),
                 SizedBox(width: 15),
@@ -202,15 +202,16 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text("Description", style: textTheme.headline6),
+          Text("Funding Goal", style: textTheme.headline6),
           SizedBox(height: 3),
           Divider(
             color: Colors.grey[400],
           ),
           SizedBox(height: 3),
           Text(
-            venturePortfolioModel.startupSummary,
-            style: textTheme.bodyText2.copyWith(color: Colors.grey[800]),
+            "₹" + priceFormatter(venturePortfolioModel.investment),
+            style: textTheme.bodyText2
+                .copyWith(color: Colors.grey[800], fontSize: 17),
           ),
           SizedBox(height: 30),
           Text("Industries", style: textTheme.headline6),
@@ -224,16 +225,15 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage> {
             style: textTheme.bodyText2.copyWith(color: Colors.grey[800]),
           ),
           SizedBox(height: 30),
-          Text("Funding Goal", style: textTheme.headline6),
+          Text("Description", style: textTheme.headline6),
           SizedBox(height: 3),
           Divider(
             color: Colors.grey[400],
           ),
           SizedBox(height: 3),
           Text(
-            "₹" + priceFormatter(venturePortfolioModel.investment),
-            style: textTheme.bodyText2
-                .copyWith(color: Colors.grey[800], fontSize: 17),
+            venturePortfolioModel.startupSummary,
+            style: textTheme.bodyText2.copyWith(color: Colors.grey[800]),
           ),
           SizedBox(height: 30),
         ],

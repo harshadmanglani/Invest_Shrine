@@ -39,13 +39,14 @@ class InvestorPortfolioListAPI {
     Map<dynamic, dynamic> parsedResponse = json.decode(responseFromApi);
     List<dynamic> allPortfolios =
         parsedResponse["data"]["allInvestors"]["edges"];
-    List<InvestorModel> investorPortfolioList = [];
+    List<InvestorPortfolioModel> investorPortfolioModelList = [];
 
     for (var i = 0; i < allPortfolios.length; i++) {
       dynamic portfolio = allPortfolios[i]["node"];
-      investorPortfolioList.add(InvestorModel(
+      investorPortfolioModelList.add(InvestorPortfolioModel(
         firstName: portfolio["firstName"],
         id: portfolio["id"],
+        uid: "1",
         displayImage: portfolio["displayImage"],
         location: portfolio["location"],
         numInvestments: portfolio["numInvestments"],
@@ -60,6 +61,6 @@ class InvestorPortfolioListAPI {
         linkedinProfile: portfolio["linkedinProfile"],
       ));
     }
-    return investorPortfolioList;
+    return investorPortfolioModelList;
   }
 }

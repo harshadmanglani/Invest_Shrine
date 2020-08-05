@@ -1,5 +1,6 @@
 import 'package:MobileApp/screens/investors/inv_home_page.dart';
 import 'package:MobileApp/screens/investors/ven_search.dart';
+import 'package:MobileApp/screens/old/beeps_page.dart';
 import 'package:MobileApp/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class _InvestorPlatformState extends State<InvestorPlatform> {
   List<Widget> _widgetOptions = <Widget>[
     InvestorHomePage(),
     VentureSearch(),
-    Container(),
+    BeepsPage(),
     Container()
   ];
   void _onItemTapped(int index) {

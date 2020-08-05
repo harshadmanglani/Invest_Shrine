@@ -23,24 +23,25 @@ class _CustomExpandedTileState extends State<CustomExpandedTile> {
   Widget build(BuildContext context) {
     title = widget.title;
     content = widget.content;
-    dynamic standardTextStyle = Theme.of(context).textTheme.caption;
+    dynamic standardTextStyle =
+        Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 14);
     return ExpandablePanel(
       controller:
           ExpandableController(initialExpanded: widget.initallyExpanded),
       theme: ExpandableThemeData(
           tapHeaderToExpand: widget.hasIcon,
           hasIcon: widget.hasIcon,
-          iconColor: navbarBackgroundColor),
+          iconColor: Colors.black),
       header: Padding(
-        padding: const EdgeInsets.only(top: 10.0),
+        padding: const EdgeInsets.only(top: 20.0),
         child: Text(
           title,
-          style: standardTextStyle.copyWith(fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
         ),
       ),
       collapsed: Container(height: 0, width: 0),
       expanded: Padding(
-        padding: const EdgeInsets.only(top: 10.0),
+        padding: const EdgeInsets.only(top: 5.0),
         child: Text(
           content,
           style: standardTextStyle,

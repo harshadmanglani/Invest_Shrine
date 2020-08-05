@@ -61,14 +61,14 @@ TextTheme _buildTextTheme(TextTheme base) {
         // ),
         headline4: base.headline4.copyWith(
           fontWeight: FontWeight.w500,
-          fontSize: 23,
+          fontSize: 20.5,
         ),
         headline5: base.headline5.copyWith(
-          fontWeight: FontWeight.w700,
-          fontSize: 21,
+          fontWeight: FontWeight.w500,
+          fontSize: 19.5,
         ),
         headline6:
-            base.headline6.copyWith(fontWeight: FontWeight.w600, fontSize: 18),
+            base.headline6.copyWith(fontWeight: FontWeight.w500, fontSize: 18),
         // caption: base.caption.copyWith(fontSize: 12),
         bodyText1: base.bodyText1.copyWith(
           fontSize: 15.0,

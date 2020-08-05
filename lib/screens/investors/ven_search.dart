@@ -39,6 +39,9 @@ class _VentureSearchState extends State<VentureSearch> {
                       padding:
                           const EdgeInsets.only(left: 15.0, right: 15, top: 10),
                       child: TextField(
+                          enableSuggestions: true,
+
+                          // toolbarOptions: ToolbarOptions(),
                           focusNode: _searchNode,
                           onTap: () {
                             setState(() {
@@ -58,6 +61,14 @@ class _VentureSearchState extends State<VentureSearch> {
                             });
                           },
                           decoration: InputDecoration(
+                              suffixIcon: showSearchResults
+                                  ? IconButton(
+                                      onPressed: () =>
+                                          _textEditingController.clear(),
+                                      icon:
+                                          Icon(Icons.clear, color: Colors.grey),
+                                    )
+                                  : null,
                               isDense: true,
                               labelText: "Fuel innovation",
                               prefixIcon: Icon(

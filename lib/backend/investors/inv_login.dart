@@ -62,7 +62,7 @@ class InvestorDataAPI {
       if (user.category == 'INVESTOR') {
         dynamic portfolioData = await InvestorPortfolioListAPI()
             .getAllInvestorPortfolios(searchQuery: '(user: "${user.id}")');
-        user.investorModel = portfolioData[0];
+        user.investorPortfolioModel = portfolioData[0];
         return true;
       } else
         return false;

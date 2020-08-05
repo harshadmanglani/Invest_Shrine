@@ -1,6 +1,7 @@
 class VenturePortfolioModel {
   String id;
   String ventureName;
+  String uid;
   String startupSummary;
   String website;
   int investment;
@@ -14,6 +15,7 @@ class VenturePortfolioModel {
   VenturePortfolioModel(
       {this.id,
       this.location,
+      this.uid,
       this.investment,
       this.industry,
       this.tagLine,

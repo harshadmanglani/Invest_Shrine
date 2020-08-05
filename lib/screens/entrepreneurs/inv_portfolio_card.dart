@@ -3,23 +3,23 @@ import 'package:flutter/material.dart';
 import '../old/ven_portfolio_card.dart';
 
 class InvestorPortfolioCard extends StatefulWidget {
-  final InvestorModel investorPortfolio;
-  InvestorPortfolioCard(this.investorPortfolio);
+  final InvestorPortfolioModel investorPortfolioModel;
+  InvestorPortfolioCard(this.investorPortfolioModel);
 
   @override
   _InvestorPortfolioCardState createState() => _InvestorPortfolioCardState();
 }
 
 class _InvestorPortfolioCardState extends State<InvestorPortfolioCard> {
-  InvestorModel investorPortfolio;
+  InvestorPortfolioModel investorPortfolioModel;
 
   @override
   Widget build(BuildContext context) {
-    investorPortfolio = widget.investorPortfolio;
+    investorPortfolioModel = widget.investorPortfolioModel;
     return InkWell(
       onTap: () {
         Navigator.pushNamed(context, '/investor_portfolio_page',
-            arguments: {'investorPortfolio': investorPortfolio});
+            arguments: {'investorPortfolioModel': investorPortfolioModel});
       },
       child: Card(
           shape: OutlineInputBorder(
@@ -46,12 +46,12 @@ class _InvestorPortfolioCardState extends State<InvestorPortfolioCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                          investorPortfolio.firstName +
+                          investorPortfolioModel.firstName +
                               ' ' +
-                              investorPortfolio.lastName,
+                              investorPortfolioModel.lastName,
                           style: Theme.of(context).textTheme.headline6),
                       SizedBox(height: 5),
-                      Text(investorPortfolio.currentOccupation),
+                      Text(investorPortfolioModel.currentOccupation),
                       SizedBox(height: 8),
                       Row(
                         children: <Widget>[
@@ -63,7 +63,7 @@ class _InvestorPortfolioCardState extends State<InvestorPortfolioCard> {
                                     height: 15, width: 15),
                                 SizedBox(width: 4),
                                 Text(
-                                  '${investorPortfolio.numInvestments} investments',
+                                  '${investorPortfolioModel.numInvestments} investments',
                                   style: Theme.of(context).textTheme.bodyText1,
                                 ),
                               ],
@@ -79,7 +79,7 @@ class _InvestorPortfolioCardState extends State<InvestorPortfolioCard> {
                                   TextSpan(text: '| Avg: '),
                                   TextSpan(
                                       text:
-                                          'Rs. ${priceFormatter(investorPortfolio.investment)}',
+                                          'Rs. ${priceFormatter(investorPortfolioModel.investment)}',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold)),
                                 ],

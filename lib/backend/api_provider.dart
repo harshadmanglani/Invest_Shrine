@@ -9,13 +9,13 @@ class ApiProvider {
   String username;
   String category;
   bool isAuthenticated;
-  InvestorModel investorModel;
-  EntrepreneurPortfolioModel entrepreneurModel;
+  InvestorPortfolioModel investorPortfolioModel;
+  EntrepreneurPortfolioModel entrepreneurPortfolioModel;
 
   void logout() {
     this.email = null;
-    this.investorModel = null;
-    this.entrepreneurModel = null;
+    this.investorPortfolioModel = null;
+    this.entrepreneurPortfolioModel = null;
     this.id = null;
     this.username = null;
     this.category = null;
