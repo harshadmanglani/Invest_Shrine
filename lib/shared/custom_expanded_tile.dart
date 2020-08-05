@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:expandable/expandable.dart';
-import '../theme/colors.dart';
+// import '../theme/colors.dart';
 
 class CustomExpandedTile extends StatefulWidget {
   final String title;
@@ -23,8 +23,10 @@ class _CustomExpandedTileState extends State<CustomExpandedTile> {
   Widget build(BuildContext context) {
     title = widget.title;
     content = widget.content;
-    dynamic standardTextStyle =
-        Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 14);
+    dynamic standardTextStyle = Theme.of(context)
+        .textTheme
+        .bodyText1
+        .copyWith(fontSize: 14, color: Colors.grey[800]);
     return ExpandablePanel(
       controller:
           ExpandableController(initialExpanded: widget.initallyExpanded),
@@ -36,7 +38,8 @@ class _CustomExpandedTileState extends State<CustomExpandedTile> {
         padding: const EdgeInsets.only(top: 20.0),
         child: Text(
           title,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+          style: TextStyle(
+              fontSize: 16.5, color: Colors.black, fontWeight: FontWeight.w500),
         ),
       ),
       collapsed: Container(height: 0, width: 0),

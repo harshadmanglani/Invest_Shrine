@@ -46,72 +46,20 @@ class _InvestorHomePageState extends State<InvestorHomePage>
     );
   }
 
-  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
-
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        // bottomNavigationBar: BottomNavigationBar(items: []),
-        key: _scaffoldKey,
-        resizeToAvoidBottomInset: false,
-        drawer: drawerWidget(),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            SizedBox(height: 20),
-            Expanded(
-              flex: 2,
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 3,
-                    child: Padding(
-                      padding: const EdgeInsets.all(3.0),
-                      child: FlatButton.icon(
-                          onPressed: () {
-                            _scaffoldKey.currentState.openDrawer();
-                          },
-                          icon: Icon(Icons.menu),
-                          label: Container(
-                            height: 0,
-                            width: 0,
-                          )),
-                    ),
-                  ),
-                  Expanded(
-                      flex: 10,
-                      child: Text(
-                        "", // "Home",""
-                        style: Theme.of(context).textTheme.headline4,
-                        textAlign: TextAlign.center,
-                      )),
-                  Expanded(
-                      flex: 3,
-                      child: Image.network(
-                        'https://cdn.pixabay.com/photo/2016/09/16/09/21/money-1673582_1280.png',
-                        height: 45,
-                        width: 45,
-                      )),
-                ],
-              ),
-            ),
-            SizedBox(height: 15),
-            Expanded(flex: 2, child: _getTabBar()),
-            Expanded(
-              flex: 26,
-              child:
-                  _getTabBarView(<Widget>[Explore(), AllStartups(), AllSMEs()]),
-            ),
-          ],
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        SizedBox(height: 15),
+        Expanded(flex: 2, child: _getTabBar()),
+        Expanded(
+          flex: 26,
+          child: _getTabBarView(<Widget>[Explore(), AllStartups(), AllSMEs()]),
         ),
-      ),
+      ],
     );
-  }
-
-  drawerWidget() {
-    return NavDrawer();
   }
 }
 
@@ -374,15 +322,9 @@ class _GrowingFastState extends State<GrowingFast> {
   }
 }
 
-class ExploreVentureCard extends StatefulWidget {
+class ExploreVentureCard extends StatelessWidget {
   final VenturePortfolioModel venturePortfolioModel;
   ExploreVentureCard({this.venturePortfolioModel});
-  @override
-  _ExploreVentureCardState createState() => _ExploreVentureCardState();
-}
-
-class _ExploreVentureCardState extends State<ExploreVentureCard> {
-  VenturePortfolioModel venturePortfolioModel;
 
   @override
   Widget build(BuildContext context) {
@@ -392,7 +334,6 @@ class _ExploreVentureCardState extends State<ExploreVentureCard> {
         logoImageWidth = 53,
         paddingWidth = 10;
     double overflowWidth = mainImageWidth - logoImageWidth - paddingWidth;
-    venturePortfolioModel = widget.venturePortfolioModel;
     var textTheme = Theme.of(context).textTheme;
     return Padding(
       padding: const EdgeInsets.only(left: 20.0),
@@ -577,19 +518,12 @@ class _AllStartupsState extends State<AllStartups> {
   }
 }
 
-class StartupCard extends StatefulWidget {
+class StartupCard extends StatelessWidget {
   final VenturePortfolioModel venturePortfolioModel;
 
   StartupCard({this.venturePortfolioModel});
   @override
-  _StartupCardState createState() => _StartupCardState();
-}
-
-class _StartupCardState extends State<StartupCard> {
-  VenturePortfolioModel venturePortfolioModel;
-  @override
   Widget build(BuildContext context) {
-    venturePortfolioModel = widget.venturePortfolioModel;
     var textTheme = Theme.of(context).textTheme;
     return Column(
       children: <Widget>[
@@ -851,18 +785,10 @@ class _AllSMEsState extends State<AllSMEs> {
   }
 }
 
-class SMECard extends StatefulWidget {
+class SMECard extends StatelessWidget {
   final VenturePortfolioModel venturePortfolioModel;
   SMECard({this.venturePortfolioModel});
-  @override
-  _SMECardState createState() => _SMECardState();
-}
-
-class _SMECardState extends State<SMECard> {
-  VenturePortfolioModel venturePortfolioModel;
-  @override
   Widget build(BuildContext context) {
-    venturePortfolioModel = widget.venturePortfolioModel;
     var textTheme = Theme.of(context).textTheme;
     return Container(
       // decoration: BoxDecoration(

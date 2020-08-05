@@ -3,7 +3,7 @@ import 'package:MobileApp/screens/entrepreneurs/ent_home.dart';
 import 'package:MobileApp/screens/entrepreneurs/ent_login.dart';
 import 'package:MobileApp/screens/entrepreneurs/inv_portfolio_page.dart';
 import 'package:MobileApp/screens/investors/inv_platform.dart';
-import 'package:MobileApp/screens/old/beeps_page.dart';
+import 'package:MobileApp/screens/investors/beeps_page.dart';
 import 'package:MobileApp/screens/split_route.dart';
 import 'package:flutter/material.dart';
 import 'theme/app.dart';

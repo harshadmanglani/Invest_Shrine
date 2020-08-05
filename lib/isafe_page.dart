@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ISAFEPage extends StatefulWidget {
   @override
@@ -114,6 +115,14 @@ Secondly, In India, even at seed stage funding, Angel networks / VCs use big fat
           "https://www.100x.vc/static/documents/Sequel%20iSAFE%20-%20Pro%20Rata%20Side%20Letter.pdf"
     },
   ];
+  launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   ReceivePort _port = ReceivePort();
   final Permission permission = Permission.storage;
   PermissionStatus _permissionStatus = PermissionStatus.undetermined;
@@ -133,13 +142,10 @@ Secondly, In India, even at seed stage funding, Angel networks / VCs use big fat
   }
 
   _requestPermission() async {
-    print("in");
     if (_permissionStatus.isDenied || _permissionStatus.isUndetermined) {
       final status = await permission.request();
       setState(() {
-        print(status);
         _permissionStatus = status;
-        print(_permissionStatus);
       });
     }
   }
@@ -147,8 +153,6 @@ Secondly, In India, even at seed stage funding, Angel networks / VCs use big fat
   @override
   void initState() {
     super.initState();
-    print("just got in");
-    print("about to go in");
     _requestPermission();
     IsolateNameServer.registerPortWithName(
         _port.sendPort, 'downloader_send_port');
@@ -184,12 +188,27 @@ Secondly, In India, even at seed stage funding, Angel networks / VCs use big fat
             child: Column(
           children: <Widget>[
             SizedBox(height: 10),
-            // Padding(
-            //   padding:
-            //       const EdgeInsets.only(left: 15.0, right: 10, bottom: 5.0),
-            //   child: Text(
-            //       "SAFE notes were created by Y-Combinator as an alternative to the traditional investment process and have been adopted according to the Indian legal system as iSAFE notes by Mr. Sanjay Mehta and his team at 100X.VC"),
-            // ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Text(
+                "iSAFE notes have been created and open sourced by courtesy of",
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Image.asset('assets/images/100x.png', height: 60, width: 60),
+                SizedBox(width: 10),
+                RawMaterialButton(
+                  onPressed: () {
+                    launchURL('100x.vc');
+                  },
+                  constraints: BoxConstraints(),
+                  child: Icon(Icons.launch, color: Colors.grey[500]),
+                )
+              ],
+            ),
             Padding(
               padding: const EdgeInsets.only(left: 15.0, right: 5, bottom: 5.0),
               child: ExpandablePanel(

@@ -11,6 +11,7 @@ class _VentureSearchState extends State<VentureSearch> {
   TextEditingController _textEditingController;
   FocusNode _searchNode;
   bool showSearchResults = false;
+  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
 
   @override
   void initState() {
@@ -22,85 +23,78 @@ class _VentureSearchState extends State<VentureSearch> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            SizedBox(
-              height: 60,
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 8,
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(left: 15.0, right: 15, top: 10),
-                      child: TextField(
-                          enableSuggestions: true,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        SizedBox(
+          height: 60,
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                flex: 8,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.only(left: 15.0, right: 15, top: 10),
+                  child: TextField(
+                      enableSuggestions: true,
 
-                          // toolbarOptions: ToolbarOptions(),
-                          focusNode: _searchNode,
-                          onTap: () {
-                            setState(() {
-                              showSearchResults = true;
-                            });
-                          },
-                          controller: _textEditingController,
-                          onSubmitted: (value) {
-                            _searchNode.unfocus();
-                            // setState(() {
-                            //   showSearchResults = true;
-                            // });
-                          },
-                          onChanged: (value) {
-                            setState(() {
-                              showSearchResults = true;
-                            });
-                          },
-                          decoration: InputDecoration(
-                              suffixIcon: showSearchResults
-                                  ? IconButton(
-                                      onPressed: () =>
-                                          _textEditingController.clear(),
-                                      icon:
-                                          Icon(Icons.clear, color: Colors.grey),
-                                    )
-                                  : null,
-                              isDense: true,
-                              labelText: "Fuel innovation",
-                              prefixIcon: Icon(
-                                Icons.search,
-                                size: 23,
-                              )),
-                          textInputAction: TextInputAction.go),
-                    ),
-                  ),
-                  showSearchResults
-                      ? Expanded(
-                          child: IconButton(
-                              icon: Icon(Icons.filter_list,
-                                  color: navbarBackgroundColor),
-                              onPressed: () {
-                                showDialog(
-                                    context: context, child: FilterWidget());
-                              }),
-                          flex: 1)
-                      : Container(height: 0, width: 0)
-                ],
+                      // toolbarOptions: ToolbarOptions(),
+                      focusNode: _searchNode,
+                      onTap: () {
+                        setState(() {
+                          showSearchResults = true;
+                        });
+                      },
+                      controller: _textEditingController,
+                      onSubmitted: (value) {
+                        _searchNode.unfocus();
+                        // setState(() {
+                        //   showSearchResults = true;
+                        // });
+                      },
+                      onChanged: (value) {
+                        setState(() {
+                          showSearchResults = true;
+                        });
+                      },
+                      decoration: InputDecoration(
+                          suffixIcon: showSearchResults
+                              ? IconButton(
+                                  onPressed: () =>
+                                      _textEditingController.clear(),
+                                  icon: Icon(Icons.clear, color: Colors.grey),
+                                )
+                              : null,
+                          isDense: true,
+                          labelText: "Fuel innovation",
+                          prefixIcon: Icon(
+                            Icons.search,
+                            size: 23,
+                          )),
+                      textInputAction: TextInputAction.go),
+                ),
               ),
-            ),
-            Expanded(
-              child: showSearchResults
-                  ? new SearchResults(
-                      searchQuery: _textEditingController.value.text)
-                  : Container(height: 0, width: 0),
-            ),
-          ],
+              showSearchResults
+                  ? Expanded(
+                      child: IconButton(
+                          icon: Icon(Icons.filter_list,
+                              color: navbarBackgroundColor),
+                          onPressed: () {
+                            showDialog(context: context, child: FilterWidget());
+                          }),
+                      flex: 1)
+                  : Container(height: 0, width: 0)
+            ],
+          ),
         ),
-      ),
+        Expanded(
+          child: showSearchResults
+              ? new SearchResults(
+                  searchQuery: _textEditingController.value.text)
+              : Container(height: 0, width: 0),
+        ),
+      ],
     );
   }
 }
