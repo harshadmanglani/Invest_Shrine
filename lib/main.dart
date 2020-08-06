@@ -1,9 +1,5 @@
-import 'package:MobileApp/isafe_page.dart';
-import 'package:MobileApp/screens/entrepreneurs/ent_home.dart';
 import 'package:MobileApp/screens/entrepreneurs/ent_login.dart';
-import 'package:MobileApp/screens/entrepreneurs/inv_portfolio_page.dart';
 import 'package:MobileApp/screens/investors/inv_platform.dart';
-import 'package:MobileApp/screens/investors/beeps_page.dart';
 import 'package:MobileApp/screens/split_route.dart';
 import 'package:flutter/material.dart';
 import 'theme/app.dart';
@@ -33,12 +29,7 @@ class _MyAppState extends State<MyApp> {
         '/investor_login': (BuildContext context) => InvestorLogin(),
         '/entrepreneur_login': (BuildContext context) => EntrepreneurLogin(),
         '/investor_home_page': (BuildContext context) => InvestorPlatform(),
-        '/investor_portfolio_page': (BuildContext context) =>
-            InvestorPortfolioPage(),
-        '/entrepreneur_home': (BuildContext context) => EntrepreneurHome(),
         '/split_route': (BuildContext context) => SplitRoute(),
-        '/beeps_page': (BuildContext context) => BeepsPage(),
-        '/isafe_page': (BuildContext context) => ISAFEPage()
       },
       initialRoute: '/split_route',
     );

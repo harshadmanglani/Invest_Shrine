@@ -32,6 +32,7 @@ class _InvestorPlatformState extends State<InvestorPlatform> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        key: _scaffoldKey,
         drawer: NavDrawer(),
         body: Column(
           children: <Widget>[

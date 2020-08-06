@@ -1,4 +1,6 @@
+import 'package:MobileApp/backend/entrepreneurs/portfolio_list.dart';
 import 'package:MobileApp/models/entrepreneurs/venture_model.dart';
+import 'package:MobileApp/screens/investors/inv_home_page.dart';
 import 'package:MobileApp/shared/nav_drawer.dart';
 import 'package:MobileApp/theme/app.dart';
 import 'package:MobileApp/theme/colors.dart';
@@ -9,115 +11,162 @@ class SavedVentures extends StatefulWidget {
   _SavedVenturesState createState() => _SavedVenturesState();
 }
 
-class _SavedVenturesState extends State<SavedVentures> {
-  List<VenturePortfolioModel> ventures = [
-    VenturePortfolioModel(
-        ventureName: "Travel Haven",
-        tagLine:
-            "Travel and make your soul feel blissful. Giving you heaven on earth."),
-    VenturePortfolioModel(
-        ventureName: "Decoration Jewelry Online",
-        tagLine:
-            "The best decoration jewelry delivered at your doorstep, at the cheapest prices!"),
-  ];
+class _SavedVenturesState extends State<SavedVentures>
+    with SingleTickerProviderStateMixin {
+  TabController tabController;
+  var tabHeaderStyle = TextStyle(fontSize: 15);
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: ListView.builder(
-        physics: BouncingScrollPhysics(),
-        itemBuilder: (context, index) => savedVentureCard(ventures[index]),
-        itemCount: ventures.length,
-      ),
+  void initState() {
+    super.initState();
+    tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
+  }
+
+  TabBar _getTabBar() {
+    return TabBar(
+      tabs: <Widget>[
+        Tab(child: Text("Startups", style: tabHeaderStyle)),
+        Tab(child: Text("SMEs", style: tabHeaderStyle)),
+      ],
+      indicatorColor: navbarBackgroundColor,
+      controller: tabController,
     );
   }
 
-  savedVentureCard(VenturePortfolioModel venturePortfolioModel) {
+  TabBarView _getTabBarView(tabs) {
+    return TabBarView(
+      children: tabs,
+      controller: tabController,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        SizedBox(height: 5),
+        Expanded(flex: 2, child: _getTabBar()),
+        Expanded(
+          flex: 26,
+          child: _getTabBarView(<Widget>[SavedStartups(), SavedSMEs()]),
+        ),
+      ],
+    );
+  }
+}
+
+class SavedStartups extends StatefulWidget {
+  @override
+  _SavedStartupsState createState() => _SavedStartupsState();
+}
+
+class _SavedStartupsState extends State<SavedStartups> {
+  Future venturePortfolioList;
+  List<VenturePortfolioModel> cachedVenturePortfolioList;
+
+  @override
+  void initState() {
+    super.initState();
+    venturePortfolioList = VenturePortfolioListAPI().getAllVenturePortfolios();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Expanded(child: SizedBox(), flex: 2),
+        Expanded(
+          flex: 90,
+          child: FutureBuilder(
+              future: venturePortfolioList,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return ListView.builder(
+                    physics: BouncingScrollPhysics(),
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (context, index) {
+                      return StartupCard(
+                        savedCard: true,
+                        venturePortfolioModel: snapshot.data[index],
+                      );
+                    },
+                  );
+                } else
+                  return ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: 10,
+                    itemBuilder: (context, index) {
+                      return StartupCard(
+                        venturePortfolioModel: null,
+                      );
+                    },
+                  );
+              }),
+        ),
+      ],
+    );
+  }
+}
+
+class SavedSMEs extends StatefulWidget {
+  @override
+  _SavedSMEsState createState() => _SavedSMEsState();
+}
+
+class _SavedSMEsState extends State<SavedSMEs> {
+  Future venturePortfolioList;
+
+  @override
+  void initState() {
+    super.initState();
+    venturePortfolioList = VenturePortfolioListAPI().getAllVenturePortfolios();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          SizedBox(width: 13),
-          Container(
-            height: 100,
-            width: 135,
-            child: Stack(
-              children: <Widget>[
-                Container(
-                  height: 95,
-                  width: 125,
-                  decoration: venturePortfolioModel != null
-                      ? BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(
-                                  venturePortfolioModel.mainImage)))
-                      : BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: Colors.grey[300]),
-                ),
-                Positioned(
-                  top: 55,
-                  left: 90,
-                  child: Container(
-                    height: 47.5,
-                    width: 47.5,
-                    decoration: venturePortfolioModel != null
-                        ? BoxDecoration(
-                            borderRadius: BorderRadius.circular(55),
-                            border: Border.all(color: Colors.white, width: 3),
-                            image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: NetworkImage(
-                                    venturePortfolioModel.logoImage)))
-                        : null,
-                  ),
-                ),
-                Positioned(
-                  top: -1,
-                  left: -3,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Icon(Icons.notifications_active,
-                          size: 20, color: navbarBackgroundColor),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 5.0),
-              child: SizedBox(
-                height: 80,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Flexible(
-                      flex: 1,
-                      child: Container(
-                        child: Text(" beeped you.",
-                            maxLines: 4,
-                            overflow: TextOverflow.clip,
-                            style: Theme.of(context).textTheme.bodyText1),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-          SizedBox(width: 8)
-        ],
-      ),
+      padding: const EdgeInsets.only(left: 12.0, right: 15.0, top: 20),
+      child: FutureBuilder(
+          future: venturePortfolioList,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done)
+              return GridView.builder(
+                  physics: BouncingScrollPhysics(),
+                  itemCount: snapshot.data.length,
+                  itemBuilder: (context, index) {
+                    return SMECard(
+                      savedCard: true,
+                      venturePortfolioModel: snapshot.data[index],
+                    );
+                  },
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    childAspectRatio: 0.68,
+                    mainAxisSpacing: 5.0,
+                    crossAxisSpacing: 12.0,
+                    crossAxisCount: 2,
+                  ));
+            else
+              return GridView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: 10,
+                  itemBuilder: (context, index) {
+                    return SMECard(
+                      venturePortfolioModel: null,
+                    );
+                  },
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    childAspectRatio: 0.68,
+                    mainAxisSpacing: 5.0,
+                    crossAxisSpacing: 12.0,
+                    crossAxisCount: 2,
+                  ));
+          }),
     );
   }
 }

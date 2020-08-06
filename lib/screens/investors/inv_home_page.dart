@@ -52,7 +52,7 @@ class _InvestorHomePageState extends State<InvestorHomePage>
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        SizedBox(height: 15),
+        SizedBox(height: 5),
         Expanded(flex: 2, child: _getTabBar()),
         Expanded(
           flex: 26,
@@ -520,8 +520,8 @@ class _AllStartupsState extends State<AllStartups> {
 
 class StartupCard extends StatelessWidget {
   final VenturePortfolioModel venturePortfolioModel;
-
-  StartupCard({this.venturePortfolioModel});
+  final bool savedCard;
+  StartupCard({this.venturePortfolioModel, this.savedCard = false});
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
@@ -597,10 +597,23 @@ class StartupCard extends StatelessWidget {
                           Expanded(
                               flex: 1,
                               child: venturePortfolioModel != null
-                                  ? Text(
-                                      venturePortfolioModel.ventureName,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: textTheme.headline6,
+                                  ? Row(
+                                      children: <Widget>[
+                                        Expanded(
+                                          flex: 4,
+                                          child: Text(
+                                            venturePortfolioModel.ventureName,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: textTheme.headline6,
+                                          ),
+                                        ),
+                                        // savedCard
+                                        //     ? Expanded(
+                                        //         child: Icon(Icons.cancel,
+                                        //             size: 20,
+                                        //             color: Colors.grey[400]))
+                                        //     : Container(height: 0, width: 0)
+                                      ],
                                     )
                                   : Container(
                                       height: 0,
@@ -787,7 +800,8 @@ class _AllSMEsState extends State<AllSMEs> {
 
 class SMECard extends StatelessWidget {
   final VenturePortfolioModel venturePortfolioModel;
-  SMECard({this.venturePortfolioModel});
+  final bool savedCard;
+  SMECard({this.venturePortfolioModel, this.savedCard = false});
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
     return Container(
@@ -842,6 +856,18 @@ class SMECard extends StatelessWidget {
                   //         : null,
                   //   ),
                   // ),
+                  // Positioned(
+                  //     bottom: -4,
+                  //     right: 4,
+                  //     child: Container(
+                  //         decoration: BoxDecoration(
+                  //             color: Colors.grey[600],
+                  //             borderRadius: BorderRadius.circular(30)),
+                  //         child: Padding(
+                  //           padding: const EdgeInsets.all(4.0),
+                  //           child: Icon(Icons.restore_from_trash,
+                  //               color: Colors.white, size: 20),
+                  //         )))
                 ],
               ),
             ),
@@ -851,13 +877,26 @@ class SMECard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  SizedBox(height: 15),
+                  SizedBox(height: 10),
                   venturePortfolioModel != null
-                      ? Text(
-                          venturePortfolioModel.ventureName,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          style: textTheme.headline6,
+                      ? Row(
+                          children: <Widget>[
+                            Expanded(
+                              flex: 4,
+                              child: Text(
+                                venturePortfolioModel.ventureName,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
+                                style: textTheme.headline6,
+                              ),
+                            ),
+                            // savedCard
+                            //     ? Expanded(
+                            //         flex: 1,
+                            //         child:
+                            //             Icon(Icons.cancel, color: Colors.grey))
+                            //     : Container(height: 0, width: 0)
+                          ],
                         )
                       : Text(
                           '                          ',

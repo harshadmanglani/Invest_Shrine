@@ -1,21 +1,12 @@
 import 'package:MobileApp/models/investors/investor_model.dart';
-import 'package:MobileApp/screens/entrepreneurs/ent_login.dart';
-import 'package:MobileApp/shared/custom_expanded_tile.dart';
-import 'package:MobileApp/shared/industry_widget.dart';
-import 'package:MobileApp/theme/app.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../old/ven_portfolio_card.dart';
-import '../../theme/colors.dart';
-import 'package:expandable/expandable.dart';
+import '../investors/ven_portfolio_page.dart';
 
-class InvestorPortfolioPage extends StatefulWidget {
-  @override
-  _InvestorPortfolioPageState createState() => _InvestorPortfolioPageState();
-}
+class InvestorPortfolioPage extends StatelessWidget {
+  final InvestorPortfolioModel investorPortfolioModel;
+  InvestorPortfolioPage({this.investorPortfolioModel});
 
-class _InvestorPortfolioPageState extends State<InvestorPortfolioPage> {
-  InvestorPortfolioModel investorPortfolioModel;
   launchURL(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
@@ -26,17 +17,6 @@ class _InvestorPortfolioPageState extends State<InvestorPortfolioPage> {
 
   @override
   Widget build(BuildContext context) {
-    investorPortfolioModel = InvestorPortfolioModel(
-        firstName: "Mahesh",
-        lastName: "Malani",
-        location: "Pune",
-        currentOccupation: "CEO @ NASSCOM",
-        interests: ["Tech"],
-        numInvestments: 10,
-        investment: 1000000,
-        displayImage: "https://i.ibb.co/Jk6HnN5/hm.png",
-        background:
-            "I'm Mahesh, and I'm here to challenge the status quo and change the world. Thinking different is the only way to do that. And remember, you're going to die one day. There's no reason not to follow your heart. You've got to find what you love. And if you haven't found it yet, keep looking. Don't settle.");
     var textTheme = Theme.of(context).textTheme;
     return Scaffold(
         appBar: AppBar(
@@ -192,11 +172,11 @@ class _InvestorPortfolioPageState extends State<InvestorPortfolioPage> {
             thickness: 10,
           ),
           SizedBox(height: 10),
-          overviewWidget()
+          overviewWidget(context)
         ]));
   }
 
-  overviewWidget() {
+  overviewWidget(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
     String industry = '';
     for (var i = 0; i < investorPortfolioModel.interests.length; i++) {
@@ -238,9 +218,9 @@ class _InvestorPortfolioPageState extends State<InvestorPortfolioPage> {
             padding: const EdgeInsets.only(left: 10.0, right: 10),
             child: Divider(color: Colors.grey[300]),
           ),
-          investmentPortfolioElement(),
+          investmentPortfolioElement(context),
           SizedBox(height: 8),
-          investmentPortfolioElement(),
+          investmentPortfolioElement(context),
           SizedBox(height: 30),
           Text("Interests", style: textTheme.headline6),
           SizedBox(height: 3),
@@ -270,7 +250,7 @@ class _InvestorPortfolioPageState extends State<InvestorPortfolioPage> {
     );
   }
 
-  investmentPortfolioElement() {
+  investmentPortfolioElement(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
 
     return Column(

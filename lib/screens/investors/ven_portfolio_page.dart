@@ -1,9 +1,19 @@
 import 'package:MobileApp/backend/entrepreneurs/portfolio_list.dart';
 import 'package:MobileApp/models/entrepreneurs/venture_model.dart';
-import 'package:MobileApp/screens/old/ven_portfolio_card.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_advanced_networkimage/provider.dart';
+
+String priceFormatter(int price) {
+  String formattedPrice;
+  int length = price.toString().length;
+  if (price.toString().endsWith('00000'))
+    formattedPrice = price.toString().substring(0, length - 5) + 'L';
+  else if (price.toString().endsWith('0000') && length >= 6)
+    formattedPrice = price.toString().substring(0, length - 5) +
+        '.' +
+        price.toString().substring(length - 5, length - 4);
+  return formattedPrice;
+}
 
 class VenturePortfolioPage extends StatefulWidget {
   final VenturePortfolioModel venturePortfolioModel;
@@ -55,23 +65,20 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage> {
                     Container(
                       height: 180,
                       decoration: BoxDecoration(
-                          // boxShadow: [
-                          //   BoxShadow(
-                          //     color: Colors.black54,
-                          //     offset: Offset(0, 2),
-                          //   ),
-                          // ],
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(25),
-                              bottomRight: Radius.circular(25)),
-                          image: DecorationImage(
-                              image: AdvancedNetworkImage(
-                                venturePortfolioModel.mainImage,
-                                useDiskCache: true,
-                                cacheRule:
-                                    CacheRule(maxAge: const Duration(days: 7)),
-                              ),
-                              fit: BoxFit.cover)),
+                        // boxShadow: [
+                        //   BoxShadow(
+                        //     color: Colors.black54,
+                        //     offset: Offset(0, 2),
+                        //   ),
+                        // ],
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(25),
+                            bottomRight: Radius.circular(25)),
+                        image: DecorationImage(
+                            image:
+                                NetworkImage(venturePortfolioModel.mainImage),
+                            fit: BoxFit.cover),
+                      ),
                     ),
                     Positioned(
                       top: 140,
