@@ -6,7 +6,10 @@ import 'package:flutter/material.dart';
 
 class SearchResults extends StatefulWidget {
   final String searchQuery;
-  SearchResults({this.searchQuery});
+  final String locationQuery;
+  final String industryQuery;
+  SearchResults({this.searchQuery, this.industryQuery, this.locationQuery})
+      : assert(locationQuery != null, industryQuery != null);
   @override
   _SearchResultsState createState() => _SearchResultsState();
 }
@@ -16,6 +19,7 @@ class _SearchResultsState extends State<SearchResults>
   Future ventureSearchResults;
   Future entrepreneurSearchResults;
   TabController tabController;
+  String finalQuery;
   var tabHeaderStyle = TextStyle(fontSize: 15);
 
   @override
@@ -50,6 +54,8 @@ class _SearchResultsState extends State<SearchResults>
 
   @override
   Widget build(BuildContext context) {
+    print(widget.industryQuery);
+    print(widget.locationQuery);
     return widget.searchQuery != ''
         ? Column(
             children: <Widget>[
@@ -63,8 +69,15 @@ class _SearchResultsState extends State<SearchResults>
   }
 
   ventureSearchWidget() {
-    ventureSearchResults = VenturePortfolioListAPI().getAllVenturePortfolios(
-        searchQuery: '(ventureName: "${widget.searchQuery}")');
+    finalQuery = '(ventureName: "${widget.searchQuery}")';
+    // widget.industryQuery != ''
+    //     ? finalQuery = finalQuery + ', industry: "${widget.industryQuery}"'
+    //     : () {};
+    // finalQuery = finalQuery + ')';
+    // print(finalQuery);
+    // print("industry: ${widget.industryQuery}");
+    ventureSearchResults = VenturePortfolioListAPI()
+        .getAllVenturePortfolios(searchQuery: finalQuery);
     return Padding(
       padding: const EdgeInsets.only(top: 20.0),
       child: FutureBuilder(

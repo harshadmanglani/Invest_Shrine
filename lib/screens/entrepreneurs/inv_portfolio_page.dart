@@ -21,9 +21,14 @@ class InvestorPortfolioPage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           // shape: appBarShape,
-          // title:
-          // Text("Investor Portfolio", style: TextStyle(color: Colors.white)),
+          title: Text("Portfolio", style: TextStyle(color: Colors.white)),
           centerTitle: true,
+          actions: [
+            RawMaterialButton(
+              onPressed: () {},
+              child: Text("EDIT", style: TextStyle(color: Colors.white)),
+            )
+          ],
         ),
         body: ListView(physics: BouncingScrollPhysics(), children: <Widget>[
           SizedBox(height: 20),
@@ -51,59 +56,52 @@ class InvestorPortfolioPage extends StatelessWidget {
                           Expanded(
                             flex: 3,
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(
-                                    "${investorPortfolioModel.firstName} ${investorPortfolioModel.lastName},",
-                                    overflow: TextOverflow.clip,
-                                    style: textTheme.headline4),
-                                Text(investorPortfolioModel.currentOccupation,
-                                    overflow: TextOverflow.clip,
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        color: Colors.grey[800],
-                                        fontWeight: FontWeight.normal)),
                                 SizedBox(height: 10),
+                                Expanded(
+                                  child: Text(
+                                      "${investorPortfolioModel.firstName} ${investorPortfolioModel.lastName}",
+                                      overflow: TextOverflow.clip,
+                                      style: textTheme.headline4),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                      investorPortfolioModel.currentOccupation,
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 3,
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.grey[800],
+                                          fontWeight: FontWeight.normal)),
+                                ),
+                                SizedBox(height: 5),
                               ],
                             ),
                           ),
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                              child: Row(
-                                children: <Widget>[
-                                  Expanded(
-                                    child: Row(
-                                      children: <Widget>[
-                                        Icon(Icons.location_on,
-                                            size: 13, color: Colors.grey[800]),
-                                        SizedBox(width: 2),
-                                        Text(
-                                          investorPortfolioModel.location,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(fontSize: 10),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 3,
-                                    child: Row(
-                                      children: <Widget>[
-                                        Icon(Icons.school,
-                                            color: Colors.grey[800], size: 13),
-                                        SizedBox(width: 2),
-                                        Text(
-                                          "University of Rhode Island    ................     ",
-                                          style: TextStyle(fontSize: 10),
-                                          overflow: TextOverflow.ellipsis,
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
+                          // Expanded(
+                          //   flex: 1,
+                          //   child: Container(
+                          //     child: Row(
+                          //       children: <Widget>[
+                          //         Expanded(
+                          //           child: Row(
+                          //             children: <Widget>[
+                          //               Icon(Icons.location_on,
+                          //                   size: 15, color: Colors.grey[700]),
+                          //               SizedBox(width: 2),
+                          //               Text(
+                          //                 investorPortfolioModel.location,
+                          //                 overflow: TextOverflow.ellipsis,
+                          //                 style: TextStyle(fontSize: 12),
+                          //               ),
+                          //             ],
+                          //           ),
+                          //         ),
+                          //       ],
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                     )),
@@ -190,17 +188,6 @@ class InvestorPortfolioPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text("Background", style: textTheme.headline6),
-          SizedBox(height: 3),
-          Divider(
-            color: Colors.grey[400],
-          ),
-          SizedBox(height: 3),
-          Text(
-            investorPortfolioModel.background,
-            style: textTheme.bodyText2.copyWith(color: Colors.grey[800]),
-          ),
-          SizedBox(height: 30),
           Text("Investment Portfolio", style: textTheme.headline6),
           SizedBox(height: 3),
           Divider(
@@ -213,14 +200,14 @@ class InvestorPortfolioPage extends StatelessWidget {
           Text(
             "Preferred amount per ticket: ₹ ${priceFormatter(investorPortfolioModel.investment)}",
           ),
-          SizedBox(height: 8),
-          Padding(
-            padding: const EdgeInsets.only(left: 10.0, right: 10),
-            child: Divider(color: Colors.grey[300]),
-          ),
-          investmentPortfolioElement(context),
-          SizedBox(height: 8),
-          investmentPortfolioElement(context),
+          // SizedBox(height: 8),
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 10.0, right: 10),
+          //   child: Divider(color: Colors.grey[300]),
+          // ),
+          // investmentPortfolioElement(context),
+          // SizedBox(height: 8),
+          // investmentPortfolioElement(context),
           SizedBox(height: 30),
           Text("Interests", style: textTheme.headline6),
           SizedBox(height: 3),
@@ -232,18 +219,18 @@ class InvestorPortfolioPage extends StatelessWidget {
             industry,
             style: textTheme.bodyText2.copyWith(color: Colors.grey[800]),
           ),
-          SizedBox(height: 30),
-          Text("Funding Goal", style: textTheme.headline6),
+          SizedBox(height: 30), Text("Background", style: textTheme.headline6),
           SizedBox(height: 3),
           Divider(
             color: Colors.grey[400],
           ),
           SizedBox(height: 3),
           Text(
-            "₹" + priceFormatter(investorPortfolioModel.investment),
-            style: textTheme.bodyText2
-                .copyWith(color: Colors.grey[800], fontSize: 17),
+            investorPortfolioModel.background,
+            style: textTheme.bodyText2.copyWith(color: Colors.grey[800]),
           ),
+          // SizedBox(height: 30),
+
           SizedBox(height: 30),
         ],
       ),

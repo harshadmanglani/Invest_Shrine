@@ -21,6 +21,41 @@ class _VentureSearchState extends State<VentureSearch> {
     _textEditingController = new TextEditingController();
   }
 
+  List<String> _locations = ['Pune', 'Bangalore', 'Chennai', 'Delhi'];
+  List<dynamic> industryImages = [
+    {
+      "industry": "Healthcare",
+      "image": "assets/images/healthcare.png",
+      "id": "SW5kdXN0cnlNb2RlbDo0"
+    },
+    {
+      "industry": "Tech",
+      "image": "assets/images/tech.png",
+      "id": "SW5kdXN0cnlNb2RlbDox"
+    },
+    {
+      "industry": "Travel",
+      "image": "assets/images/travel.png",
+      "id": "SW5kdXN0cnlNb2RlbDo1"
+    },
+    {
+      "industry": "Fintech",
+      "image": "assets/images/fintech.png",
+      "id": "SW5kdXN0cnlNb2RlbDoy"
+    },
+    {
+      "industry": "E-Commerce",
+      "image": "assets/images/ecommerce.png",
+      "id": "SW5kdXN0cnlNb2RlbDo2"
+    },
+    {
+      "industry": "Food",
+      "image": "assets/images/food.jpg",
+      "id": "SW5kdXN0cnlNb2RlbDo5"
+    }
+  ];
+  String _selectedLocation, _selectedIndustry, _selectedIndustryId;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -81,7 +116,7 @@ class _VentureSearchState extends State<VentureSearch> {
                           icon: Icon(Icons.filter_list,
                               color: navbarBackgroundColor),
                           onPressed: () {
-                            showDialog(context: context, child: FilterWidget());
+                            showDialog(context: context, child: filterWidget());
                           }),
                       flex: 1)
                   : Container(height: 0, width: 0)
@@ -91,56 +126,17 @@ class _VentureSearchState extends State<VentureSearch> {
         Expanded(
           child: showSearchResults
               ? new SearchResults(
-                  searchQuery: _textEditingController.value.text)
+                  searchQuery: _textEditingController.value.text,
+                  locationQuery: _selectedLocation ?? '',
+                  industryQuery: _selectedIndustryId ?? '',
+                )
               : Container(height: 0, width: 0),
         ),
       ],
     );
   }
-}
 
-class FilterWidget extends StatefulWidget {
-  @override
-  _FilterWidgetState createState() => _FilterWidgetState();
-}
-
-class _FilterWidgetState extends State<FilterWidget> {
-  List<String> _locations = ['Pune', 'Bangalore', 'Chennai', 'Delhi'];
-  List<dynamic> industryImages = [
-    {
-      "industry": "Healthcare",
-      "image": "assets/images/healthcare.png",
-      "id": "SW5kdXN0cnlNb2RlbDo0"
-    },
-    {
-      "industry": "Tech",
-      "image": "assets/images/tech.png",
-      "id": "SW5kdXN0cnlNb2RlbDox"
-    },
-    {
-      "industry": "Travel",
-      "image": "assets/images/travel.png",
-      "id": "SW5kdXN0cnlNb2RlbDo1"
-    },
-    {
-      "industry": "Fintech",
-      "image": "assets/images/fintech.png",
-      "id": "SW5kdXN0cnlNb2RlbDoy"
-    },
-    {
-      "industry": "E-Commerce",
-      "image": "assets/images/ecommerce.png",
-      "id": "SW5kdXN0cnlNb2RlbDo2"
-    },
-    {
-      "industry": "Food",
-      "image": "assets/images/food.jpg",
-      "id": "SW5kdXN0cnlNb2RlbDo5"
-    }
-  ];
-  String _selectedLocation, _selectedIndustry, _selectedIndustryId, name;
-  @override
-  Widget build(BuildContext context) {
+  filterWidget() {
     return AlertDialog(
         shape: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
         title: Text("Filters"),
@@ -189,7 +185,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                         onChanged: (industry) {
                           setState(() {
                             _selectedIndustry = industry;
-                            print(_selectedIndustry);
+                            // print(_selectedIndustry);
                           });
                           for (var i = 0; i < industryImages.length; i++)
                             if (industryImages[i]["industry"] == industry)
@@ -216,6 +212,12 @@ class _FilterWidgetState extends State<FilterWidget> {
                             borderRadius: BorderRadius.circular(20),
                             borderSide: BorderSide(color: Colors.transparent)),
                         onPressed: () {
+                          _selectedIndustryId = null;
+                          _selectedLocation = null;
+                          _selectedIndustry = null;
+                          setState(() {
+                            showSearchResults = true;
+                          });
                           Navigator.pop(context);
                         },
                         child: Text("Clear",
@@ -229,7 +231,13 @@ class _FilterWidgetState extends State<FilterWidget> {
                         shape: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                             borderSide: BorderSide(color: Colors.transparent)),
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            showSearchResults = true;
+                            _selectedLocation = _selectedLocation;
+                            _selectedIndustryId = _selectedIndustryId;
+                          });
+                        },
                         child: Text("Apply",
                             style: TextStyle(color: Colors.white)),
                       ),

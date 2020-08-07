@@ -1,4 +1,5 @@
 import 'package:MobileApp/backend/api_provider.dart';
+import 'package:MobileApp/screens/entrepreneurs/inv_portfolio_page.dart';
 import 'package:MobileApp/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -39,10 +40,33 @@ class _NavDrawerState extends State<NavDrawer> {
                     style: GoogleFonts.workSans(
                         textStyle: TextStyle(fontSize: 23))),
                 SizedBox(width: 10),
-                Icon(Icons.account_balance, color: navbarBackgroundColor)
+                // Icon(Icons.account_balance, color: navbarBackgroundColor)
               ],
             ),
             onTap: null,
+          ),
+          ListTile(
+            title: Row(
+              children: [
+                Expanded(
+                    flex: 4,
+                    child: Text("Portfolio", style: navDrawerButtonStyle)),
+                Expanded(
+                    flex: 1,
+                    child: Icon(Icons.person_outline,
+                        size: 28, color: Colors.black)),
+              ],
+            ),
+            onTap: () {
+              user.category == 'INVESTOR'
+                  ? Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => InvestorPortfolioPage(
+                              investorPortfolioModel:
+                                  user.investorPortfolioModel)))
+                  : null;
+            },
           ),
           ListTile(
               onTap: () {
@@ -55,8 +79,7 @@ class _NavDrawerState extends State<NavDrawer> {
                       child: Text("iSAFE", style: navDrawerButtonStyle)),
                   Expanded(
                       flex: 1,
-                      child: Icon(Icons.help_outline,
-                          color: navbarBackgroundColor)),
+                      child: Icon(Icons.help_outline, color: Colors.black)),
                 ],
               )),
           ListTile(
@@ -90,7 +113,7 @@ class _NavDrawerState extends State<NavDrawer> {
                         Expanded(
                             flex: 1,
                             child: Icon(Icons.exit_to_app,
-                                color: navbarBackgroundColor //Colors.grey,
+                                color: Colors.black //Colors.grey,
                                 )),
                       ],
                     )),
