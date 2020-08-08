@@ -1,23 +1,20 @@
-import 'package:MobileApp/screens/investors/inv_home_page.dart';
-import 'package:MobileApp/screens/investors/saved_ven.dart';
-import 'package:MobileApp/screens/investors/ven_search.dart';
-import 'package:MobileApp/screens/investors/beeps_page.dart';
+import 'package:MobileApp/screens/entrepreneurs/ent_home_page.dart';
 import 'package:MobileApp/shared/nav_drawer.dart';
-import 'package:MobileApp/theme/colors.dart';
 import 'package:flutter/material.dart';
+import '../../theme/colors.dart';
 
-class InvestorPlatform extends StatefulWidget {
+class EntrepreneurPlatform extends StatefulWidget {
   @override
-  _InvestorPlatformState createState() => _InvestorPlatformState();
+  _EntrepreneurPlatformState createState() => _EntrepreneurPlatformState();
 }
 
-class _InvestorPlatformState extends State<InvestorPlatform> {
+class _EntrepreneurPlatformState extends State<EntrepreneurPlatform> {
   int _selectedIndex = 0;
   List<Widget> _widgetOptions = <Widget>[
-    InvestorHomePage(),
-    VentureSearch(),
-    BeepsPage(),
-    SavedVentures()
+    EntrepreneurHomePage(),
+    Container(),
+    Container(),
+    Container()
   ];
   void _onItemTapped(int index) {
     setState(() {
@@ -66,9 +63,9 @@ class _InvestorPlatformState extends State<InvestorPlatform> {
                   Expanded(
                       flex: 3,
                       child: Image.asset(
-                        'assets/images/inv.png',
-                        height: 35,
-                        width: 35,
+                        'assets/images/ent.jpg',
+                        height: 50,
+                        width: 50,
                       )),
                 ],
               ),

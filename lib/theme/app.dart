@@ -14,7 +14,7 @@ var appBarShape = RoundedRectangleBorder(
 );
 
 OutlineInputBorder textFieldBorder = OutlineInputBorder(
-    borderSide: BorderSide(color: Colors.grey[300]),
+    borderSide: BorderSide(color: Colors.grey[400]),
     borderRadius: BorderRadius.all(Radius.circular(20.0)));
 
 ThemeData _buildTheme() {

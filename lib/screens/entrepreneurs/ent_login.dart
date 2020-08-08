@@ -94,6 +94,9 @@ class _EntrepreneurLoginState extends State<EntrepreneurLogin> {
                               : _unfocusedColor),
                     ),
                     focusNode: _passwordFocusNode,
+                    onSubmitted: (value) {
+                      entrepreneurLoginFunction();
+                    },
                   ),
                 ),
                 // SizedBox(height: 10.0),
@@ -110,7 +113,7 @@ class _EntrepreneurLoginState extends State<EntrepreneurLogin> {
                       right: loginMargin, top: 0.0, left: loginMargin),
                   child: RaisedButton(
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(27.0))),
+                        borderRadius: BorderRadius.all(Radius.circular(20.0))),
                     elevation: 3.0,
                     child: Padding(
                       padding: EdgeInsets.all(14.0),
@@ -138,107 +141,64 @@ class _EntrepreneurLoginState extends State<EntrepreneurLogin> {
                         ],
                       ),
                     ),
-                    onPressed: () async {
-                      _passwordFocusNode.unfocus();
-                      _usernameFocusNode.unfocus();
-                      setState(() {
-                        isLoading = true;
-                      });
-                      bool correctLogin = await EntrepreneurLoginAPI()
-                          .loginUser(
-                              username: _usernameController.value.text,
-                              password: _passwordController.value.text);
-                      print(correctLogin);
-                      if (correctLogin) {
-                        setState(() {
-                          isLoading = false;
-                        });
-                        Navigator.of(context).pushNamedAndRemoveUntil(
-                            '/entrepreneur_home',
-                            (Route<dynamic> route) => false);
-                      } else {
-                        setState(() {
-                          isLoading = false;
-                        });
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            title: Text("Invalid credentials",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                            actions: <Widget>[
-                              FlatButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8),
-                                    child: Text("Retry",
-                                        style: TextStyle(fontSize: 15)),
-                                  ))
-                            ],
-                            content: Container(
-                                height: 100,
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                      "Please re-enter a valid username and password."),
-                                )),
-                            shape: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                          ),
-                        );
-                      }
+                    onPressed: () {
+                      entrepreneurLoginFunction();
                     },
                   ),
                 ),
                 SizedBox(height: 10.0),
-                // Divider(
-                //   color: Colors.grey,
-                //   thickness: 2.0,
-                //   indent: loginMargin,
-                //   endIndent: loginMargin,
-                // ),
-                // SizedBox(height: 10.0),
-                // Padding(
-                //   padding: EdgeInsets.only(
-                //       right: loginMargin, top: 0.0, left: loginMargin),
-                //   child: RaisedButton(
-                //     color: Colors.white,
-                //     shape: RoundedRectangleBorder(
-                //         side: BorderSide(color: Colors.grey, width: 1.5),
-                //         borderRadius: BorderRadius.all(Radius.circular(27.0))),
-                //     elevation: 3.0,
-                //     child: Padding(
-                //       padding: EdgeInsets.all(14.0),
-                //       child: Row(
-                //         children: <Widget>[
-                //           Expanded(
-                //             flex: 12,
-                //             child: Text('Sign in with Google',
-                //                 style: TextStyle(
-                //                     fontSize: 17.0,
-                //                     color: Colors.grey[600],
-                //                     fontWeight: FontWeight.w600)),
-                //           ),
-                //           Expanded(
-                //             flex: 1,
-                //             child: Image.asset(
-                //               'assets/images/google_icon.png',
-                //             ),
-                //           )
-                //         ],
-                //       ),
-                //     ),
-                //     onPressed: () {
-                //       Navigator.pushNamed(context, '/entrepreneur_home');
-                //     },
-                //   ),
-                // ),
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  entrepreneurLoginFunction() async {
+    _passwordFocusNode.unfocus();
+    _usernameFocusNode.unfocus();
+    setState(() {
+      isLoading = true;
+    });
+    bool correctLogin = await EntrepreneurLoginAPI().loginUser(
+        username: _usernameController.value.text,
+        password: _passwordController.value.text);
+    print(correctLogin);
+    if (correctLogin) {
+      setState(() {
+        isLoading = false;
+      });
+      Navigator.of(context).pushNamedAndRemoveUntil(
+          '/entrepreneur_platform', (Route<dynamic> route) => false);
+    } else {
+      setState(() {
+        isLoading = false;
+      });
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text("Invalid credentials",
+              style: TextStyle(fontWeight: FontWeight.bold)),
+          actions: <Widget>[
+            FlatButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Text("Retry", style: TextStyle(fontSize: 15)),
+                ))
+          ],
+          content: Container(
+              height: 100,
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text("Please re-enter a valid username and password."),
+              )),
+          shape: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+        ),
+      );
+    }
   }
 }

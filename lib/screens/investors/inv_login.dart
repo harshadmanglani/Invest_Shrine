@@ -1,5 +1,5 @@
 import 'package:MobileApp/backend/investors/inv_login.dart';
-import 'package:MobileApp/screens/investors/new_user.dart';
+import 'package:MobileApp/screens/investors/inv_reg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../../theme/colors.dart';
@@ -117,7 +117,8 @@ class _InvestorLoginState extends State<InvestorLogin> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => NewUserForm()));
+                                  builder: (context) =>
+                                      InvestorRegistrationForm()));
                         }),
                   ),
                   Expanded(flex: 2, child: SizedBox()),
@@ -136,7 +137,7 @@ class _InvestorLoginState extends State<InvestorLogin> {
                       right: loginMargin, top: 0.0, left: loginMargin),
                   child: RaisedButton(
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                        borderRadius: BorderRadius.all(Radius.circular(18.0))),
                     elevation: 3.0,
                     child: Padding(
                       padding: EdgeInsets.all(14.0),
@@ -176,7 +177,7 @@ class _InvestorLoginState extends State<InvestorLogin> {
                           isLoading = false;
                         });
                         Navigator.of(context).pushNamedAndRemoveUntil(
-                            '/investor_home_page',
+                            '/investor_platform',
                             (Route<dynamic> route) => false);
                       } else {
                         setState(() {
@@ -240,7 +241,7 @@ class _InvestorLoginState extends State<InvestorLogin> {
         isLoading = false;
       });
       Navigator.of(context).pushNamedAndRemoveUntil(
-          '/investor_home_page', (Route<dynamic> route) => false);
+          '/investor_platform', (Route<dynamic> route) => false);
     } else {
       setState(() {
         isLoading = false;

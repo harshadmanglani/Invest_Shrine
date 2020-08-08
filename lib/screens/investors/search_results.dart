@@ -20,6 +20,8 @@ class _SearchResultsState extends State<SearchResults>
   Future entrepreneurSearchResults;
   TabController tabController;
   String finalQuery;
+  String locationQuery;
+  String industryQuery;
   var tabHeaderStyle = TextStyle(fontSize: 15);
 
   @override
@@ -54,8 +56,6 @@ class _SearchResultsState extends State<SearchResults>
 
   @override
   Widget build(BuildContext context) {
-    print(widget.industryQuery);
-    print(widget.locationQuery);
     return widget.searchQuery != ''
         ? Column(
             children: <Widget>[
@@ -69,17 +69,19 @@ class _SearchResultsState extends State<SearchResults>
   }
 
   ventureSearchWidget() {
-    finalQuery = '(ventureName: "${widget.searchQuery}")';
-    // widget.industryQuery != ''
-    //     ? finalQuery = finalQuery + ', industry: "${widget.industryQuery}"'
-    //     : () {};
-    // finalQuery = finalQuery + ')';
-    // print(finalQuery);
-    // print("industry: ${widget.industryQuery}");
+    finalQuery = '(ventureName: "${widget.searchQuery}"';
+    industryQuery = widget.industryQuery != ''
+        ? ', industry: "${widget.industryQuery}"'
+        : '';
+    locationQuery = widget.locationQuery != ''
+        ? ', location: "${widget.locationQuery}"'
+        : '';
+    finalQuery = finalQuery + industryQuery + ')';
+    print(finalQuery);
     ventureSearchResults = VenturePortfolioListAPI()
         .getAllVenturePortfolios(searchQuery: finalQuery);
     return Padding(
-      padding: const EdgeInsets.only(top: 20.0),
+      padding: const EdgeInsets.only(top: 15.0),
       child: FutureBuilder(
         future: ventureSearchResults,
         builder: (context, snapshot) {

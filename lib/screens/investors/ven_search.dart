@@ -11,7 +11,7 @@ class _VentureSearchState extends State<VentureSearch> {
   TextEditingController _textEditingController;
   FocusNode _searchNode;
   bool showSearchResults = false;
-  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
+  bool isFilterApplied = false;
 
   @override
   void initState() {
@@ -112,14 +112,29 @@ class _VentureSearchState extends State<VentureSearch> {
               ),
               showSearchResults
                   ? Expanded(
-                      child: IconButton(
-                          icon: Icon(Icons.filter_list,
-                              color: navbarBackgroundColor),
-                          onPressed: () {
-                            showDialog(context: context, child: filterWidget());
-                          }),
+                      child: InkWell(
+                        onTap: () {
+                          showDialog(context: context, child: filterWidget());
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: isFilterApplied
+                                  ? navbarBackgroundColor
+                                  : Colors.white,
+                              borderRadius: BorderRadius.circular(9)),
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                            child: Icon(Icons.filter_list,
+                                color: isFilterApplied
+                                    ? Colors.white
+                                    : navbarBackgroundColor),
+                          ),
+                        ),
+                      ),
                       flex: 1)
-                  : Container(height: 0, width: 0)
+                  : Container(height: 0, width: 0),
+              SizedBox(width: 10)
             ],
           ),
         ),
@@ -140,19 +155,18 @@ class _VentureSearchState extends State<VentureSearch> {
     return AlertDialog(
         shape: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
         title: Text("Filters"),
-        content: StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState) {
-          return Container(
-            height: 215,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      flex: 1,
-                      child: DropdownButton(
+        content: Container(
+          height: 215,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    flex: 1,
+                    child: StatefulBuilder(
+                      builder: (context, setState) => DropdownButton(
                         hint: Text('Location'), // Not necessary for Option 1
                         value: _selectedLocation,
 
@@ -160,7 +174,7 @@ class _VentureSearchState extends State<VentureSearch> {
                         onChanged: (newValue) {
                           setState(() {
                             _selectedLocation = newValue;
-                            print(_selectedLocation);
+                            // print(_selectedLocation);
                           });
                         },
                         items: _locations.map((location) {
@@ -171,14 +185,16 @@ class _VentureSearchState extends State<VentureSearch> {
                         }).toList(),
                       ),
                     ),
-                  ],
-                ),
-                SizedBox(height: 10),
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      flex: 1,
-                      child: DropdownButton<dynamic>(
+                  ),
+                ],
+              ),
+              SizedBox(height: 10),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    flex: 1,
+                    child: StatefulBuilder(
+                      builder: (context, setState) => DropdownButton<dynamic>(
                         hint: Text('Industry'), // Not necessary for Option 1
                         value: _selectedIndustry,
                         isExpanded: true,
@@ -200,53 +216,56 @@ class _VentureSearchState extends State<VentureSearch> {
                         }).toList(),
                       ),
                     ),
-                  ],
-                ),
-                SizedBox(height: 60),
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      flex: 1,
-                      child: RaisedButton(
-                        shape: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide(color: Colors.transparent)),
-                        onPressed: () {
+                  ),
+                ],
+              ),
+              SizedBox(height: 60),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    flex: 1,
+                    child: RaisedButton(
+                      shape: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: BorderSide(color: Colors.transparent)),
+                      onPressed: () {
+                        setState(() {
+                          showSearchResults = true;
                           _selectedIndustryId = null;
                           _selectedLocation = null;
                           _selectedIndustry = null;
-                          setState(() {
-                            showSearchResults = true;
-                          });
-                          Navigator.pop(context);
-                        },
-                        child: Text("Clear",
-                            style: TextStyle(color: Colors.white)),
-                      ),
+                          isFilterApplied = false;
+                        });
+                        Navigator.pop(context);
+                      },
+                      child:
+                          Text("Clear", style: TextStyle(color: Colors.white)),
                     ),
-                    Expanded(flex: 1, child: SizedBox()),
-                    Expanded(
-                      flex: 1,
-                      child: RaisedButton(
-                        shape: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide(color: Colors.transparent)),
-                        onPressed: () {
-                          setState(() {
-                            showSearchResults = true;
-                            _selectedLocation = _selectedLocation;
-                            _selectedIndustryId = _selectedIndustryId;
-                          });
-                        },
-                        child: Text("Apply",
-                            style: TextStyle(color: Colors.white)),
-                      ),
-                    )
-                  ],
-                )
-              ],
-            ),
-          );
-        }));
+                  ),
+                  Expanded(flex: 1, child: SizedBox()),
+                  Expanded(
+                    flex: 1,
+                    child: RaisedButton(
+                      shape: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: BorderSide(color: Colors.transparent)),
+                      onPressed: () {
+                        setState(() {
+                          showSearchResults = true;
+                          _selectedLocation = _selectedLocation;
+                          _selectedIndustryId = _selectedIndustryId;
+                          isFilterApplied = true;
+                        });
+                        Navigator.pop(context);
+                      },
+                      child:
+                          Text("Apply", style: TextStyle(color: Colors.white)),
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
+        ));
   }
 }

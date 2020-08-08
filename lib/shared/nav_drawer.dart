@@ -1,5 +1,6 @@
 import 'package:MobileApp/backend/api_provider.dart';
 import 'package:MobileApp/screens/entrepreneurs/inv_portfolio_page.dart';
+import 'package:MobileApp/shared/isafe_page.dart';
 import 'package:MobileApp/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -70,7 +71,8 @@ class _NavDrawerState extends State<NavDrawer> {
           ),
           ListTile(
               onTap: () {
-                Navigator.pushNamed(context, '/isafe_page');
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ISAFEPage()));
               },
               title: Row(
                 children: <Widget>[
@@ -87,14 +89,14 @@ class _NavDrawerState extends State<NavDrawer> {
                 setState(() {
                   isLoading = true;
                 });
-                await Future.delayed(Duration(seconds: 1));
+                await Future.delayed(Duration(milliseconds: 50));
                 setState(() {
                   isLoading = false;
                 });
 
                 Navigator.pushNamedAndRemoveUntil(
                     context, '/split_route', (route) => false);
-                await Future.delayed(Duration(milliseconds: 10));
+                await Future.delayed(Duration(milliseconds: 20));
                 user.logout();
               },
               title: isLoading

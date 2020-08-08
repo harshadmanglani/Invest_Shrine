@@ -1,7 +1,7 @@
 import 'package:MobileApp/backend/entrepreneurs/portfolio_list.dart';
 import 'package:MobileApp/models/entrepreneurs/venture_model.dart';
 import 'package:MobileApp/screens/investors/ven_portfolio_page.dart';
-import 'package:MobileApp/shared/nav_drawer.dart';
+import '../../backend/industry_images.dart';
 import 'package:MobileApp/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -96,38 +96,6 @@ class IndustryVentures extends StatefulWidget {
 }
 
 class _IndustryVenturesState extends State<IndustryVentures> {
-  List<dynamic> industryImages = [
-    {
-      "industry": "Healthcare",
-      "image": "assets/images/healthcare.png",
-      "id": "SW5kdXN0cnlNb2RlbDo0"
-    },
-    {
-      "industry": "Tech",
-      "image": "assets/images/tech.png",
-      "id": "SW5kdXN0cnlNb2RlbDox"
-    },
-    {
-      "industry": "Travel",
-      "image": "assets/images/travel.png",
-      "id": "SW5kdXN0cnlNb2RlbDo1"
-    },
-    {
-      "industry": "Fintech",
-      "image": "assets/images/fintech.png",
-      "id": "SW5kdXN0cnlNb2RlbDoy"
-    },
-    {
-      "industry": "E-Commerce",
-      "image": "assets/images/ecommerce.png",
-      "id": "SW5kdXN0cnlNb2RlbDo2"
-    },
-    {
-      "industry": "Food",
-      "image": "assets/images/food.jpg",
-      "id": "SW5kdXN0cnlNb2RlbDo5"
-    }
-  ];
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
@@ -805,8 +773,6 @@ class SMECard extends StatelessWidget {
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
     return Container(
-      // decoration: BoxDecoration(
-      //     border: Border(bottom: BorderSide(color: Colors.grey[300]))),
       child: InkWell(
         onTap: () {
           Navigator.push(
@@ -839,35 +805,6 @@ class SMECard extends StatelessWidget {
                               color: Colors.grey[300]),
                     ),
                   ),
-                  // Positioned(
-                  //   top: 70,
-                  //   left: -6,
-                  //   child: Container(
-                  //     height: 47.5,
-                  //     width: 47.5,
-                  //     decoration: venturePortfolioModel != null
-                  //         ? BoxDecoration(
-                  //             borderRadius: BorderRadius.circular(15),
-                  //             border: Border.all(color: Colors.white, width: 3),
-                  //             image: DecorationImage(
-                  //                 fit: BoxFit.cover,
-                  //                 image: NetworkImage(
-                  //                     venturePortfolioModel.logoImage)))
-                  //         : null,
-                  //   ),
-                  // ),
-                  // Positioned(
-                  //     bottom: -4,
-                  //     right: 4,
-                  //     child: Container(
-                  //         decoration: BoxDecoration(
-                  //             color: Colors.grey[600],
-                  //             borderRadius: BorderRadius.circular(30)),
-                  //         child: Padding(
-                  //           padding: const EdgeInsets.all(4.0),
-                  //           child: Icon(Icons.restore_from_trash,
-                  //               color: Colors.white, size: 20),
-                  //         )))
                 ],
               ),
             ),
