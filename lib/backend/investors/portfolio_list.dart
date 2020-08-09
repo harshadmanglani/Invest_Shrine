@@ -17,6 +17,7 @@ class InvestorPortfolioListAPI {
           background,
           location,
           numInvestments
+          portfolioId
           interests{
             edges{
               node{
@@ -46,7 +47,7 @@ class InvestorPortfolioListAPI {
       investorPortfolioModelList.add(InvestorPortfolioModel(
         firstName: portfolio["firstName"],
         id: portfolio["id"],
-        uid: "1",
+        uid: portfolio["portfolioId"],
         displayImage: portfolio["displayImage"],
         location: portfolio["location"],
         numInvestments: portfolio["numInvestments"],

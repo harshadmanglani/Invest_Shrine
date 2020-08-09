@@ -5,6 +5,23 @@ import '../../backend/industry_images.dart';
 import 'package:MobileApp/theme/colors.dart';
 import 'package:flutter/material.dart';
 
+retrieveIcon(String industry) {
+  switch (industry) {
+    case "Tech":
+      return Image.asset('assets/images/tech_icon.jpg', height: 15, width: 15);
+
+    case "Healthcare":
+      return Icon(Icons.local_hospital, color: Colors.red, size: 15);
+
+    case "Fintech":
+      return Image.asset('assets/images/blockchain_icon.png',
+          height: 15, width: 15);
+
+    case "Food":
+      return Image.asset('assets/images/food.png', height: 15, width: 15);
+  }
+}
+
 class InvestorHomePage extends StatefulWidget {
   @override
   _InvestorHomePageState createState() => _InvestorHomePageState();
@@ -385,8 +402,8 @@ class ExploreVentureCard extends StatelessWidget {
                             SizedBox(width: 4),
                             venturePortfolioModel != null
                                 ? Flexible(
-                                    child: Icon(Icons.local_hospital,
-                                        size: 15, color: Colors.red),
+                                    child: retrieveIcon(
+                                        venturePortfolioModel.industry[0]),
                                   )
                                 : Container(
                                     height: 0,
@@ -499,14 +516,16 @@ class StartupCard extends StatelessWidget {
           padding:
               const EdgeInsets.only(left: 16.0, right: 8.0, top: 4, bottom: 4),
           child: InkWell(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => VenturePortfolioPage(
-                            venturePortfolioModel: venturePortfolioModel,
-                          )));
-            },
+            onTap: venturePortfolioModel != null
+                ? () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => VenturePortfolioPage(
+                                  venturePortfolioModel: venturePortfolioModel,
+                                )));
+                  }
+                : null,
             child: Row(
               children: <Widget>[
                 Expanded(
@@ -633,7 +652,7 @@ class StartupCard extends StatelessWidget {
                                             child: venturePortfolioModel != null
                                                 ? Text(
                                                     venturePortfolioModel
-                                                        .industry[1],
+                                                        .industry[0],
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                     style: textTheme.bodyText1
@@ -648,10 +667,9 @@ class StartupCard extends StatelessWidget {
                                           SizedBox(width: 4),
                                           venturePortfolioModel != null
                                               ? Flexible(
-                                                  child: Icon(
-                                                      Icons.local_hospital,
-                                                      size: 15,
-                                                      color: Colors.red),
+                                                  child: retrieveIcon(
+                                                      venturePortfolioModel
+                                                          .industry[0]),
                                                 )
                                               : Container(
                                                   height: 0,
@@ -774,14 +792,16 @@ class SMECard extends StatelessWidget {
     var textTheme = Theme.of(context).textTheme;
     return Container(
       child: InkWell(
-        onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => VenturePortfolioPage(
-                    venturePortfolioModel: venturePortfolioModel),
-              ));
-        },
+        onTap: venturePortfolioModel != null
+            ? () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => VenturePortfolioPage(
+                          venturePortfolioModel: venturePortfolioModel),
+                    ));
+              }
+            : null,
         child: Column(
           children: <Widget>[
             Container(
@@ -863,7 +883,7 @@ class SMECard extends StatelessWidget {
                               Flexible(
                                 flex: 2,
                                 child: venturePortfolioModel != null
-                                    ? Text(venturePortfolioModel.industry[1],
+                                    ? Text(venturePortfolioModel.industry[0],
                                         overflow: TextOverflow.ellipsis,
                                         style: textTheme.bodyText1
                                             .copyWith(fontSize: 13))
@@ -872,8 +892,8 @@ class SMECard extends StatelessWidget {
                               SizedBox(width: 2),
                               venturePortfolioModel != null
                                   ? Flexible(
-                                      child: Icon(Icons.local_hospital,
-                                          size: 15, color: Colors.red),
+                                      child: retrieveIcon(
+                                          venturePortfolioModel.industry[0]),
                                     )
                                   : Container(
                                       height: 0,
@@ -919,6 +939,7 @@ class SMECard extends StatelessWidget {
     );
   }
 }
+
 /* NOTE: Might need later, don't delete
 class SeasonedEntrepreneurs extends StatefulWidget {
   @override

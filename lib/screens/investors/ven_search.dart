@@ -1,3 +1,4 @@
+import 'package:MobileApp/screens/investors/ent_portfolio_page.dart';
 import 'package:MobileApp/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:MobileApp/backend/entrepreneurs/portfolio_list.dart';
@@ -108,7 +109,6 @@ class _VentureSearchState extends State<VentureSearch> {
                   locationQuery: _selectedLocation ?? '',
                   industryQuery: _selectedIndustryId ?? '',
                   tabCallback: (value) {
-                    print(value);
                     showIndustryFilter = value;
                   },
                 )
@@ -401,9 +401,22 @@ class EntrepreneurCard extends StatelessWidget {
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
 
-    return Column(
-      children: <Widget>[
-        Row(
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 15.0),
+      child: InkWell(
+        onTap: entrepreneurPortfolioModel != null
+            ? () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (builder) => EntrepreneurPortfolioPage(
+                              entrepreneurPortfolioModel:
+                                  entrepreneurPortfolioModel,
+                              personalPortfolio: false,
+                            )));
+              }
+            : null,
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -432,10 +445,10 @@ class EntrepreneurCard extends StatelessWidget {
                   entrepreneurPortfolioModel != null
                       ? Text(
                           "${entrepreneurPortfolioModel.firstName} ${entrepreneurPortfolioModel.lastName}",
-                          style: textTheme.headline6)
+                          style: textTheme.headline6.copyWith(fontSize: 17))
                       : Text("                              ",
                           style: TextStyle(backgroundColor: Colors.grey[200])),
-                  SizedBox(height: 10),
+                  SizedBox(height: 5),
                   entrepreneurPortfolioModel != null
                       ? Text("Co-Founder @ Apple Computer, USA",
                           overflow: TextOverflow.ellipsis,
@@ -448,9 +461,7 @@ class EntrepreneurCard extends StatelessWidget {
             )
           ],
         ),
-        SizedBox(height: 8),
-        Divider(color: Colors.grey[300]),
-      ],
+      ),
     );
   }
 }

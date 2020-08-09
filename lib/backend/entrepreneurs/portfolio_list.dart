@@ -14,7 +14,9 @@ class EntrepreneurPortfolioListAPI {
         node{
           id,
           firstName,
+          location,
           linkedinProfile,
+          portfolioId,
           displayImage,
           lastName,
           execSummary,
@@ -38,7 +40,8 @@ class EntrepreneurPortfolioListAPI {
       entrepreneurPortfolioList.add(EntrepreneurPortfolioModel(
         firstName: portfolio["firstName"],
         id: portfolio["id"],
-        uid: "1", //portfolio["uid"],
+        uid: portfolio["portfolioId"],
+        location: portfolio["location"],
         displayImage: portfolio["displayImage"],
         lastName: portfolio["lastName"],
         execSummary: portfolio["execSummary"],
@@ -67,6 +70,7 @@ class VenturePortfolioListAPI {
            logoImage,
            location,
            website,
+           ventureId,
            investment,
           vLinkedinProfile,
            industry{
@@ -102,7 +106,7 @@ class VenturePortfolioListAPI {
           startupSummary: portfolio["startupSummary"],
           mainImage: portfolio["mainImage"],
           logoImage: portfolio["logoImage"],
-          uid: "1", //portfolio["uid"],
+          uid: portfolio["ventureId"],
           industry: List.generate(
               portfolio["industry"]["edges"].length,
               (index) =>

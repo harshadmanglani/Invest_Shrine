@@ -1,5 +1,7 @@
 import 'package:MobileApp/backend/entrepreneurs/portfolio_list.dart';
+import 'package:MobileApp/models/entrepreneurs/entrepreneur_model.dart';
 import 'package:MobileApp/models/entrepreneurs/venture_model.dart';
+import 'package:MobileApp/screens/investors/ent_portfolio_page.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -243,6 +245,17 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage> {
             style: textTheme.bodyText2.copyWith(color: Colors.grey[800]),
           ),
           SizedBox(height: 30),
+          Text("Headquarters", style: textTheme.headline6),
+          SizedBox(height: 3),
+          Divider(
+            color: Colors.grey[400],
+          ),
+          SizedBox(height: 3),
+          Text(
+            venturePortfolioModel.location,
+            style: textTheme.bodyText2.copyWith(color: Colors.grey[800]),
+          ),
+          SizedBox(height: 30),
         ],
       ),
     );
@@ -274,56 +287,8 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage> {
                     physics: BouncingScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(left: 10.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              height: 110,
-                              width: 110,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: CircleAvatar(
-                                backgroundImage: NetworkImage(
-                                    snapshot.data[index].displayImage),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 150,
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 16.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Text(
-                                        snapshot.data[index].firstName +
-                                            " " +
-                                            snapshot.data[index].lastName,
-                                        textAlign: TextAlign.center,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: textTheme.headline6.copyWith(
-                                            fontSize: 16,
-                                            color: Colors.grey[800])),
-                                    SizedBox(height: 3),
-                                    Text("Ex-CEO, Apple Computer in Cupertino",
-                                        maxLines: 3,
-                                        textAlign: TextAlign.center,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: textTheme.bodyText1.copyWith(
-                                            fontSize: 14,
-                                            color: Colors.grey[700])),
-                                    SizedBox(height: 3),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
+                      return EntrepreneurTeamCard(
+                          entrepreneurPortfolioModel: snapshot.data[index]);
                     },
                     itemCount: snapshot.data.length,
                   );
@@ -333,56 +298,109 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage> {
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(left: 10.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              height: 110,
-                              width: 110,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: CircleAvatar(
-                                backgroundColor: Colors.grey[300],
-                              ),
-                            ),
-                            SizedBox(
-                              width: 150,
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 16.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Text("                           ",
-                                        textAlign: TextAlign.left,
-                                        style: textTheme.headline6.copyWith(
-                                            fontSize: 16,
-                                            backgroundColor: Colors.grey[200])),
-                                    SizedBox(height: 3),
-                                    Text("                         ",
-                                        maxLines: 3,
-                                        textAlign: TextAlign.left,
-                                        style: textTheme.bodyText1.copyWith(
-                                            fontSize: 14,
-                                            backgroundColor: Colors.grey[200])),
-                                    SizedBox(height: 3),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
+                      return EntrepreneurTeamCard(
+                          entrepreneurPortfolioModel: null);
                     },
                     itemCount: 10,
                   );
               }),
         ),
       ],
+    );
+  }
+}
+
+class EntrepreneurTeamCard extends StatelessWidget {
+  final EntrepreneurPortfolioModel entrepreneurPortfolioModel;
+  EntrepreneurTeamCard({this.entrepreneurPortfolioModel});
+  @override
+  Widget build(BuildContext context) {
+    var textTheme = Theme.of(context).textTheme;
+    return Padding(
+      padding: const EdgeInsets.only(left: 10.0),
+      child: InkWell(
+        onTap: entrepreneurPortfolioModel != null
+            ? () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (builder) => EntrepreneurPortfolioPage(
+                              entrepreneurPortfolioModel:
+                                  entrepreneurPortfolioModel,
+                              personalPortfolio: false,
+                            )));
+              }
+            : null,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            entrepreneurPortfolioModel != null
+                ? Container(
+                    height: 110,
+                    width: 110,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: CircleAvatar(
+                      backgroundImage:
+                          NetworkImage(entrepreneurPortfolioModel.displayImage),
+                    ),
+                  )
+                : Container(
+                    height: 110,
+                    width: 110,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: CircleAvatar(
+                      backgroundColor: Colors.grey[300],
+                    ),
+                  ),
+            SizedBox(
+              width: 150,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    entrepreneurPortfolioModel != null
+                        ? Text(
+                            entrepreneurPortfolioModel.firstName +
+                                " " +
+                                entrepreneurPortfolioModel.lastName,
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.ellipsis,
+                            style: textTheme.headline6.copyWith(
+                                fontSize: 16, color: Colors.grey[800]))
+                        : Text("                           ",
+                            textAlign: TextAlign.left,
+                            style: textTheme.headline6.copyWith(
+                                fontSize: 16,
+                                backgroundColor: Colors.grey[200])),
+                    SizedBox(height: 3),
+                    entrepreneurPortfolioModel != null
+                        ? Text("Ex-CEO, Apple Computer in Cupertino",
+                            maxLines: 3,
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.ellipsis,
+                            style: textTheme.bodyText1.copyWith(
+                                fontSize: 14, color: Colors.grey[700]))
+                        : Text("                         ",
+                            maxLines: 3,
+                            textAlign: TextAlign.left,
+                            style: textTheme.bodyText1.copyWith(
+                                fontSize: 14,
+                                backgroundColor: Colors.grey[200])),
+                    SizedBox(height: 3),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

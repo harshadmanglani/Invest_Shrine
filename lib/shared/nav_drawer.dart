@@ -1,5 +1,6 @@
 import 'package:MobileApp/backend/api_provider.dart';
 import 'package:MobileApp/screens/entrepreneurs/inv_portfolio_page.dart';
+import 'package:MobileApp/screens/investors/ent_portfolio_page.dart';
 import 'package:MobileApp/shared/isafe_page.dart';
 import 'package:MobileApp/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +67,12 @@ class _NavDrawerState extends State<NavDrawer> {
                           builder: (context) => InvestorPortfolioPage(
                               investorPortfolioModel:
                                   user.investorPortfolioModel)))
-                  : null;
+                  : Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => EntrepreneurPortfolioPage(
+                              entrepreneurPortfolioModel:
+                                  user.entrepreneurPortfolioModel)));
             },
           ),
           ListTile(

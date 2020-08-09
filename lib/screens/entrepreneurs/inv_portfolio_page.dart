@@ -5,7 +5,9 @@ import '../investors/ven_portfolio_page.dart';
 
 class InvestorPortfolioPage extends StatelessWidget {
   final InvestorPortfolioModel investorPortfolioModel;
-  InvestorPortfolioPage({this.investorPortfolioModel});
+  final bool personalPortfolio;
+  InvestorPortfolioPage(
+      {this.investorPortfolioModel, this.personalPortfolio = true});
 
   launchURL(String url) async {
     if (await canLaunch(url)) {
@@ -21,13 +23,18 @@ class InvestorPortfolioPage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           // shape: appBarShape,
-          title: Text("Portfolio", style: TextStyle(color: Colors.white)),
+          title: personalPortfolio
+              ? Text("Portfolio", style: TextStyle(color: Colors.white))
+              : null,
           centerTitle: true,
           actions: [
-            RawMaterialButton(
-              onPressed: () {},
-              child: Text("EDIT", style: TextStyle(color: Colors.white)),
-            )
+            personalPortfolio
+                ? RawMaterialButton(
+                    onPressed: () {},
+                    child: Text("EDIT", style: TextStyle(color: Colors.white)),
+                  )
+                : IconButton(
+                    icon: Icon(Icons.notifications_active), onPressed: () {})
           ],
         ),
         body: ListView(physics: BouncingScrollPhysics(), children: <Widget>[
