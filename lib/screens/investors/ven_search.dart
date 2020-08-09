@@ -1,6 +1,9 @@
-import 'package:MobileApp/screens/investors/search_results.dart';
 import 'package:MobileApp/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:MobileApp/backend/entrepreneurs/portfolio_list.dart';
+import 'package:MobileApp/models/entrepreneurs/entrepreneur_model.dart';
+import 'package:MobileApp/screens/investors/inv_home_page.dart';
+import '../../backend/industry_images.dart';
 
 class VentureSearch extends StatefulWidget {
   @override
@@ -22,38 +25,7 @@ class _VentureSearchState extends State<VentureSearch> {
   }
 
   List<String> _locations = ['Pune', 'Bangalore', 'Chennai', 'Delhi'];
-  List<dynamic> industryImages = [
-    {
-      "industry": "Healthcare",
-      "image": "assets/images/healthcare.png",
-      "id": "SW5kdXN0cnlNb2RlbDo0"
-    },
-    {
-      "industry": "Tech",
-      "image": "assets/images/tech.png",
-      "id": "SW5kdXN0cnlNb2RlbDox"
-    },
-    {
-      "industry": "Travel",
-      "image": "assets/images/travel.png",
-      "id": "SW5kdXN0cnlNb2RlbDo1"
-    },
-    {
-      "industry": "Fintech",
-      "image": "assets/images/fintech.png",
-      "id": "SW5kdXN0cnlNb2RlbDoy"
-    },
-    {
-      "industry": "E-Commerce",
-      "image": "assets/images/ecommerce.png",
-      "id": "SW5kdXN0cnlNb2RlbDo2"
-    },
-    {
-      "industry": "Food",
-      "image": "assets/images/food.jpg",
-      "id": "SW5kdXN0cnlNb2RlbDo5"
-    }
-  ];
+
   String _selectedLocation, _selectedIndustry, _selectedIndustryId;
 
   @override
@@ -72,26 +44,16 @@ class _VentureSearchState extends State<VentureSearch> {
                   padding:
                       const EdgeInsets.only(left: 15.0, right: 15, top: 10),
                   child: TextField(
-                      enableSuggestions: true,
-
-                      // toolbarOptions: ToolbarOptions(),
                       focusNode: _searchNode,
-                      onTap: () {
-                        setState(() {
-                          showSearchResults = true;
-                        });
-                      },
                       controller: _textEditingController,
-                      onSubmitted: (value) {
-                        _searchNode.unfocus();
-                        // setState(() {
-                        //   showSearchResults = true;
-                        // });
-                      },
                       onChanged: (value) {
-                        setState(() {
-                          showSearchResults = true;
-                        });
+                        value != ''
+                            ? setState(() {
+                                showSearchResults = true;
+                              })
+                            : setState(() {
+                                showSearchResults = false;
+                              });
                       },
                       decoration: InputDecoration(
                           suffixIcon: showSearchResults
@@ -140,7 +102,7 @@ class _VentureSearchState extends State<VentureSearch> {
         ),
         Expanded(
           child: showSearchResults
-              ? new SearchResults(
+              ? new VentureSearchResults(
                   searchQuery: _textEditingController.value.text,
                   locationQuery: _selectedLocation ?? '',
                   industryQuery: _selectedIndustryId ?? '',
@@ -252,8 +214,6 @@ class _VentureSearchState extends State<VentureSearch> {
                       onPressed: () {
                         setState(() {
                           showSearchResults = true;
-                          _selectedLocation = _selectedLocation;
-                          _selectedIndustryId = _selectedIndustryId;
                           isFilterApplied = true;
                         });
                         Navigator.pop(context);
@@ -267,5 +227,208 @@ class _VentureSearchState extends State<VentureSearch> {
             ],
           ),
         ));
+  }
+}
+
+class VentureSearchResults extends StatefulWidget {
+  final String searchQuery;
+  final String locationQuery;
+  final String industryQuery;
+  VentureSearchResults(
+      {this.searchQuery, this.industryQuery, this.locationQuery})
+      : assert(locationQuery != null, industryQuery != null);
+  @override
+  _VentureSearchResultsState createState() => _VentureSearchResultsState();
+}
+
+class _VentureSearchResultsState extends State<VentureSearchResults>
+    with SingleTickerProviderStateMixin {
+  Future ventureSearchResults;
+  Future entrepreneurSearchResults;
+  TabController tabController;
+  String finalQuery;
+  String locationQuery;
+  String industryQuery;
+  var tabHeaderStyle = TextStyle(fontSize: 15);
+
+  @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    tabController = TabController(length: 2, vsync: this);
+  }
+
+  TabBar _getTabBar() {
+    return TabBar(
+      indicatorColor: navbarBackgroundColor,
+      tabs: <Widget>[
+        Tab(child: Text("Startups & SMEs", style: tabHeaderStyle)),
+        Tab(child: Text("Entrepreneurs", style: tabHeaderStyle)),
+      ],
+      controller: tabController,
+    );
+  }
+
+  TabBarView _getTabBarView(List<Widget> tabs) {
+    return TabBarView(
+      children: tabs,
+      controller: tabController,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        SizedBox(height: 60, child: _getTabBar()),
+        Expanded(
+            child: _getTabBarView(
+                [ventureSearchWidget(), entrepreneurSearchWidget()]))
+      ],
+    );
+  }
+
+  ventureSearchWidget() {
+    finalQuery = '(ventureName: "${widget.searchQuery}"';
+    industryQuery = widget.industryQuery != ''
+        ? ', industry: "${widget.industryQuery}"'
+        : '';
+    locationQuery = widget.locationQuery != ''
+        ? ', location: "${widget.locationQuery}"'
+        : '';
+    finalQuery = finalQuery + industryQuery + ')';
+    print(finalQuery);
+    ventureSearchResults = VenturePortfolioListAPI()
+        .getAllVenturePortfolios(searchQuery: finalQuery);
+    return Padding(
+      padding: const EdgeInsets.only(top: 15.0),
+      child: FutureBuilder(
+        future: ventureSearchResults,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.data.length != 0)
+              return ListView.builder(
+                  physics: BouncingScrollPhysics(),
+                  itemCount: snapshot.data.length,
+                  itemBuilder: (context, index) =>
+                      StartupCard(venturePortfolioModel: snapshot.data[index]));
+            else
+              return Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text("No results found."),
+              );
+          } else {
+            return ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: 10,
+                itemBuilder: (context, index) =>
+                    StartupCard(venturePortfolioModel: null));
+          }
+        },
+      ),
+    );
+  }
+
+  entrepreneurSearchWidget() {
+    entrepreneurSearchResults = widget.searchQuery.split(' ').length == 1
+        ? EntrepreneurPortfolioListAPI().getAllEntrepreneurPortfolios(
+            searchQuery: '(firstName: "${widget.searchQuery.split(' ')[0]}")')
+        : EntrepreneurPortfolioListAPI().getAllEntrepreneurPortfolios(
+            searchQuery:
+                '(firstName: "${widget.searchQuery.split(' ')[0]}", lastName: "${widget.searchQuery.split(' ')[1]}")');
+    return Padding(
+      padding: const EdgeInsets.only(top: 20.0),
+      child: FutureBuilder(
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.data.length != 0) {
+                return ListView.builder(
+                    itemCount: snapshot.data.length,
+                    physics: BouncingScrollPhysics(),
+                    itemBuilder: (context, index) => EntrepreneurCard(
+                        entrepreneurPortfolioModel: snapshot.data[index]));
+              } else {
+                return Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text("No results found."),
+                );
+              }
+            } else {
+              return ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: 10,
+                  itemBuilder: (context, index) =>
+                      EntrepreneurCard(entrepreneurPortfolioModel: null));
+            }
+          },
+          future: entrepreneurSearchResults),
+    );
+  }
+}
+
+class EntrepreneurCard extends StatelessWidget {
+  final EntrepreneurPortfolioModel entrepreneurPortfolioModel;
+  EntrepreneurCard({this.entrepreneurPortfolioModel});
+
+  @override
+  Widget build(BuildContext context) {
+    var textTheme = Theme.of(context).textTheme;
+
+    return Column(
+      children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+                flex: 2,
+                child: entrepreneurPortfolioModel != null
+                    ? CircleAvatar(
+                        radius: (45),
+                        backgroundColor: Colors.white,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(65),
+                          child: Image.network(
+                              entrepreneurPortfolioModel.displayImage),
+                        ))
+                    : CircleAvatar(
+                        backgroundColor: Colors.grey[300],
+                        radius: 45,
+                      )),
+            Expanded(
+              flex: 3,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  SizedBox(height: 5),
+                  entrepreneurPortfolioModel != null
+                      ? Text(
+                          "${entrepreneurPortfolioModel.firstName} ${entrepreneurPortfolioModel.lastName}",
+                          style: textTheme.headline6)
+                      : Text("                              ",
+                          style: TextStyle(backgroundColor: Colors.grey[200])),
+                  SizedBox(height: 10),
+                  entrepreneurPortfolioModel != null
+                      ? Text("Co-Founder @ Apple Computer, USA",
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          style: textTheme.bodyText1)
+                      : Text("                         ",
+                          style: TextStyle(backgroundColor: Colors.grey[200]))
+                ],
+              ),
+            )
+          ],
+        ),
+        SizedBox(height: 8),
+        Divider(color: Colors.grey[300]),
+      ],
+    );
   }
 }

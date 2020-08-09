@@ -12,3 +12,6 @@ Entrepreneur side - yet to begin (skeleton initialised)
 
 # 2.0.0+1 - 09/08/2020
 Investor side - registration form complete, final values ready for API
+
+# 2.0.0+2 - 09/08/2020
+Entrepreneur side - home page + search bar (inspired from LinkedIn) complete
