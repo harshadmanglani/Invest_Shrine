@@ -124,7 +124,7 @@ class _InvestorSearchState extends State<InvestorSearch> {
         shape: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
         title: Text("Filters"),
         content: Container(
-          height: 215,
+          height: 170,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,

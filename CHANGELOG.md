@@ -15,3 +15,7 @@ Investor side - registration form complete, final values ready for API
 
 # 2.0.0+2 - 09/08/2020
 Entrepreneur side - home page + search bar (inspired from LinkedIn) complete - not connected to advanced APIs and location filter in development
+
+# 2.0.0+3 - 09/08/2020
+Entrepreneur side - registration form for entrepreneurs done, final values ready for API
+Investor side - search for entrepreneurs + filter - connected & location filter ready for ventures & entrepreneurs

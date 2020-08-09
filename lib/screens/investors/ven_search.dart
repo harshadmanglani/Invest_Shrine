@@ -15,6 +15,7 @@ class _VentureSearchState extends State<VentureSearch> {
   FocusNode _searchNode;
   bool showSearchResults = false;
   bool isFilterApplied = false;
+  bool showIndustryFilter = true;
 
   @override
   void initState() {
@@ -106,6 +107,10 @@ class _VentureSearchState extends State<VentureSearch> {
                   searchQuery: _textEditingController.value.text,
                   locationQuery: _selectedLocation ?? '',
                   industryQuery: _selectedIndustryId ?? '',
+                  tabCallback: (value) {
+                    print(value);
+                    showIndustryFilter = value;
+                  },
                 )
               : Container(height: 0, width: 0),
         ),
@@ -118,7 +123,7 @@ class _VentureSearchState extends State<VentureSearch> {
         shape: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
         title: Text("Filters"),
         content: Container(
-          height: 215,
+          height: showIndustryFilter ? 215 : 170,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -151,36 +156,41 @@ class _VentureSearchState extends State<VentureSearch> {
                 ],
               ),
               SizedBox(height: 10),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 1,
-                    child: StatefulBuilder(
-                      builder: (context, setState) => DropdownButton<dynamic>(
-                        hint: Text('Industry'), // Not necessary for Option 1
-                        value: _selectedIndustry,
-                        isExpanded: true,
-                        onChanged: (industry) {
-                          setState(() {
-                            _selectedIndustry = industry;
-                            // print(_selectedIndustry);
-                          });
-                          for (var i = 0; i < industryImages.length; i++)
-                            if (industryImages[i]["industry"] == industry)
-                              _selectedIndustryId = industryImages[i]["id"];
-                        },
-                        items: industryImages
-                            .map<DropdownMenuItem<dynamic>>((industry) {
-                          return DropdownMenuItem<dynamic>(
-                            child: Text(industry["industry"]),
-                            value: industry["industry"],
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              showIndustryFilter
+                  ? Row(
+                      children: <Widget>[
+                        Expanded(
+                          flex: 1,
+                          child: StatefulBuilder(
+                            builder: (context, setState) =>
+                                DropdownButton<dynamic>(
+                              hint: Text(
+                                  'Industry'), // Not necessary for Option 1
+                              value: _selectedIndustry,
+                              isExpanded: true,
+                              onChanged: (industry) {
+                                setState(() {
+                                  _selectedIndustry = industry;
+                                  // print(_selectedIndustry);
+                                });
+                                for (var i = 0; i < industryImages.length; i++)
+                                  if (industryImages[i]["industry"] == industry)
+                                    _selectedIndustryId =
+                                        industryImages[i]["id"];
+                              },
+                              items: industryImages
+                                  .map<DropdownMenuItem<dynamic>>((industry) {
+                                return DropdownMenuItem<dynamic>(
+                                  child: Text(industry["industry"]),
+                                  value: industry["industry"],
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  : Container(height: 0, width: 0),
               SizedBox(height: 60),
               Row(
                 children: <Widget>[
@@ -234,8 +244,12 @@ class VentureSearchResults extends StatefulWidget {
   final String searchQuery;
   final String locationQuery;
   final String industryQuery;
+  final Function tabCallback;
   VentureSearchResults(
-      {this.searchQuery, this.industryQuery, this.locationQuery})
+      {this.searchQuery,
+      this.industryQuery,
+      this.locationQuery,
+      this.tabCallback})
       : assert(locationQuery != null, industryQuery != null);
   @override
   _VentureSearchResultsState createState() => _VentureSearchResultsState();
@@ -261,6 +275,12 @@ class _VentureSearchResultsState extends State<VentureSearchResults>
   void initState() {
     super.initState();
     tabController = TabController(length: 2, vsync: this);
+    tabController.addListener(() {
+      if (tabController.index == 0)
+        widget.tabCallback(true);
+      else
+        widget.tabCallback(false);
+    });
   }
 
   TabBar _getTabBar() {
@@ -302,7 +322,6 @@ class _VentureSearchResultsState extends State<VentureSearchResults>
         ? ', location: "${widget.locationQuery}"'
         : '';
     finalQuery = finalQuery + industryQuery + ')';
-    print(finalQuery);
     ventureSearchResults = VenturePortfolioListAPI()
         .getAllVenturePortfolios(searchQuery: finalQuery);
     return Padding(
@@ -335,12 +354,15 @@ class _VentureSearchResultsState extends State<VentureSearchResults>
   }
 
   entrepreneurSearchWidget() {
-    entrepreneurSearchResults = widget.searchQuery.split(' ').length == 1
-        ? EntrepreneurPortfolioListAPI().getAllEntrepreneurPortfolios(
-            searchQuery: '(firstName: "${widget.searchQuery.split(' ')[0]}")')
-        : EntrepreneurPortfolioListAPI().getAllEntrepreneurPortfolios(
-            searchQuery:
-                '(firstName: "${widget.searchQuery.split(' ')[0]}", lastName: "${widget.searchQuery.split(' ')[1]}")');
+    finalQuery = widget.searchQuery.split(' ').length == 1
+        ? '(firstName: "${widget.searchQuery.split(' ')[0]}"'
+        : '(firstName: "${widget.searchQuery.split(' ')[0]}", lastName: "${widget.searchQuery.split(' ')[1]}"';
+    locationQuery = widget.locationQuery != ''
+        ? ', location: "${widget.locationQuery}")'
+        : ')';
+    finalQuery = finalQuery + locationQuery;
+    entrepreneurSearchResults = EntrepreneurPortfolioListAPI()
+        .getAllEntrepreneurPortfolios(searchQuery: finalQuery);
     return Padding(
       padding: const EdgeInsets.only(top: 20.0),
       child: FutureBuilder(

@@ -165,53 +165,6 @@ class _InvestorLoginState extends State<InvestorLogin> {
                         ],
                       ),
                     ),
-                    onLongPress: () async {
-                      setState(() {
-                        isLoading = true;
-                      });
-                      bool correctLogin = await InvestorLoginAPI()
-                          .loginUser(username: "temp", password: "root1234");
-                      print(correctLogin);
-                      if (correctLogin) {
-                        setState(() {
-                          isLoading = false;
-                        });
-                        Navigator.of(context).pushNamedAndRemoveUntil(
-                            '/investor_platform',
-                            (Route<dynamic> route) => false);
-                      } else {
-                        setState(() {
-                          isLoading = false;
-                        });
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            title: Text("Invalid credentials",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                            actions: <Widget>[
-                              FlatButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8),
-                                    child: Text("Retry",
-                                        style: TextStyle(fontSize: 15)),
-                                  ))
-                            ],
-                            content: Container(
-                                height: 100,
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                      "Please re-enter a valid username and password."),
-                                )),
-                            shape: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                          ),
-                        );
-                      }
-                    },
                     onPressed: () {
                       investorLoginFunction();
                     },
@@ -253,29 +206,16 @@ class _InvestorLoginState extends State<InvestorLogin> {
               textAlign: TextAlign.left,
               style: TextStyle(fontWeight: FontWeight.bold)),
           actions: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                RawMaterialButton(
-                  constraints: BoxConstraints(),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "Try Again",
-                        style: TextStyle(fontSize: 15),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(width: 20)
-              ],
-            )
+            FlatButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Text("Retry",
+                      style: TextStyle(
+                          fontSize: 15, color: navbarBackgroundColor)),
+                ))
           ],
           content: Container(
               height: 40,

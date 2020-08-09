@@ -1,20 +1,20 @@
-import 'package:MobileApp/backend/industry_images.dart';
-import 'package:MobileApp/models/investors/inv_user.dart';
-import 'package:MobileApp/theme/colors.dart';
+import 'package:MobileApp/models/entrepreneurs/ent_user.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'inv_login.dart';
+import 'ent_login.dart';
 import 'package:validators/validators.dart';
 import 'dart:io';
+import 'package:image_picker/image_picker.dart';
+import 'package:MobileApp/theme/colors.dart';
 
-class InvestorRegistrationForm extends StatefulWidget {
+class EntrepreneurRegistrationForm extends StatefulWidget {
   @override
-  _InvestorRegistrationFormState createState() =>
-      _InvestorRegistrationFormState();
+  _EntrepreneurRegistrationFormState createState() =>
+      _EntrepreneurRegistrationFormState();
 }
 
-class _InvestorRegistrationFormState extends State<InvestorRegistrationForm> {
-  InvestorUserModel investorUserModel;
+class _EntrepreneurRegistrationFormState
+    extends State<EntrepreneurRegistrationForm> {
+  EntrepreneurUserModel entrepreneurUserModel;
 
   File _image;
   final picker = ImagePicker();
@@ -27,65 +27,21 @@ class _InvestorRegistrationFormState extends State<InvestorRegistrationForm> {
     });
   }
 
-  List<String> _locations = ['Pune', 'Bangalore', 'Chennai', 'Delhi'];
-  int radioButton;
+  String _selectedLocation;
 
-  FocusNode _emailNode,
+  List<String> _locations = ['Pune', 'Bangalore', 'Chennai', 'Delhi'];
+  FocusNode _usernameNode,
+      _emailNode,
       _passwordNode,
-      _investmentNode,
-      _numInvestmentsNode,
-      _currentOccupationNode,
       _firstNameNode,
       _lastNameNode,
-      _backgroundNode,
+      _execSummaryNode,
       _linkedinNode,
       _twitterNode,
-      _facebookNode,
-      _websiteNode;
+      _facebookNode;
+  int form = 1;
   final _firstFormKey = GlobalKey<FormState>();
   final _secondFormKey = GlobalKey<FormState>();
-  final _thirdFormKey = GlobalKey<FormState>();
-
-  int form = 1;
-
-  Map<String, bool> selectedIndustries;
-
-  @override
-  void initState() {
-    super.initState();
-    investorUserModel = InvestorUserModel();
-    _emailNode = FocusNode();
-    _passwordNode = FocusNode();
-    _currentOccupationNode = FocusNode();
-    _firstNameNode = FocusNode();
-    _lastNameNode = FocusNode();
-    _investmentNode = FocusNode();
-    _numInvestmentsNode = FocusNode();
-    _backgroundNode = FocusNode();
-    _linkedinNode = FocusNode();
-    _twitterNode = FocusNode();
-    _facebookNode = FocusNode();
-    _websiteNode = FocusNode();
-    selectedIndustries = Map();
-    for (var i = 0; i < industryImages.length; i++) {
-      selectedIndustries[industryImages[i]["id"]] = false;
-    }
-  }
-
-  unfocusAllNodes() {
-    _emailNode.unfocus();
-    _passwordNode.unfocus();
-    _currentOccupationNode.unfocus();
-    _firstNameNode.unfocus();
-    _lastNameNode.unfocus();
-    _investmentNode.unfocus();
-    _numInvestmentsNode.unfocus();
-    _backgroundNode.unfocus();
-    _linkedinNode.unfocus();
-    _twitterNode.unfocus();
-    _websiteNode.unfocus();
-    _facebookNode.unfocus();
-  }
 
   incrementForm() {
     switch (form) {
@@ -99,18 +55,8 @@ class _InvestorRegistrationFormState extends State<InvestorRegistrationForm> {
       case 2:
         if (_secondFormKey.currentState.validate())
           setState(() {
-            form = 3;
-          });
-        break;
-
-      case 3:
-        if (_thirdFormKey.currentState.validate()) {
-          unfocusAllNodes();
-          setState(() {
             print("submit form");
-            print(investorUserModel.toString());
           });
-        }
         break;
     }
   }
@@ -122,13 +68,38 @@ class _InvestorRegistrationFormState extends State<InvestorRegistrationForm> {
       });
   }
 
-  String _selectedLocation;
+  unfocusAllNodes() {
+    _usernameNode.unfocus();
+    _emailNode.unfocus();
+    _passwordNode.unfocus();
+    _firstNameNode.unfocus();
+    _lastNameNode.unfocus();
+    _execSummaryNode.unfocus();
+    _linkedinNode.unfocus();
+    _twitterNode.unfocus();
+    _facebookNode.unfocus();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    entrepreneurUserModel = EntrepreneurUserModel();
+    _usernameNode = FocusNode();
+    _emailNode = FocusNode();
+    _passwordNode = FocusNode();
+    _firstNameNode = FocusNode();
+    _lastNameNode = FocusNode();
+    _execSummaryNode = FocusNode();
+    _linkedinNode = FocusNode();
+    _twitterNode = FocusNode();
+    _facebookNode = FocusNode();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text("Sign up as an Investor",
+          title: Text("Sign up as an Entrepreneur",
               style: TextStyle(color: Colors.white))),
       body: GestureDetector(
         onTap: unfocusAllNodes,
@@ -139,7 +110,7 @@ class _InvestorRegistrationFormState extends State<InvestorRegistrationForm> {
             children: <Widget>[
               SizedBox(height: 10.0),
               Center(
-                  child: Image.asset('assets/images/inv.png',
+                  child: Image.asset('assets/images/ent.jpg',
                       height: 100, width: 100)),
               formWidget(),
               Padding(
@@ -154,7 +125,7 @@ class _InvestorRegistrationFormState extends State<InvestorRegistrationForm> {
                     child: Row(
                       children: [
                         Expanded(
-                            child: Text(form != 3 ? "Continue" : "Sign up!",
+                            child: Text(form != 2 ? "Continue" : "Sign up!",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 17,
@@ -184,9 +155,6 @@ class _InvestorRegistrationFormState extends State<InvestorRegistrationForm> {
 
       case 2:
         return secondForm();
-
-      case 3:
-        return thirdForm();
     }
   }
 
@@ -206,12 +174,14 @@ class _InvestorRegistrationFormState extends State<InvestorRegistrationForm> {
                 return null;
               },
               onChanged: (value) {
-                investorUserModel.investorPortfolioModel.firstName = value;
+                entrepreneurUserModel.entrepreneurPortfolioModel.firstName =
+                    value;
               },
               onFieldSubmitted: (value) {
                 _lastNameNode.requestFocus();
               },
-              initialValue: investorUserModel.investorPortfolioModel.firstName,
+              initialValue:
+                  entrepreneurUserModel.entrepreneurPortfolioModel.firstName,
               // controller: _firstName,
               decoration: InputDecoration(
                   isDense: true,
@@ -229,13 +199,15 @@ class _InvestorRegistrationFormState extends State<InvestorRegistrationForm> {
                 return null;
               },
               onChanged: (value) {
-                investorUserModel.investorPortfolioModel.lastName = value;
+                entrepreneurUserModel.entrepreneurPortfolioModel.lastName =
+                    value;
               },
               onFieldSubmitted: (value) {
                 _emailNode.requestFocus();
               },
               // controller: _lastName,
-              initialValue: investorUserModel.investorPortfolioModel.lastName,
+              initialValue:
+                  entrepreneurUserModel.entrepreneurPortfolioModel.lastName,
               decoration: InputDecoration(
                   isDense: true,
                   labelText: 'Last Name',
@@ -256,9 +228,9 @@ class _InvestorRegistrationFormState extends State<InvestorRegistrationForm> {
               },
               // controller: _email,
               onChanged: (value) {
-                investorUserModel.email = value;
+                entrepreneurUserModel.email = value;
               },
-              initialValue: investorUserModel.email,
+              initialValue: entrepreneurUserModel.email,
               decoration: InputDecoration(
                 isDense: true,
                 labelText: 'Email',
@@ -276,13 +248,13 @@ class _InvestorRegistrationFormState extends State<InvestorRegistrationForm> {
                 return null;
               },
               onChanged: (value) {
-                investorUserModel.password = value;
+                entrepreneurUserModel.password = value;
               },
               onFieldSubmitted: (value) {
                 _passwordNode.unfocus();
                 incrementForm();
               },
-              initialValue: investorUserModel.password,
+              initialValue: entrepreneurUserModel.password,
               obscureText: true,
               decoration: InputDecoration(
                 isDense: true,
@@ -301,155 +273,6 @@ class _InvestorRegistrationFormState extends State<InvestorRegistrationForm> {
   secondForm() {
     return Form(
       key: _secondFormKey,
-      child: Padding(
-        padding: EdgeInsets.only(left: loginMargin, right: loginMargin),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            decrementFormButton(),
-            Padding(
-              padding: const EdgeInsets.only(left: 0.0),
-              child: Text("Interests",
-                  style: Theme.of(context).textTheme.headline6),
-            ),
-            for (var industry in industryImages)
-              Row(
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: Checkbox(
-                        value: selectedIndustries[industry["id"]],
-                        activeColor: Colors.green,
-                        onChanged: (bool newValue) {
-                          setState(() {
-                            selectedIndustries[industry["id"]] = newValue;
-                          });
-                        }),
-                  ),
-                  Expanded(child: Text(industry["industry"]), flex: 5)
-                ],
-              ),
-            SizedBox(height: 20.0),
-            TextFormField(
-              validator: (value) {
-                if (value.isEmpty) return "Please enter an amount";
-                if (!isNumeric(value)) {
-                  print("is not numeric");
-                  return "Please enter a numeric value.";
-                }
-                return null;
-              },
-              onFieldSubmitted: (value) {
-                _investmentNode.unfocus();
-              },
-              keyboardType: TextInputType.number,
-              textInputAction: TextInputAction.next,
-              initialValue:
-                  investorUserModel.investorPortfolioModel.investment == null
-                      ? null
-                      : investorUserModel.investorPortfolioModel.investment
-                          .toString(),
-              onChanged: (value) {
-                if (isNumeric(value))
-                  investorUserModel.investorPortfolioModel.investment =
-                      int.parse(value);
-                else
-                  investorUserModel.investorPortfolioModel.investment = 0;
-              },
-              decoration: InputDecoration(
-                  isDense: true,
-                  labelText: 'How much money are you looking to invest?',
-                  labelStyle: TextStyle()),
-              focusNode: _investmentNode,
-            ),
-            SizedBox(height: 20),
-            Text("Have you invested in startups or SMEs before?",
-                style: Theme.of(context).textTheme.headline6),
-            Row(
-              children: [
-                Expanded(
-                    flex: 1,
-                    child: Radio(
-                        groupValue: radioButton,
-                        onChanged: (value) {
-                          setState(() {
-                            radioButton = value;
-                          });
-                        },
-                        value: 0)),
-                Expanded(child: Text("Yes"), flex: 5)
-              ],
-            ),
-            Row(
-              children: [
-                Expanded(
-                    flex: 1,
-                    child: Radio(
-                        groupValue: radioButton,
-                        onChanged: (value) {
-                          setState(() {
-                            radioButton = value;
-                          });
-                        },
-                        value: 1)),
-                Expanded(child: Text("No"), flex: 5)
-              ],
-            ),
-            radioButton == 0
-                ? Padding(
-                    padding: const EdgeInsets.only(top: 20.0),
-                    child: TextFormField(
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.number,
-                      validator: (value) {
-                        if (value.isEmpty) return "Please enter a number";
-                        if (!isNumeric(value)) {
-                          print("is not numeric");
-                          return "Please enter a numeric value.";
-                        }
-                        return null;
-                      },
-                      // controller: _numInvestments,
-                      initialValue: investorUserModel
-                                  .investorPortfolioModel.numInvestments ==
-                              null
-                          ? null
-                          : investorUserModel
-                              .investorPortfolioModel.numInvestments
-                              .toString(),
-                      onChanged: (value) {
-                        if (isNumeric(value))
-                          investorUserModel.investorPortfolioModel
-                              .numInvestments = int.parse(value);
-                        else
-                          investorUserModel
-                              .investorPortfolioModel.numInvestments = 0;
-                      },
-                      onFieldSubmitted: (value) {
-                        _numInvestmentsNode.unfocus();
-                        incrementForm();
-                      },
-                      decoration: InputDecoration(
-                          isDense: true,
-                          labelText: 'How many ventures have you invested in?',
-                          labelStyle: TextStyle()),
-                      focusNode: _numInvestmentsNode,
-                    ),
-                  )
-                : Container(height: 0, width: 0),
-            SizedBox(
-              height: 20,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  thirdForm() {
-    return Form(
-      key: _thirdFormKey,
       child: Padding(
         padding:
             EdgeInsets.only(left: loginMargin, right: loginMargin, bottom: 20),
@@ -518,43 +341,20 @@ class _InvestorRegistrationFormState extends State<InvestorRegistrationForm> {
               }).toList(),
             ),
             SizedBox(height: 20),
-            TextFormField(
-              textInputAction: TextInputAction.go,
-              keyboardType: TextInputType.name,
-              validator: (value) {
-                if (value.isEmpty) return "Please enter your current title";
-                return null;
-              },
-              textCapitalization: TextCapitalization.sentences,
-              // controller: _currentOccupation,
-              initialValue:
-                  investorUserModel.investorPortfolioModel.currentOccupation,
-              onChanged: (value) {
-                investorUserModel.investorPortfolioModel.currentOccupation =
-                    value;
-              },
-              onFieldSubmitted: (value) {
-                _backgroundNode.requestFocus();
-              },
-              decoration: InputDecoration(
-                  isDense: true,
-                  labelText: 'Current Title',
-                  labelStyle: TextStyle()),
-              focusNode: _currentOccupationNode,
-            ),
             SizedBox(height: 20),
             TextFormField(
               textInputAction: TextInputAction.go,
               keyboardType: TextInputType.multiline,
               textCapitalization: TextCapitalization.sentences,
-              focusNode: _backgroundNode,
-              initialValue: investorUserModel.investorPortfolioModel.background,
+              focusNode: _execSummaryNode,
+              initialValue:
+                  entrepreneurUserModel.entrepreneurPortfolioModel.execSummary,
               onChanged: (value) {
-                investorUserModel.investorPortfolioModel.currentOccupation =
+                entrepreneurUserModel.entrepreneurPortfolioModel.execSummary =
                     value;
               },
               onFieldSubmitted: (value) {
-                _websiteNode.requestFocus();
+                _linkedinNode.requestFocus();
               },
               decoration: InputDecoration(
                   isDense: true,
@@ -564,42 +364,19 @@ class _InvestorRegistrationFormState extends State<InvestorRegistrationForm> {
             ),
             SizedBox(height: 20),
             TextFormField(
-              onFieldSubmitted: (value) {
-                _linkedinNode.requestFocus();
-              },
               textInputAction: TextInputAction.go,
-              keyboardType: TextInputType.url,
-              focusNode: _websiteNode,
-              onChanged: (value) {
-                print(
-                    value); //add it to investorUserModel.investorPortfolioModel.website when done
-              },
-              initialValue: 'www.',
-              //     investorUserModel.investorPortfolioModel.linkedinProfile,
-              decoration: InputDecoration(
-                  labelText: "Website",
-                  isDense: true,
-                  prefix: Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
-                    child:
-                        Icon(Icons.launch, size: 20, color: Colors.grey[700]),
-                  )),
-            ),
-            SizedBox(height: 20),
-            TextFormField(
-              textInputAction: TextInputAction.go,
-              focusNode: _linkedinNode,
               onFieldSubmitted: (value) {
                 _twitterNode.requestFocus();
               },
               keyboardType: TextInputType.url,
               onChanged: (value) {
-                investorUserModel.investorPortfolioModel.linkedinProfile =
-                    "https://linkedin.com/in" + value;
+                entrepreneurUserModel.entrepreneurPortfolioModel
+                    .linkedinProfile = "https://linkedin.com/in" + value;
               },
-              initialValue:
-                  investorUserModel.investorPortfolioModel.linkedinProfile ??
-                      '/',
+              focusNode: _linkedinNode,
+              initialValue: entrepreneurUserModel
+                      .entrepreneurPortfolioModel.linkedinProfile ??
+                  '/',
               decoration: InputDecoration(
                   isDense: true,
                   labelText: "LinkedIn",
@@ -612,7 +389,6 @@ class _InvestorRegistrationFormState extends State<InvestorRegistrationForm> {
             SizedBox(height: 20),
             TextFormField(
               textInputAction: TextInputAction.go,
-              focusNode: _twitterNode,
               onFieldSubmitted: (value) {
                 _facebookNode.requestFocus();
               },
@@ -632,6 +408,7 @@ class _InvestorRegistrationFormState extends State<InvestorRegistrationForm> {
                     child: Image.asset('assets/images/twitter.png',
                         height: 20, width: 20),
                   )),
+              focusNode: _twitterNode,
             ),
             SizedBox(height: 20),
             TextFormField(
@@ -639,7 +416,6 @@ class _InvestorRegistrationFormState extends State<InvestorRegistrationForm> {
               onFieldSubmitted: (value) {
                 incrementForm();
               },
-              focusNode: _facebookNode,
               keyboardType: TextInputType.url,
               onChanged: (value) {
                 print(
@@ -656,6 +432,7 @@ class _InvestorRegistrationFormState extends State<InvestorRegistrationForm> {
                     child: Image.asset('assets/images/facebook.png',
                         height: 20, width: 20),
                   )),
+              focusNode: _facebookNode,
             )
           ],
         ),

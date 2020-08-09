@@ -1,4 +1,5 @@
 import 'package:MobileApp/backend/entrepreneurs/ent_login.dart';
+import 'package:MobileApp/screens/entrepreneurs/ent_reg.dart';
 import 'package:flutter/material.dart';
 import '../../theme/colors.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -74,6 +75,10 @@ class _EntrepreneurLoginState extends State<EntrepreneurLogin> {
                               : _unfocusedColor),
                     ),
                     focusNode: _usernameFocusNode,
+                    onSubmitted: (value) {
+                      _usernameFocusNode.unfocus();
+                      _passwordFocusNode.requestFocus();
+                    },
                   ),
                 ),
                 SizedBox(height: 5.0),
@@ -99,13 +104,30 @@ class _EntrepreneurLoginState extends State<EntrepreneurLogin> {
                     },
                   ),
                 ),
-                // SizedBox(height: 10.0),
-                ButtonBar(children: <Widget>[
-                  FlatButton(
-                      padding: EdgeInsets.only(right: loginMargin),
-                      child: Text("Forgot password?",
-                          style: TextStyle(color: navbarBackgroundColor)),
-                      onPressed: () {})
+                Row(children: <Widget>[
+                  Expanded(
+                    flex: 3,
+                    child: FlatButton(
+                        padding: EdgeInsets.only(left: loginMargin),
+                        child: Text("New User?",
+                            style: TextStyle(color: navbarBackgroundColor)),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      EntrepreneurRegistrationForm()));
+                        }),
+                  ),
+                  Expanded(flex: 2, child: SizedBox()),
+                  Expanded(
+                    flex: 4,
+                    child: FlatButton(
+                        padding: EdgeInsets.only(right: loginMargin),
+                        child: Text("Forgot password?",
+                            style: TextStyle(color: navbarBackgroundColor)),
+                        onPressed: () {}),
+                  )
                 ]),
                 SizedBox(height: 40.0),
                 Padding(
@@ -187,7 +209,9 @@ class _EntrepreneurLoginState extends State<EntrepreneurLogin> {
                 },
                 child: Padding(
                   padding: EdgeInsets.all(8),
-                  child: Text("Retry", style: TextStyle(fontSize: 15)),
+                  child: Text("Retry",
+                      style: TextStyle(
+                          fontSize: 15, color: navbarBackgroundColor)),
                 ))
           ],
           content: Container(

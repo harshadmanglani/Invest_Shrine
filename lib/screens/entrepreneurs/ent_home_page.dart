@@ -413,16 +413,7 @@ class AllInvestorCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
-    String interests = '';
 
-    if (investorPortfolioModel != null) {
-      for (var i = 0; i < investorPortfolioModel.interests.length; i++) {
-        if (i != investorPortfolioModel.interests.length - 1)
-          interests += investorPortfolioModel.interests[i] + ', ';
-        else
-          interests += investorPortfolioModel.interests[i];
-      }
-    }
     return Padding(
       padding: const EdgeInsets.only(left: 5.0, right: 5.0),
       child: Column(
