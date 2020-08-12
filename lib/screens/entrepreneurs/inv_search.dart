@@ -12,11 +12,14 @@ class _InvestorSearchState extends State<InvestorSearch> {
   bool showSearchResults = false;
   TextEditingController _textEditingController;
   bool isFilterApplied = false;
+  FocusNode searchNode;
 
   @override
   void initState() {
     super.initState();
+    searchNode = FocusNode();
     _textEditingController = TextEditingController();
+    searchNode.requestFocus();
   }
 
   List<String> _locations = ['Pune', 'Bangalore', 'Chennai', 'Delhi'];
@@ -44,10 +47,11 @@ class _InvestorSearchState extends State<InvestorSearch> {
                       onPressed: () {
                         Navigator.pop(context);
                       })),
-              SizedBox(width: 15),
+              SizedBox(width: 30),
               Expanded(
                 flex: 17,
                 child: TextField(
+                  focusNode: searchNode,
                   onChanged: (value) {
                     value != ''
                         ? setState(() {
@@ -58,6 +62,7 @@ class _InvestorSearchState extends State<InvestorSearch> {
                           });
                   },
                   controller: _textEditingController,
+                  style: TextStyle(fontSize: 17),
                   decoration: InputDecoration(
                       isDense: true,
                       border: InputBorder.none,
@@ -224,7 +229,7 @@ class _InvestorSearchResultsState extends State<InvestorSearchResults> {
         ? '(firstName: "${widget.searchQuery.split(' ')[0]}"'
         : '(firstName: "${widget.searchQuery.split(' ')[0]}", lastName: "${widget.searchQuery.split(' ')[1]}"';
     locationQuery = widget.locationQuery != ''
-        ? ', location: "${widget.locationQuery}"'
+        ? ', location: "${widget.locationQuery}")'
         : ')';
     finalQuery = finalQuery + locationQuery;
 

@@ -99,6 +99,11 @@ class _EntrepreneurRegistrationFormState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          leading: IconButton(
+              icon: Icon(Icons.close),
+              onPressed: () {
+                Navigator.pop(context);
+              }),
           title: Text("Sign up as an Entrepreneur",
               style: TextStyle(color: Colors.white))),
       body: GestureDetector(

@@ -64,6 +64,7 @@ class _EntrepreneurLoginState extends State<EntrepreneurLogin> {
                       EdgeInsets.fromLTRB(loginMargin, 0.0, loginMargin, 10.0),
                   child: TextField(
                     keyboardType: TextInputType.emailAddress,
+                    textInputAction: TextInputAction.next,
                     controller: _usernameController,
                     decoration: InputDecoration(
                       prefixIcon: Icon(Icons.person_outline),
@@ -87,6 +88,7 @@ class _EntrepreneurLoginState extends State<EntrepreneurLogin> {
                       EdgeInsets.fromLTRB(loginMargin, 0.0, loginMargin, 0.0),
                   child: TextField(
                     keyboardType: TextInputType.visiblePassword,
+                    textInputAction: TextInputAction.done,
                     controller: _passwordController,
                     obscureText: true,
                     decoration: InputDecoration(

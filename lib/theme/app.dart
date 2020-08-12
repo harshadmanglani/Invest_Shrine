@@ -10,7 +10,7 @@ IconThemeData _customIconTheme(IconThemeData original) {
 
 var appBarShape = RoundedRectangleBorder(
   borderRadius: BorderRadius.only(
-      bottomLeft: Radius.circular(20.0), bottomRight: Radius.circular(15)),
+      bottomLeft: Radius.circular(20.0), bottomRight: Radius.circular(20)),
 );
 
 OutlineInputBorder textFieldBorder = OutlineInputBorder(

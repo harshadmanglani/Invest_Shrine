@@ -128,6 +128,11 @@ class _InvestorRegistrationFormState extends State<InvestorRegistrationForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          leading: IconButton(
+              icon: Icon(Icons.close),
+              onPressed: () {
+                Navigator.pop(context);
+              }),
           title: Text("Sign up as an Investor",
               style: TextStyle(color: Colors.white))),
       body: GestureDetector(
@@ -550,8 +555,7 @@ class _InvestorRegistrationFormState extends State<InvestorRegistrationForm> {
               focusNode: _backgroundNode,
               initialValue: investorUserModel.investorPortfolioModel.background,
               onChanged: (value) {
-                investorUserModel.investorPortfolioModel.currentOccupation =
-                    value;
+                investorUserModel.investorPortfolioModel.background = value;
               },
               onFieldSubmitted: (value) {
                 _websiteNode.requestFocus();

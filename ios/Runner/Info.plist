@@ -12,8 +12,6 @@
 	<string>6.0</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app is requesting access to your photo library so that you can set your display image</string>
-	<key>NSCameraUsageDescription</key>
-	<string>This app is requesting access to your camera so that you can set your display image</string>
 	<key>CFBundleName</key>
 	<string>MobileApp</string>
 	<key>CFBundlePackageType</key>

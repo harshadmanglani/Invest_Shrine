@@ -20,7 +20,7 @@ class _EntrepreneurHomePageState extends State<EntrepreneurHomePage> {
         Expanded(
           flex: 2,
           child: Padding(
-            padding: const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 3),
+            padding: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 3),
             child: TextField(
               onTap: () {
                 Navigator.push(context,
@@ -29,6 +29,11 @@ class _EntrepreneurHomePageState extends State<EntrepreneurHomePage> {
               readOnly: true,
               decoration: InputDecoration(
                   isDense: true,
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(16.0),
+                      ),
+                      borderSide: BorderSide(color: Colors.grey[400])),
                   hintText: "Search",
                   prefixIcon: Icon(
                     Icons.search,

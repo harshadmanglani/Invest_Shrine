@@ -2,7 +2,7 @@ List<dynamic> industryImages = [
   {
     "industry": "Healthcare",
     "image": "assets/images/healthcare.png",
-    "id": "SW5kdXN0cnlNb2RlbDo0"
+    "id": "SW5kdXN0cnlNb2RlbDoy"
   },
   {
     "industry": "Tech",
@@ -17,16 +17,16 @@ List<dynamic> industryImages = [
   {
     "industry": "Fintech",
     "image": "assets/images/fintech.png",
-    "id": "SW5kdXN0cnlNb2RlbDoy"
+    "id": "SW5kdXN0cnlNb2RlbDoz"
   },
   {
     "industry": "E-Commerce",
     "image": "assets/images/ecommerce.png",
-    "id": "SW5kdXN0cnlNb2RlbDo2"
+    "id": "SW5kdXN0cnlNb2RlbDo3"
   },
   {
     "industry": "Food",
     "image": "assets/images/food.jpg",
-    "id": "SW5kdXN0cnlNb2RlbDo5"
+    "id": "SW5kdXN0cnlNb2RlbDo0"
   }
 ];

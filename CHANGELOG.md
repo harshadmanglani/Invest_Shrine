@@ -23,3 +23,7 @@ Investor side - search for entrepreneurs + filter - connected & location filter 
 ### 2.0.0+4 - 09/08/2020
 Entrepreneur portfolio page - venture search, drawer, founding team - done
 Bugfixes & minor changes in UI
+
+### 2.0.0+5 - 12/08/2020
+Entrepreneur side - View investors you beeped, UXR changes (Deepesh)
+Added edit portfolio for investors and entrepreneurs

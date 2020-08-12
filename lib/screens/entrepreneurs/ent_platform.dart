@@ -1,3 +1,4 @@
+import 'package:MobileApp/screens/entrepreneurs/beeps_page.dart';
 import 'package:MobileApp/screens/entrepreneurs/ent_home_page.dart';
 import 'package:MobileApp/shared/nav_drawer.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +13,7 @@ class _EntrepreneurPlatformState extends State<EntrepreneurPlatform> {
   int _selectedIndex = 0;
   List<Widget> _widgetOptions = <Widget>[
     EntrepreneurHomePage(),
-    Container(),
-    Container(),
+    BeepsPage(),
     Container()
   ];
   void _onItemTapped(int index) {
@@ -22,7 +22,7 @@ class _EntrepreneurPlatformState extends State<EntrepreneurPlatform> {
     });
   }
 
-  List<String> labels = ["Home", "Search", "Beeps", "Saved"];
+  List<String> labels = ["Home", "Beeps", "Saved"];
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
 
   @override
@@ -76,6 +76,7 @@ class _EntrepreneurPlatformState extends State<EntrepreneurPlatform> {
         bottomNavigationBar: BottomNavigationBar(
             currentIndex: _selectedIndex,
             selectedItemColor: navbarBackgroundColor,
+            showUnselectedLabels: false,
             unselectedItemColor: Colors.grey[500],
             onTap: (index) {
               _onItemTapped(index);
@@ -84,11 +85,9 @@ class _EntrepreneurPlatformState extends State<EntrepreneurPlatform> {
               BottomNavigationBarItem(
                   icon: Icon(Icons.home), title: Text("Home")),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.search), title: Text("Search")),
-              BottomNavigationBarItem(
                   icon: Icon(Icons.notifications), title: Text("Beeps")),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.bookmark), title: Text("Saved"))
+                  icon: Icon(Icons.business), title: Text("Saved"))
             ]),
       ),
     );

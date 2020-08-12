@@ -15,6 +15,7 @@ class EntrepreneurPortfolioListAPI {
           id,
           firstName,
           location,
+          
           linkedinProfile,
           portfolioId,
           displayImage,

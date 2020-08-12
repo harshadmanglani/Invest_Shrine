@@ -316,12 +316,12 @@ class _VentureSearchResultsState extends State<VentureSearchResults>
   ventureSearchWidget() {
     finalQuery = '(ventureName: "${widget.searchQuery}"';
     industryQuery = widget.industryQuery != ''
-        ? ', industry: "${widget.industryQuery}"'
+        ? ', industry: ["${widget.industryQuery}"]'
         : '';
     locationQuery = widget.locationQuery != ''
         ? ', location: "${widget.locationQuery}"'
         : '';
-    finalQuery = finalQuery + industryQuery + ')';
+    finalQuery = finalQuery + locationQuery + industryQuery + ')';
     ventureSearchResults = VenturePortfolioListAPI()
         .getAllVenturePortfolios(searchQuery: finalQuery);
     return Padding(
