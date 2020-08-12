@@ -455,7 +455,33 @@ class EntrepreneurCard extends StatelessWidget {
                           maxLines: 2,
                           style: textTheme.bodyText1)
                       : Text("                         ",
-                          style: TextStyle(backgroundColor: Colors.grey[200]))
+                          style: TextStyle(backgroundColor: Colors.grey[200])),
+                  SizedBox(height: 5),
+                  entrepreneurPortfolioModel != null
+                      ? SizedBox(
+                          height: 15,
+                          child: Row(
+                            children: <Widget>[
+                              Flexible(
+                                  flex: 2,
+                                  child: Text(
+                                      entrepreneurPortfolioModel.location,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          color: Colors.grey[700],
+                                          fontSize: 13))),
+                              SizedBox(width: 3),
+                              Flexible(
+                                child: Icon(
+                                  Icons.location_on,
+                                  color: Colors.grey[600],
+                                  size: 14,
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      : Container(height: 0, width: 0),
                 ],
               ),
             )

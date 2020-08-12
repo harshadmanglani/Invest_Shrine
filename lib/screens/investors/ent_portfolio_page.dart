@@ -49,7 +49,7 @@ class EntrepreneurPortfolioPage extends StatelessWidget {
                     SizedBox(width: 13),
                     Expanded(
                         child: SizedBox(
-                      height: 100,
+                      height: 110,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -58,7 +58,7 @@ class EntrepreneurPortfolioPage extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                SizedBox(height: 10),
+                                SizedBox(height: 5),
                                 Expanded(
                                   child: Text(
                                       "${entrepreneurPortfolioModel.firstName} ${entrepreneurPortfolioModel.lastName}",
@@ -66,6 +66,7 @@ class EntrepreneurPortfolioPage extends StatelessWidget {
                                       style: textTheme.headline4),
                                 ),
                                 Expanded(
+                                  flex: 2,
                                   child: Text("CEO @ Apple Computer Inc.",
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 3,
@@ -74,7 +75,32 @@ class EntrepreneurPortfolioPage extends StatelessWidget {
                                           color: Colors.grey[800],
                                           fontWeight: FontWeight.normal)),
                                 ),
-                                SizedBox(height: 5),
+                                // SizedBox(height: 10),
+                                SizedBox(
+                                  height: 18,
+                                  child: Row(
+                                    // mainAxisAlignment: MainAxisAlignment.end,
+                                    children: <Widget>[
+                                      Flexible(
+                                          flex: 2,
+                                          child: Text(
+                                              entrepreneurPortfolioModel
+                                                  .location,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                  color: Colors.grey[700],
+                                                  fontSize: 14))),
+                                      SizedBox(width: 3),
+                                      Flexible(
+                                        child: Icon(
+                                          Icons.location_on,
+                                          color: Colors.grey[600],
+                                          size: 14,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -102,11 +128,11 @@ class EntrepreneurPortfolioPage extends StatelessWidget {
                         : Container(height: 0, width: 0)
                   ],
                 ),
-                SizedBox(height: 15),
+                SizedBox(height: 5),
               ],
             ),
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 5),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,

@@ -27,3 +27,6 @@ Bugfixes & minor changes in UI
 ### 2.0.0+5 - 12/08/2020
 Entrepreneur side - View investors you beeped, UXR changes (Deepesh)
 Added edit portfolio for investors and entrepreneurs
+
+### 2.0.0+6 - 12/08/2020
+Added location attribute to AllInvestorCard, and individual portfolio pages.

@@ -52,39 +52,57 @@ class InvestorPortfolioPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     CircleAvatar(
-                        radius: 50,
+                        radius: 60,
                         backgroundImage:
                             NetworkImage(investorPortfolioModel.displayImage)),
                     SizedBox(width: 20),
                     Expanded(
                         child: SizedBox(
-                      height: 100,
+                      height: 120,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
+                          SizedBox(height: 5),
                           Expanded(
-                            flex: 3,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            child: Text(
+                                "${investorPortfolioModel.firstName} ${investorPortfolioModel.lastName}",
+                                overflow: TextOverflow.clip,
+                                style: textTheme.headline4),
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                                investorPortfolioModel.currentOccupation,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 3,
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.grey[800],
+                                    fontWeight: FontWeight.normal)),
+                          ),
+                          // SizedBox(height: 10),
+                          SizedBox(
+                            height: 18,
+                            child: Row(
+                              // mainAxisAlignment: MainAxisAlignment.end,
+                              // crossAxisAlignment: CrossAxisAlignment.end,
                               children: <Widget>[
-                                SizedBox(height: 10),
-                                Expanded(
-                                  child: Text(
-                                      "${investorPortfolioModel.firstName} ${investorPortfolioModel.lastName}",
-                                      overflow: TextOverflow.clip,
-                                      style: textTheme.headline4),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                      investorPortfolioModel.currentOccupation,
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 3,
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          color: Colors.grey[800],
-                                          fontWeight: FontWeight.normal)),
-                                ),
-                                SizedBox(height: 5),
+                                Flexible(
+                                    flex: 2,
+                                    child: Text(investorPortfolioModel.location,
+                                        overflow: TextOverflow.ellipsis,
+                                        // textAlign: TextAlign.end,
+                                        style: TextStyle(
+                                            color: Colors.grey[700],
+                                            fontSize: 14))),
+                                SizedBox(width: 3),
+                                Flexible(
+                                  child: Icon(
+                                    Icons.location_on,
+                                    color: Colors.grey[600],
+                                    size: 14,
+                                  ),
+                                )
                               ],
                             ),
                           ),
@@ -111,11 +129,11 @@ class InvestorPortfolioPage extends StatelessWidget {
                         : Container(height: 0, width: 0)
                   ],
                 ),
-                SizedBox(height: 15),
+                SizedBox(height: 5),
               ],
             ),
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 5),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -188,7 +206,7 @@ class InvestorPortfolioPage extends StatelessWidget {
         industry += investorPortfolioModel.interests[i];
     }
     return Padding(
-      padding: const EdgeInsets.only(top: 0, left: 13.0, right: 13),
+      padding: const EdgeInsets.only(top: 10, left: 13.0, right: 13),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[

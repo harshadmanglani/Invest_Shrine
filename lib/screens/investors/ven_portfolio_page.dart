@@ -52,13 +52,11 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage> {
         appBar: AppBar(
           actions: <Widget>[
             IconButton(
-                icon: Icon(Icons.bookmark_border, size: 25), onPressed: () {})
+                icon: Icon(Icons.bookmark_border, size: 30), onPressed: () {})
           ],
         ),
         body: SingleChildScrollView(
           child: Column(
-            // mainAxisAlignment: MainAxisAlignment.start,
-            // crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Container(
                 height: 220,
@@ -67,12 +65,6 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage> {
                     Container(
                       height: 180,
                       decoration: BoxDecoration(
-                        // boxShadow: [
-                        //   BoxShadow(
-                        //     color: Colors.black54,
-                        //     offset: Offset(0, 2),
-                        //   ),
-                        // ],
                         borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(25),
                             bottomRight: Radius.circular(25)),
@@ -102,7 +94,7 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage> {
                   ],
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 10),
               introWidget(),
               SizedBox(height: 10),
               Divider(
@@ -134,7 +126,7 @@ class _VenturePortfolioPageState extends State<VenturePortfolioPage> {
             overflow: TextOverflow.clip,
             textAlign: TextAlign.center,
             style: textTheme.bodyText2.copyWith(color: Colors.grey[800])),
-        SizedBox(height: 15),
+        SizedBox(height: 10),
         Center(
           child: Padding(
             padding: const EdgeInsets.only(left: 12.0, right: 12.0),

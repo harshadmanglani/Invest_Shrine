@@ -472,68 +472,110 @@ class AllInvestorCard extends StatelessWidget {
                   // crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     investorPortfolioModel != null
-                        ? Text(
-                            "${investorPortfolioModel.firstName} ${investorPortfolioModel.lastName}",
-                            overflow: TextOverflow.ellipsis,
-                            style: textTheme.headline6.copyWith(fontSize: 17))
+                        ? Expanded(
+                            flex: 1,
+                            child: Text(
+                                "${investorPortfolioModel.firstName} ${investorPortfolioModel.lastName}",
+                                overflow: TextOverflow.ellipsis,
+                                style:
+                                    textTheme.headline6.copyWith(fontSize: 17)),
+                          )
                         : Container(height: 20, width: 0),
-                    SizedBox(height: 4),
+                    SizedBox(height: 7),
                     investorPortfolioModel != null
-                        ? Text(investorPortfolioModel.currentOccupation,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.center,
-                            style: textTheme.bodyText1
-                                .copyWith(color: Colors.grey[800]))
+                        ? Expanded(
+                            flex: 1,
+                            child: Text(
+                                investorPortfolioModel.currentOccupation,
+                                // maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.center,
+                                style: textTheme.bodyText1
+                                    .copyWith(color: Colors.grey[800])),
+                          )
                         : Text('                                   ',
                             style:
                                 TextStyle(backgroundColor: Colors.grey[200])),
-                    SizedBox(height: 6),
+                    // SizedBox(height: 6),
                     investorPortfolioModel != null
-                        ? RichText(
-                            textAlign: TextAlign.left,
-                            text: TextSpan(
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText2
-                                  .copyWith(fontSize: 14),
-                              children: <TextSpan>[
-                                TextSpan(
-                                    text: 'Avg ticket: ',
-                                    style: TextStyle(color: Colors.grey[600])),
-                                TextSpan(
-                                    text:
-                                        '₹ ${priceFormatter(investorPortfolioModel.investment)}',
-                                    style: TextStyle(color: Colors.grey[800])),
-                              ],
+                        ? Expanded(
+                            child: RichText(
+                              textAlign: TextAlign.left,
+                              text: TextSpan(
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText2
+                                    .copyWith(fontSize: 14),
+                                children: <TextSpan>[
+                                  TextSpan(
+                                      text: 'Avg ticket: ',
+                                      style:
+                                          TextStyle(color: Colors.grey[600])),
+                                  TextSpan(
+                                      text:
+                                          '₹ ${priceFormatter(investorPortfolioModel.investment)}',
+                                      style:
+                                          TextStyle(color: Colors.grey[800])),
+                                ],
+                              ),
                             ),
                           )
                         : Text('                         ',
                             style:
                                 TextStyle(backgroundColor: Colors.grey[200])),
-                    SizedBox(height: 4),
+                    // SizedBox(height: 4),
                     investorPortfolioModel != null
-                        ? RichText(
-                            textAlign: TextAlign.left,
-                            text: TextSpan(
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText2
-                                  .copyWith(fontSize: 14),
-                              children: <TextSpan>[
-                                TextSpan(
-                                    text: 'Investments: ',
-                                    style: TextStyle(color: Colors.grey[600])),
-                                TextSpan(
-                                    text:
-                                        '${investorPortfolioModel.numInvestments}',
-                                    style: TextStyle(color: Colors.grey[800])),
-                              ],
+                        ? Expanded(
+                            child: RichText(
+                              textAlign: TextAlign.left,
+                              text: TextSpan(
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText2
+                                    .copyWith(fontSize: 14),
+                                children: <TextSpan>[
+                                  TextSpan(
+                                      text: 'Investments: ',
+                                      style:
+                                          TextStyle(color: Colors.grey[600])),
+                                  TextSpan(
+                                      text:
+                                          '${investorPortfolioModel.numInvestments}',
+                                      style:
+                                          TextStyle(color: Colors.grey[800])),
+                                ],
+                              ),
                             ),
                           )
                         : Text('                         ',
                             style:
                                 TextStyle(backgroundColor: Colors.grey[200])),
+                    // SizedBox(height: 5),
+                    investorPortfolioModel != null
+                        ? Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Flexible(
+                                    flex: 2,
+                                    child: Text(investorPortfolioModel.location,
+                                        overflow: TextOverflow.ellipsis,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Colors.grey[700],
+                                            fontSize: 14))),
+                                SizedBox(width: 3),
+                                Flexible(
+                                  child: Icon(
+                                    Icons.location_on,
+                                    color: Colors.grey[600],
+                                    size: 14,
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        : Container(height: 0, width: 0),
                   ],
                 ))
           ],
