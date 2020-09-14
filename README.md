@@ -24,12 +24,10 @@
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
-* [Usage](#usage)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
 * [License](#license)
-* [Contact](#contact)
-* [Acknowledgements](#acknowledgements)
+* [Team](#team)
 
 
 
@@ -45,11 +43,10 @@ Here's a blank template to get started:
 
 ### Built With
 
-* Flutter <img src="https://miro.medium.com/max/1000/1*ilC2Aqp5sZd1wi0CopD1Hw.png" height="20" width="20">
-* Django
-* GraphQL
-* MySQL
-* Azure
+* Flutter <img src="https://miro.medium.com/max/1000/1*ilC2Aqp5sZd1wi0CopD1Hw.png" height="15" width="15">
+* Django <img src="https://miro.medium.com/max/2400/1*HVKOLLX7wprRbHTl2IPDcQ.png" height="15" width="15">
+* GraphQL <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/GraphQL_Logo.svg/1024px-GraphQL_Logo.svg.png" height="15" width="15">
+* Azure <img src="https://lh3.googleusercontent.com/proxy/ICJ_6eA8XBJttsn8kOXALeZwoPwva0kzrcEuzLHrMF5QQSqOI0F-Dw6DVTxrLBYb78X-xt66DL3dnc4XLjPCvRQ0qYjU2d3-eU-Vicj49d6Ym93Ya9E" height ="15" width="15"> 
 
 
 
@@ -60,43 +57,32 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
+Install the flutter SDK from the <a href="">official website</a>
+
 ```sh
-npm install npm@latest -g
+flutter upgrade
+flutter doctor
 ```
 
 ### Installation
 
 1. Clone the repo
 ```sh
-git clone https://github.com/github_username/repo_name.git
+git clone https://github.com/harshadmanglani/Invest_Shrine.git
 ```
-2. Install Flutter
+2. Go into the root of the repository and run the app.
 ```sh
 cd Invest_Shrine
 flutter run
 ```
 
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-
-
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/github_username/repo_name/issues) for a list of proposed features (and known issues).
+During the course of building this project, attempts were made to follow a typical software development life-cycle, with specific focus on Product Management tasks.
 
+Initially, the wireframes and the user-flows looked something like this:
 
-
-<!-- CONTRIBUTING -->
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -115,39 +101,8 @@ Contributions are what make the open source community such an amazing place to b
 Distributed under the MIT License. See `LICENSE` for more information.
 
 
-
-<!-- CONTACT -->
-## Contact
-
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email
-
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
-
-
-
 <!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
+## Team
 
-* []()
-* []()
-* []()
-
-
-
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/github_username/repo.svg?style=flat-square
-[contributors-url]: https://github.com/github_username/repo/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/github_username/repo.svg?style=flat-square
-[forks-url]: https://github.com/github_username/repo/network/members
-[stars-shield]: https://img.shields.io/github/stars/github_username/repo.svg?style=flat-square
-[stars-url]: https://github.com/github_username/repo/stargazers
-[issues-shield]: https://img.shields.io/github/issues/github_username/repo.svg?style=flat-square
-[issues-url]: https://github.com/github_username/repo/issues
-[license-shield]: https://img.shields.io/github/license/github_username/repo.svg?style=flat-square
-[license-url]: https://github.com/github_username/repo/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/github_username
-[product-screenshot]: images/screenshot.png
+* Aditya Khandelwal - Backend developer
+* Harshad Manglani - Frontend developer
