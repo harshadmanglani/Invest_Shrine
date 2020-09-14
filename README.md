@@ -95,7 +95,7 @@ Over time, they improved. And due to these improvements, the app was much easier
 | --- | --- |
 | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-updated.jpeg" height="320" width="180"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-updated-2.jpeg" height="320" width="180"> |
 | Converted to ⬇️| Converted to ⬇️|
-| <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-1.jpeg" height="320" width="180"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-2.jpeg" height="320" width="180"> |
+| <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-1.jpeg" height="350" width="180"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-2.jpeg" height="350" width="180"> |
 
 ## Contributing
 
