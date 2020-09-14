@@ -88,14 +88,15 @@ Initially, the wireframes and the user-flows looked something like this:
 | --- | --- |
 | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-init.jpeg" height="320" width="180"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/user-flow.jpeg" height="320" width="180"> |
 
-These wireframes were ambiguous, and led to confusion during actual code-writing, as a lot of time was taken up in deciding how a lot of visual elemens should look.
+These wireframes were ambiguous, and led to confusion during actual code-writing, as a lot of time was taken up in deciding how different visual elemens should look.
 
 Over time, they improved. And due to these improvements, the app was much easier to code.
-| Home - Explore | Home - Startups |
-| --- | --- |
-| <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-updated.jpeg" height="320" width="180"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-updated-2.jpeg" height="320" width="180"> |
-| Converted to ⬇️| Converted to ⬇️|
-| <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-1.jpeg" height="350" width="180"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-2.jpeg" height="350" width="180"> |
+| Home - Explore | Home - Startups | Search | Investor Sign up | Investor Sign up |
+| --- | --- | --- | --- | --- | --- |
+| <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-updated.jpeg" height="320" width="180"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-updated-2.jpeg" height="320" width="180"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/search-wireframe.jpeg" height="320" width="180"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-reg-1%2C2.jpeg" height="320" width="180"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-reg-3%2C4.jpeg" height="320" width="180">
+| Converted to ⬇️| Converted to ⬇️| Converted to ⬇️| Converted to ⬇️| Converted to ⬇️|
+| <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-1.jpeg" height="350" width="180"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-2.jpeg" height="350" width="180"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-search-entrepreneurs.jpeg" height="350" width="180"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-reg-1.jpeg" height="350" width="180"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-reg-3.jpeg" height="350" width="180"> |
+| <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-sd.jpeg" height="350" width="180"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-sme.jpeg" height="350" width="180"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-search-startups.jpeg" height="350" width="180"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-reg-2.jpeg" height="350" width="180"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-reg-4.jpeg" height="350" width="180"> |
 
 ## Contributing
 
