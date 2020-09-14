@@ -42,7 +42,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img src = "https://github.com/harshadmanglani/Assets/raw/master/route.jpeg" align="center" height="640" width="303")
+<img src = "https://github.com/harshadmanglani/Assets/raw/master/route.jpeg" align="center" height="640" width="303">
 
 Here's a blank template to get started:
 **To avoid retyping too much info. Do a search and replace with your text editor for the following:**
