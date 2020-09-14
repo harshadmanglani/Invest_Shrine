@@ -1,25 +1,19 @@
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
+[![Forks][forks-shield]][https://github.com/harshadmanglani/Invest_Shrine/network/members]
+[![Stargazers][stars-shield]][https://github.com/harshadmanglani/Invest_Shrine/stargazers]
+[![Issues][issues-shield]][https://github.com/harshadmanglani/Invest_Shrine/issues]
+[![MIT License][license-shield]][https://github.com/harshadmanglani/Invest_Shrine/blob/master/LICENSE]
 
 
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
   <a href="https://github.com/harshadmanglani/Invest_Shrine">
-
-  <h3 align="center">Invest Shrine</h3>
-
+  <h2 align="center">Invest Shrine</h2>
   </a>
 
   <p align="center">
     A mobile app for startups and SMEs to connect with investors.
     <br />
-    ·
     <a href="https://github.com/harshadmanglani/Invest_Shrine/issues">Report Bug</a>
     ·
     <a href="https://github.com/harshadmanglani/Invest_Shrine/issues">Request Feature</a>
@@ -48,7 +42,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][product-screenshot]](https://github.com/harshadmanglani/Assets/raw/master/route.jpeg)
 
 Here's a blank template to get started:
 **To avoid retyping too much info. Do a search and replace with your text editor for the following:**
