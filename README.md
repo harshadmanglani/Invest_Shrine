@@ -36,10 +36,12 @@
 
 <img align="center" src="https://github.com/harshadmanglani/Assets/raw/master/route.jpeg" height="640" width="303">
 
-This app lets entrepreneurs sign up, create their individual profiles and create a venture profile (startup/SME) which will show up on the portfolio list for every other investor to see.
+* This app lets entrepreneurs sign up, create their individual profiles and create a venture profile (startup/SME) which will show up on the portfolio list for every other investor to see.
 Investor profiles are visible to entrepreneurs to search and "beep" once they have signed up.
 
-Beeps are analogous to the "poke" functionality on facebook, wherein entrepreneurs can beep investors to view their venture profiles and get in touch if interested.
+* Beeps are analogous to the "poke" functionality on facebook, wherein entrepreneurs can beep investors to view their venture profiles and get in touch if interested.
+
+* Investors can save venture profiles to view later.
 
 ### Built With
 
@@ -84,7 +86,16 @@ During the course of building this project, attempts were made to follow a typic
 Initially, the wireframes and the user-flows looked something like this:
 | Wireframe | User flow |
 | --- | --- |
-| <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-init.jpeg" height="640" width="360"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/user-flow.jpeg" height="640" width="360"> |
+| <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-init.jpeg" height="320" width="180"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/user-flow.jpeg" height="320" width="180"> |
+
+These wireframes were ambiguous, and led to confusion during actual code-writing, as a lot of time was taken up in deciding how a lot of visual elemens should look.
+
+Over time, they improved. And due to these improvements, the app was much easier to code.
+| Home - Explore | Home - Startups |
+| --- | --- |
+| <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-updated.jpeg" height="320" width="180"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-updated-2.jpeg" height="320" width="180"> |
+| Converted to ⬇️| Converted to ⬇️|
+| <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-1.jpeg" height="320" width="180"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-2.jpeg" height="320" width="180"> |
 
 ## Contributing
 
