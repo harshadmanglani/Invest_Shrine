@@ -34,12 +34,12 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img src = "https://github.com/harshadmanglani/Assets/raw/master/route.jpeg" align="center" height="640" width="303">
+<img align="center" src="https://github.com/harshadmanglani/Assets/raw/master/route.jpeg" height="640" width="303">
 
-Here's a blank template to get started:
-**To avoid retyping too much info. Do a search and replace with your text editor for the following:**
-`github_username`, `repo_name`, `twitter_handle`, `email`
+This app lets entrepreneurs sign up, create their individual profiles and create a venture profile (startup/SME) which will show up on the portfolio list for every other investor to see.
+Investor profiles are visible to entrepreneurs to search and "beep" once they have signed up.
 
+Beeps are analogous to the "poke" functionality on facebook, wherein entrepreneurs can beep investors to view their venture profiles and get in touch if interested.
 
 ### Built With
 
@@ -82,6 +82,9 @@ flutter run
 During the course of building this project, attempts were made to follow a typical software development life-cycle, with specific focus on Product Management tasks.
 
 Initially, the wireframes and the user-flows looked something like this:
+| Wireframe | User flow |
+| --- | --- |
+| <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-init.jpeg" height="640" width="360"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/user-flow.jpeg" height="640" width="360"> |
 
 ## Contributing
 
