@@ -1,10 +1,4 @@
-[![Forks][forks-shield]][https://github.com/harshadmanglani/Invest_Shrine/network/members]
-[![Stargazers][stars-shield]][https://github.com/harshadmanglani/Invest_Shrine/stargazers]
-[![Issues][issues-shield]][https://github.com/harshadmanglani/Invest_Shrine/issues]
-[![MIT License][license-shield]][https://github.com/harshadmanglani/Invest_Shrine/blob/master/LICENSE]
 
-
-<!-- PROJECT LOGO -->
 <br />
 <p align="center">
   <a href="https://github.com/harshadmanglani/Invest_Shrine">
@@ -51,9 +45,11 @@ Here's a blank template to get started:
 
 ### Built With
 
-* []()
-* []()
-* []()
+* Flutter <img src="https://miro.medium.com/max/1000/1*ilC2Aqp5sZd1wi0CopD1Hw.png" height="20" width="20">
+* Django
+* GraphQL
+* MySQL
+* Azure
 
 
 
