@@ -95,8 +95,11 @@ Over time, they improved. And due to these improvements, the app was much easier
 | Explore | Startups & SMEs | Search | Investor Sign up | Investor Sign up |
 | ---- | ---- | ---- | ---- | ---- | ---- |
 |<img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-updated.jpeg" height="320" width="140">|<img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-updated-2.jpeg" height="320" width="140"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/search-wireframe.jpeg" height="320" width="140"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-reg-1%2C2.jpeg" height="320" width="140"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-reg-3%2C4.jpeg" height="320" width="140">
+
 | Converted to ⬇️| Converted to ⬇️| Converted to ⬇️| Converted to ⬇️| Converted to ⬇️|
+
 | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-1.jpeg" height="350" width="140"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-2.jpeg" height="350" width="140"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-search-entrepreneurs.jpeg" height="350" width="140"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-reg-1.jpeg" height="350" width="140"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-reg-3.jpeg" height="350" width="140"> |
+
 | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-sd.jpeg" height="350" width="140"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-sme.jpeg" height="350" width="140"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-search-startups.jpeg" height="350" width="140"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-reg-2.jpeg" height="350" width="140"> | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-reg-4.jpeg" height="350" width="140"> |
 
 ## Contributing
