@@ -59,7 +59,7 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
-Install the flutter SDK from the <a href="">official website</a>
+Install the flutter SDK from the <a href="http://flutter.io/">official website</a>
 
 ```sh
 flutter upgrade
