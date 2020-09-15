@@ -92,7 +92,7 @@ These wireframes were ambiguous, and led to confusion during actual code-writing
 
 Over time, they improved. And due to these improvements, the app was much easier to code.
 </br>
-| Function | Wireframe | ===> | Screenshot | Action | Screenshot |
+| Function | Wireframe |  | Screenshot | Action | Screenshot |
 | ---- | ---- | ---- | ---- | ---- | ---- |
 | Investor Home | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-updated.jpeg" height="300" width="140"> | ===> | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-1.jpeg" height="320" width="140"> | Scroll down | <img src="https://github.com/harshadmanglani/Assets/raw/master/inv-home-sd.jpeg" height="320" width="140"> |
 <!-- 
