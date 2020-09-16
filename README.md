@@ -48,7 +48,7 @@ Investor profiles are visible to entrepreneurs to search and "beep" once they ha
 * Flutter <img src="https://miro.medium.com/max/1000/1*ilC2Aqp5sZd1wi0CopD1Hw.png" height="20" width="20">
 * Django <img src="https://miro.medium.com/max/2400/1*HVKOLLX7wprRbHTl2IPDcQ.png" height="20" width="40">
 * GraphQL <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/GraphQL_Logo.svg/1024px-GraphQL_Logo.svg.png" height="20" width="20">
-* Azure <img src="https://lh3.googleusercontent.com/proxy/ICJ_6eA8XBJttsn8kOXALeZwoPwva0kzrcEuzLHrMF5QQSqOI0F-Dw6DVTxrLBYb78X-xt66DL3dnc4XLjPCvRQ0qYjU2d3-eU-Vicj49d6Ym93Ya9E" height ="20" width="20"> 
+* Azure <img src="https://rnd-solutions.net/wp-content/uploads/2018/06/azure-icon-250x250.png" height ="20" width="20"> 
 
 
 
